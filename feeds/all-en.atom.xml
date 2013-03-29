@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>EarthPy</title><link href="/" rel="alternate"></link><link href="/feeds/all-en.atom.xml" rel="self"></link><id>/</id><updated>2013-03-28T10:20:00+01:00</updated><entry><title>First post</title><link href="/first-post.html" rel="alternate"></link><updated>2013-03-28T10:20:00+01:00</updated><author><name>Nikolay Koldunov</name></author><id>tag:,2013-03-28:first-post.html</id><summary type="html">&lt;p&gt;Why we create this website?
+iWhy should anyone care?&lt;/p&gt;</summary><category term=""></category></entry></feed>
