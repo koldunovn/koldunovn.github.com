@@ -4,7 +4,7 @@
         <title>EarthPy - pandas</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-                <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EarthPy Atom Feed" />
+                <link href="http://earthpy.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EarthPy Atom Feed" />
                         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -32,7 +32,7 @@
                             <aside id="featured" class="body">
                 <article>
 			   			 <link rel="stylesheet" href="/theme/css/ipython.min.css">
-			                    <h1 class="entry-title"><a href="../pandas-basics.html">Time series analysis with pandas</a></h1> 
+			                    <h1 class="entry-title"><a href="../pandas-basics.html">Time series analysis with&nbsp;pandas</a></h1> 
                     <footer class="post-info">
         <abbr class="published" title="2013-03-30T00:00:00">
                 Sat 30 March 2013
@@ -52,19 +52,19 @@
 </code></pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
-<p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation of 1D data, especially time series, MUCH faster. Before pandas working with time series in python was a pain for me, now it's fun. Ease of use stimulate in-depth exploration of the data: why wouldn't you make some additional analysis if it's just one line of code? Hope you will also find this great tool helpful and useful. So, let's begin.</p>
+<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it&#8217;s the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with&nbsp;pandas.</p>
+<p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation of 1D data, especially time series, <span class="caps">MUCH</span> faster. Before pandas working with time series in python was a pain for me, now it&#8217;s fun. Ease of use stimulate in-depth exploration of the data: why wouldn&#8217;t you make some additional analysis if it&#8217;s just one line of code? Hope you will also find this great tool helpful and useful. So, let&#8217;s&nbsp;begin.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As an example we are going to use time series of <a href="http://en.wikipedia.org/wiki/Arctic_oscillation">Arctic Oscillation (AO)</a> and <a href="http://en.wikipedia.org/wiki/North_Atlantic_oscillation">North Atlantic Oscillation (NAO)</a> data sets.</p>
+<p>As an example we are going to use time series of <a href="http://en.wikipedia.org/wiki/Arctic_oscillation">Arctic Oscillation (<span class="caps">AO</span>)</a> and <a href="http://en.wikipedia.org/wiki/North_Atlantic_oscillation">North Atlantic Oscillation (<span class="caps">NAO</span>)</a> data&nbsp;sets.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
-  Module import
+  Module&nbsp;import
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>First we have to import necessary modules:</p>
+<p>First we have to import necessary&nbsp;modules:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -80,7 +80,7 @@
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And "switch on" inline graphic for the notebook:</p>
+<p>And &#8220;switch on&#8221; inline graphic for the&nbsp;notebook:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -106,7 +106,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas developing very fast, and while we are going to use only basic functionality, some details may still change in the newer versions. This example will only work in version &gt; 0.8. Check yours:</p>
+<p>Pandas developing very fast, and while we are going to use only basic functionality, some details may still change in the newer versions. This example will only work in version &gt; 0.8. Check&nbsp;yours:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -130,11 +130,11 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
-  Loading data
+  Loading&nbsp;data
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, when we are done with preparations, let's get some data. If you work on Windows download monthly AO data <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii">from here</a>. If you on *nix machine, you can do it directly from ipython notebook using system call to wget command:</p>
+<p>Now, when we are done with preparations, let&#8217;s get some data. If you work on Windows download monthly <span class="caps">AO</span> data <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii">from here</a>. If you on *nix machine, you can do it directly from ipython notebook using system call to wget&nbsp;command:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -178,7 +178,7 @@ Saving to: &#96;monthly.ao.index.b50.current.ascii.2&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas has very good IO capabilities, but we not going to use them in this tutorial in order to keep things simple. For now we open the file simply with numpy loadtxt:</p>
+<p>Pandas has very good <span class="caps">IO</span> capabilities, but we not going to use them in this tutorial in order to keep things simple. For now we open the file simply with numpy&nbsp;loadtxt:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -191,7 +191,7 @@ Saving to: &#96;monthly.ao.index.b50.current.ascii.2&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Every line in the file consist of three elements: year, month, value:</p>
+<p>Every line in the file consist of three elements: year, month,&nbsp;value:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -215,7 +215,7 @@ Saving to: &#96;monthly.ao.index.b50.current.ascii.2&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And here is the shape of our array:</p>
+<p>And here is the shape of our&nbsp;array:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -239,11 +239,11 @@ Saving to: &#96;monthly.ao.index.b50.current.ascii.2&apos;
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
-  Time Series
+  Time&nbsp;Series
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We would like to convert this data in to time series, that can be manipulated naturally and easily. First step, that we have to do is to create the range of dates for our time series. From the file it is clear, that record starts at January 1950 and ends at February 2013 (at the time I am writing this, of course). Frequency of the data is one month (freq='M'). </p>
+<p>We would like to convert this data in to time series, that can be manipulated naturally and easily. First step, that we have to do is to create the range of dates for our time series. From the file it is clear, that record starts at January 1950 and ends at February 2013 (at the time I am writing this, of course). Frequency of the data is one month&nbsp;(freq=&#8217;M&#8217;). </p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -256,7 +256,7 @@ Saving to: &#96;monthly.ao.index.b50.current.ascii.2&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As you see syntax is quite simple, and this is one of the reasons why I love Pandas so much :) Another thing to mention, is that we put March 2003 instead of February because the interval is open on the right side. You can check if the range of dates is properly generated:</p>
+<p>As you see syntax is quite simple, and this is one of the reasons why I love Pandas so much :) Another thing to mention, is that we put March 2003 instead of February because the interval is open on the right side. You can check if the range of dates is properly&nbsp;generated:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -301,13 +301,13 @@ Length: 758, Freq: M, Timezone: None</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we are ready to create our first time series. Dates from the <em>dates</em> variable will be our index, and AO values will be our, hm... values:</p>
+<p>Now we are ready to create our first time series. Dates from the <em>dates</em> variable will be our index, and <span class="caps">AO</span> values will be our, hm&#8230;&nbsp;values:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">ao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">ao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -317,7 +317,7 @@ Length: 758, Freq: M, Timezone: None</pre>
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span>
 </pre></div>
 
 </div>
@@ -346,13 +346,13 @@ Freq: M, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we can plot complete time series:</p>
+<p>Now we can plot complete time&nbsp;series:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -838,13 +838,13 @@ UWBY3EREgWFxExEF5gOjNEKIu5A46AAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>or its part:</p>
+<p>or its&nbsp;part:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="s">&#39;1980&#39;</span><span class="p">:</span><span class="s">&#39;1990&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="s">&#39;1980&#39;</span><span class="p">:</span><span class="s">&#39;1990&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1227,13 +1227,13 @@ AoFA0I0Qoi0QCATdCCHaAoFA0I0Qoi0QCATdCCHaAoFA0I34/0FAP6PMGuc8AAAAAElFTkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>or even smaller part:</p>
+<p>or even smaller&nbsp;part:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="s">&#39;1980-05&#39;</span><span class="p">:</span><span class="s">&#39;1981-03&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="s">&#39;1980-05&#39;</span><span class="p">:</span><span class="s">&#39;1981-03&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
 </div>
@@ -1499,13 +1499,13 @@ NQ9FNxM7AAAAAElFTkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reference to the time periods is done in a very natural way. You, of course, can also get individual values. By number: </p>
+<p>Reference to the time periods is done in a very natural way. You, of course, can also get individual values. By&nbsp;number: </p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[48]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="mi">120</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="mi">120</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -1522,13 +1522,13 @@ NQ9FNxM7AAAAAElFTkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>or by index (date in our case):</p>
+<p>or by index (date in our&nbsp;case):</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="s">&#39;1960-01&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="s">&#39;1960-01&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -1546,13 +1546,13 @@ Freq: M</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And what if we choose only one year?</p>
+<p>And what if we choose only one&nbsp;year?</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[46]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="s">&#39;1960&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="s">&#39;1960&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -1581,16 +1581,16 @@ Freq: M</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Isn't that great? :)</p>
+<p>Isn&#8217;t that great?&nbsp;:)</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One bonus example :)</p>
+<p>One bonus example&nbsp;:)</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[68]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO</span><span class="p">[</span><span class="n">AO</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">AO</span></span><span class="p">[</span><span class="n"><span class="caps">AO</span></span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -1620,11 +1620,11 @@ Length: 347</pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
-  Data Frame
+  Data&nbsp;Frame
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's make live a bit more interesting and download more data. This will be NOA time series (Windowd users can get it <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii">here</a>).</p>
+<p>Now let&#8217;s make live a bit more interesting and download more data. This will be <span class="caps">NOA</span> time series (Windowd users can get it <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii">here</a>).</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -1668,7 +1668,7 @@ Saving to: &#96;norm.nao.monthly.b5001.current.ascii.2&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Create Series the same way as we did for AO:</p>
+<p>Create Series the same way as we did for&nbsp;<span class="caps">AO</span>:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -1676,20 +1676,20 @@ Saving to: &#96;norm.nao.monthly.b5001.current.ascii.2&apos;
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="n">nao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s">&#39;norm.nao.monthly.b5001.current.ascii&#39;</span><span class="p">)</span>
 <span class="n">dates_nao</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">&#39;1950-01&#39;</span><span class="p">,</span> <span class="s">&#39;2013-03&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">&#39;M&#39;</span><span class="p">)</span>
-<span class="n">NAO</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">nao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates_nao</span><span class="p">)</span>
+<span class="n"><span class="caps">NAO</span></span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">nao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates_nao</span><span class="p">)</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Time period is the same:</p>
+<p>Time period is the&nbsp;same:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[52]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">NAO</span><span class="o">.</span><span class="n">index</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n"><span class="caps">NAO</span></span><span class="o">.</span><span class="n">index</span>
 </pre></div>
 
 </div>
@@ -1708,20 +1708,20 @@ Length: 758, Freq: M, Timezone: None</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now we create Data Frame, that will contain both AO and NAO data. It sort of an Excel table where the first row contain headers for the columns and firs column is an index:</p>
+<p>Now we create Data Frame, that will contain both <span class="caps">AO</span> and <span class="caps">NAO</span> data. It sort of an Excel table where the first row contain headers for the columns and firs column is an&nbsp;index:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[53]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;AO&#39;</span> <span class="p">:</span> <span class="n">AO</span><span class="p">,</span> <span class="s">&#39;NAO&#39;</span> <span class="p">:</span> <span class="n">NAO</span><span class="p">})</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;<span class="caps">AO</span>&#39;</span> <span class="p">:</span> <span class="n"><span class="caps">AO</span></span><span class="p">,</span> <span class="s">&#39;<span class="caps">NAO</span>&#39;</span> <span class="p">:</span> <span class="n"><span class="caps">NAO</span></span><span class="p">})</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One can plot the data straight away:</p>
+<p>One can plot the data straight&nbsp;away:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -2424,7 +2424,7 @@ FhAQEEgyCOIWEBAQSDII4hYQEBBIMvx/UwT7Q6lcVIwAAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Or have a look at the first several rows:</p>
+<p>Or have a look at the first several&nbsp;rows:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -2445,8 +2445,8 @@ FhAQEEgyCOIWEBAQSDII4hYQEBBIMvx/UwT7Q6lcVIwAAAAASUVORK5CYII=
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
     </tr>
   </thead>
   <tbody>
@@ -2484,13 +2484,13 @@ FhAQEEgyCOIWEBAQSDII4hYQEBBIMvx/UwT7Q6lcVIwAAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can reference each column by its name:</p>
+<p>We can reference each column by its&nbsp;name:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[58]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="p">[</span><span class="s">&#39;NAO&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="p">[</span><span class="s">&#39;<span class="caps">NAO</span>&#39;</span><span class="p">]</span>
 </pre></div>
 
 </div>
@@ -2519,13 +2519,13 @@ Freq: M, Name: NAO, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>or as method of the Data Frame variable (if name of the variable is a valid python name):</p>
+<p>or as method of the Data Frame variable (if name of the variable is a valid python&nbsp;name):</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[77]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="o">.</span><span class="n"><span class="caps">NAO</span></span>
 </pre></div>
 
 </div>
@@ -2554,13 +2554,13 @@ Freq: M, Name: NAO, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can simply add column to the Data Frame:</p>
+<p>We can simply add column to the Data&nbsp;Frame:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[82]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="p">[</span><span class="s">&#39;Diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aonao</span><span class="p">[</span><span class="s">&#39;AO&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">aonao</span><span class="p">[</span><span class="s">&#39;NAO&#39;</span><span class="p">]</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">aonao</span><span class="p">[</span><span class="s">&#39;Diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aonao</span><span class="p">[</span><span class="s">&#39;<span class="caps">AO</span>&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">aonao</span><span class="p">[</span><span class="s">&#39;<span class="caps">NAO</span>&#39;</span><span class="p">]</span>
 <span class="n">aonao</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -2576,8 +2576,8 @@ Freq: M, Name: NAO, Length: 758</pre>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
       <th>Diff</th>
     </tr>
   </thead>
@@ -2621,7 +2621,7 @@ Freq: M, Name: NAO, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And delete it:</p>
+<p>And delete&nbsp;it:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -2643,8 +2643,8 @@ Freq: M, Name: NAO, Length: 758</pre>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
     </tr>
   </thead>
   <tbody>
@@ -2682,7 +2682,7 @@ Freq: M, Name: NAO, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Slicing will also work:</p>
+<p>Slicing will also&nbsp;work:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -2703,8 +2703,8 @@ Freq: M, Name: NAO, Length: 758</pre>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
     </tr>
   </thead>
   <tbody>
@@ -2732,17 +2732,17 @@ Freq: M, Name: NAO, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>even in some crazy combinations:</p>
+<p>even in some crazy&nbsp;combinations:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[107]:</div>
 <div class="input_area box-flex1">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="n">aonao</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
+<span class="n">aonao</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">aonao</span><span class="o">.</span><span class="n"><span class="caps">AO</span></span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n"><span class="caps">NAO</span></span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
         <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
         <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1989</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
-        <span class="s">&#39;NAO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;barh&#39;</span><span class="p">)</span>
+        <span class="s">&#39;<span class="caps">NAO</span>&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;barh&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -3083,7 +3083,7 @@ rEZf7G+HG926WBkAAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here we use special <a href="http://pandas.pydata.org/pandas-docs/stable/indexing.html#advanced-indexing-with-labels">advanced indexing attribute .ix</a>. We choose all NAO values in the 1980s for months where AO is positive and NAO is negative, and then plot them. Magic :)even in some crazy combinations:</p>
+<p>Here we use special <a href="http://pandas.pydata.org/pandas-docs/stable/indexing.html#advanced-indexing-with-labels">advanced indexing attribute .ix</a>. We choose all <span class="caps">NAO</span> values in the 1980s for months where <span class="caps">AO</span> is positive and <span class="caps">NAO</span> is negative, and then plot them. Magic :)even in some crazy&nbsp;combinations:</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
@@ -3091,7 +3091,7 @@ rEZf7G+HG926WBkAAAAASUVORK5CYII=
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Back to simple stuff. We can obtain statistical information over elements of the Data Frame. Default is column wise:</p>
+<p>Back to simple stuff. We can obtain statistical information over elements of the Data Frame. Default is column&nbsp;wise:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -3157,7 +3157,7 @@ NAO   -3.1800</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can also do it row-wise:</p>
+<p>You can also do it&nbsp;row-wise:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -3192,7 +3192,7 @@ Freq: M, Length: 758</pre>
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Or get everything at once:</p>
+<p>Or get everything at&nbsp;once:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -3213,8 +3213,8 @@ Freq: M, Length: 758</pre>
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
     </tr>
   </thead>
   <tbody>
@@ -3272,13 +3272,13 @@ Freq: M, Length: 758</pre>
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas provide easy way to resample data to different time frequency. Two main parameters for resampling is time period you resemple to and the method that you use. By default the method is mean. Following example calculates annual ('A') mean:</p>
+<p>Pandas provide easy way to resample data to different time frequency. Two main parameters for resampling is time period you resemple to and the method that you use. By default the method is mean. Following example calculates annual (&#8216;A&#8217;)&nbsp;mean:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[349]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n"><span class="caps">AO</span></span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">&#39;g--&#39;</span><span class="p">)</span>
 </pre></div>
 
@@ -3628,7 +3628,7 @@ YII=
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[352]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">&#39;median&#39;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n"><span class="caps">AO</span></span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">&#39;median&#39;</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
@@ -3961,13 +3961,13 @@ If8fFEwimG51ux8AAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can use your methods for resampling, for example np.max (in this case we change resampling frequency to 3 years):</p>
+<p>You can use your methods for resampling, for example np.max (in this case we change resampling frequency to 3&nbsp;years):</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[357]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;3A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n"><span class="caps">AO</span></span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;3A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
 
@@ -4253,13 +4253,13 @@ GrCuKJ1zGvYAAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can specify several functions at once as a list:</p>
+<p>You can specify several functions at once as a&nbsp;list:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[360]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;mean&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">])</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">AO_mm</span> <span class="o">=</span> <span class="n"><span class="caps">AO</span></span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;mean&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">])</span>
 <span class="n">AO_mm</span><span class="p">[</span><span class="s">&#39;1900&#39;</span><span class="p">:</span><span class="s">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="p">[</span><span class="s">&#39;1900&#39;</span><span class="p">:</span><span class="s">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
@@ -5325,14 +5325,14 @@ E0KIwFDgJoQQgaHATQghAkOBmxBCBOb/AMXVmdqbgYdDAAAAAElFTkSuQmCC
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 class="ipynb">
-  Moving (rolling) statistics
+  Moving (rolling)&nbsp;statistics
 </h2>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas provide good collection of moving statistics.</p>
+<p>Pandas provide good collection of moving&nbsp;statistics.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Rolling mean:</p>
+<p>Rolling&nbsp;mean:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -5988,13 +5988,13 @@ cDicccj/B7sq04XRXSHQAAAAAElFTkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Rolling correlation:</p>
+<p>Rolling&nbsp;correlation:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[377]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pd</span><span class="o">.</span><span class="n">rolling_corr</span><span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span><span class="p">,</span> <span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">&#39;-g&#39;</span><span class="p">)</span>
+<div class="highlight-ipynb"><pre class="ipynb"><span class="n">pd</span><span class="o">.</span><span class="n">rolling_corr</span><span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n"><span class="caps">AO</span></span><span class="p">,</span> <span class="n">aonao</span><span class="o">.</span><span class="n"><span class="caps">NAO</span></span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s">&#39;-g&#39;</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -6323,7 +6323,7 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>By the way getting correlation coefficients for members of the Data Frame is as simple as:</p>
+<p>By the way getting correlation coefficients for members of the Data Frame is as simple&nbsp;as:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -6344,18 +6344,18 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>AO</th>
-      <th>NAO</th>
+      <th><span class="caps">AO</span></th>
+      <th><span class="caps">NAO</span></th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>AO</th>
+      <th><span class="caps">AO</span></th>
       <td> 1.000000</td>
       <td> 0.610255</td>
     </tr>
     <tr>
-      <th>NAO</th>
+      <th><span class="caps">NAO</span></th>
       <td> 0.610255</td>
       <td> 1.000000</td>
     </tr>
@@ -6368,9 +6368,9 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That's it. I hope you at least get a rough impression of what pandas can do for you. Comments are very welcome (below). If you have intresting examples of pandas usage in Earth Science, we would be happy to put them on <a href="http://earthpy.org">EarthPy</a>.</p>
+<p>That&#8217;s it. I hope you at least get a rough impression of what pandas can do for you. Comments are very welcome (below). If you have intresting examples of pandas usage in Earth Science, we would be happy to put them on <a href="http://earthpy.org">EarthPy</a>.</p>
 </div>
-</div>                </article>
+</div><p>There are <a href="../pandas-basics.html#disqus_thread">comments</a>.</p>                </article>
                                                                 </aside><!-- /#featured -->
                                                 </ol><!-- /#posts-list -->
                         </section><!-- /#content -->
@@ -6378,22 +6378,11 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
                         <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                                                    <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                    <li><a href="http://pyaos.johnny-lin.com/">Python for the Atmospheric and Oceanic Sciences</a></li>
+                                                    <li><a href="http://koldunov.net">koldunov.net (in Russian)</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                    <li><a href="#">You can add links in your config file</a></li>
-                                                    <li><a href="#">Another social link</a></li>
-                                                </ul>
-                </div><!-- /.social -->
-                </section><!-- /#extras -->
+                        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
@@ -6403,5 +6392,14 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
                 <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
+<script type="text/javascript">
+    var disqus_shortname = 'earthpy';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
 </body>
 </html>

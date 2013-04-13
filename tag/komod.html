@@ -4,7 +4,7 @@
         <title>EarthPy - komod</title>
         <meta charset="utf-8" />
         <link rel="stylesheet" href="../theme/css/main.css" type="text/css" />
-                <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EarthPy Atom Feed" />
+                <link href="http://earthpy.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EarthPy Atom Feed" />
                         <!--[if IE]>
                 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
@@ -32,7 +32,7 @@
                             <aside id="featured" class="body">
                 <article>
 			   			 <link rel="stylesheet" href="/theme/css/ipython.min.css">
-			                    <h1 class="entry-title"><a href="../komod-mitplot-drawmap.html">Plot maps with PyNGL and komod</a></h1> 
+			                    <h1 class="entry-title"><a href="../komod-mitplot-drawmap.html">Plot maps with PyNGL and&nbsp;komod</a></h1> 
                     <footer class="post-info">
         <abbr class="published" title="2013-03-31T00:00:00">
                 Sun 31 March 2013
@@ -52,12 +52,12 @@
 </code></pre>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The PyNGL module produce very nice looking maps, and it's capabilities in fine tuning the resulting image in many cases are much better compared to matplotlib Basemap module. However this flexibility come at a price: in order to draw a map of an acceptable appearance one has to write quite a long script, and specify many parameters. Of course once you find your "best ever" set of parameters, you basically copy/paste them from one script to another with only slight modifications. But at some point you get annoyed by this long sheets of code, that by the way do not look very nice in IPython notebooks, and you write a wrapper function.</p>
-<p>This is exactly what happens to me, and here I present several functions, that allow you relatively easily to create maps with PyNGL. This functions are part of the <a href="https://github.com/koldunovn/komod"><strong>komod module</strong></a>, that I wrote for manipulation with MITgsm data. However plotting functions are not MITgcm specific, and can be used for any 2D (and also, as you will see, 3D and 4D) data that have lat/lon coordinates.</p>
-<p>In order to make <em>komod</em> work you have to first install numpy, scipy, matplotlib and PyNGL. In order to make this tutorial work, you have to have ether gv (viewer of PostScript and PDF files) or ImageMagick (*nix image processing) installed. If you done with this, let's get started :)</p>
+<p>The PyNGL module produce very nice looking maps, and it&#8217;s capabilities in fine tuning the resulting image in many cases are much better compared to matplotlib Basemap module. However this flexibility come at a price: in order to draw a map of an acceptable appearance one has to write quite a long script, and specify many parameters. Of course once you find your &#8220;best ever&#8221; set of parameters, you basically copy/paste them from one script to another with only slight modifications. But at some point you get annoyed by this long sheets of code, that by the way do not look very nice in IPython notebooks, and you write a wrapper&nbsp;function.</p>
+<p>This is exactly what happens to me, and here I present several functions, that allow you relatively easily to create maps with PyNGL. This functions are part of the <a href="https://github.com/koldunovn/komod"><strong>komod module</strong></a>, that I wrote for manipulation with MITgsm data. However plotting functions are not MITgcm specific, and can be used for any 2D (and also, as you will see, 3D and 4D) data that have lat/lon&nbsp;coordinates.</p>
+<p>In order to make <em>komod</em> work you have to first install numpy, scipy, matplotlib and PyNGL. In order to make this tutorial work, you have to have ether gv (viewer of PostScript and <span class="caps">PDF</span> files) or ImageMagick (*nix image processing) installed. If you done with this, let&#8217;s get started&nbsp;:)</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Import modules:</p>
+<p>Import&nbsp;modules:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -73,13 +73,13 @@
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As an example we are going to use netCDF file of <a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc">mean temperature from the World Ocean Atlas 2009</a> (5 deg. resolution). You can get it with wget:</p>
+<p>As an example we are going to use netCDF file of <a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc">mean temperature from the World Ocean Atlas 2009</a> (5 deg. resolution). You can get it with&nbsp;wget:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="input_area box-flex1">
-<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>wget http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc
+<div class="highlight-ipynb"><pre class="ipynb"><span class="o">!</span>wget http://data.nodc.noaa.gov/thredds/fileServer/woa/<span class="caps">WOA09</span>/NetCDFdata/temperature_annual_5deg.nc
 </pre></div>
 
 </div>
@@ -117,7 +117,7 @@ Saving to: &#96;temperature_annual_5deg.nc.1&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We open the file with <em>Nio</em> (part of PyNGL), while you can do it with any other module that opens netCDF files (like netCDF4 or scipy.io.netcdf).</p>
+<p>We open the file with <em>Nio</em> (part of PyNGL), while you can do it with any other module that opens netCDF files (like netCDF4 or&nbsp;scipy.io.netcdf).</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -130,7 +130,7 @@ Saving to: &#96;temperature_annual_5deg.nc.1&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Get data from the variables (t_mn - is the mean temperature, that we are going to plot):</p>
+<p>Get data from the variables (t_mn - is the mean temperature, that we are going to&nbsp;plot):</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -146,7 +146,7 @@ Saving to: &#96;temperature_annual_5deg.nc.1&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The <em>temp</em> variable has four dimensions (time, depth, lon, lat):</p>
+<p>The <em>temp</em> variable has four dimensions (time, depth, lon,&nbsp;lat):</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -169,10 +169,10 @@ Saving to: &#96;temperature_annual_5deg.nc.1&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>so we choose first (and the only in this case) field of time and first field of depth (surface).</p>
+<p>so we choose first (and the only in this case) field of time and first field of depth&nbsp;(surface).</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And plot:</p>
+<p>And&nbsp;plot:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -185,7 +185,7 @@ Saving to: &#96;temperature_annual_5deg.nc.1&apos;
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This command creates .ps file (<em>output.ps</em> by default) with the map in your working directory. If you have gv installed, then window with the map should pop up. If not, let's convert ps file to png: </p>
+<p>This command creates .ps file (<em>output.ps</em> by default) with the map in your working directory. If you have gv installed, then window with the map should pop up. If not, let&#8217;s convert ps file to&nbsp;png: </p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -2543,7 +2543,7 @@ LjAKOZN0DQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Default map already looks fine, except for the name of the variable and a bit strange intervals for the isotherms. It can be easily fixed:</p>
+<p>Default map already looks fine, except for the name of the variable and a bit strange intervals for the isotherms. It can be easily&nbsp;fixed:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -5440,7 +5440,7 @@ MIGWfVMAAAATdEVYdHBzOkxldmVsAEFkb2JlLTIuMAo5k3QNAAAAAElFTkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you prefer raster version, where grid boxes are clearly visible:</p>
+<p>If you prefer raster version, where grid boxes are clearly&nbsp;visible:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -6723,7 +6723,7 @@ OZN0DQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you want to change color scheme it's also possible. You have to choose one from <a href="http://www.pyngl.ucar.edu/Graphics/color_table_gallery.shtml">PyNGL color maps</a>, and in some cases also adjust start and end colors:</p>
+<p>If you want to change color scheme it&#8217;s also possible. You have to choose one from <a href="http://www.pyngl.ucar.edu/Graphics/color_table_gallery.shtml">PyNGL color maps</a>, and in some cases also adjust start and end&nbsp;colors:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -7960,7 +7960,7 @@ OjAwBzkbdwAAABN0RVh0cHM6TGV2ZWwAQWRvYmUtMi4wCjmTdA0AAAAASUVORK5CYII=
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you want to plot some smaller region there are two ways to do it - hard and easy. The easy one is to set <em>region='Global'</em> and specify min/max lat and lon:</p>
+<p>If you want to plot some smaller region there are two ways to do it - hard and easy. The easy one is to set <em>region=&#8217;Global&#8217;</em> and specify min/max lat and&nbsp;lon:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -12163,10 +12163,10 @@ KzAyOjAwIHpdDgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxMy0wMy0zMVQxNjowNzo1MCswMjowMFEn
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>However polar regions will look ugly and there is still problem with plotting over 0 meridian. For longitudes only 0-360 format is supported, so something like minLon=-20, maxLon=20 will not work :(</p>
+<p>However polar regions will look ugly and there is still problem with plotting over 0 meridian. For longitudes only 0-360 format is supported, so something like minLon=-20, maxLon=20 will not work&nbsp;:(</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Hard way is to use predefined regions:</p>
+<p>Hard way is to use predefined&nbsp;regions:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -16097,7 +16097,7 @@ MDIrMDI6MDAnPxizAAAAE3RFWHRwczpMZXZlbABBZG9iZS0yLjAKOZN0DQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to get rid of the ugly break at the 0 longitude, we have to add cyclic points:</p>
+<p>In order to get rid of the ugly break at the 0 longitude, we have to add cyclic&nbsp;points:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -20032,10 +20032,10 @@ ZS0yLjAKOZN0DQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>While it look not that hard (you just define <em>region</em> variable), actually creating this regions is a bit of the pain. You have to go in to the komod/mtplot.py file and define it by specifying several map related parameters in <em>reg</em> function. In return your get a bit more advanced control over the projection and some other characteristics of the region. In the future I hope to make just separate configuration file with this parameters.</p>
+<p>While it look not that hard (you just define <em>region</em> variable), actually creating this regions is a bit of the pain. You have to go in to the komod/mtplot.py file and define it by specifying several map related parameters in <em>reg</em> function. In return your get a bit more advanced control over the projection and some other characteristics of the region. In the future I hope to make just separate configuration file with this&nbsp;parameters.</p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One more thing that I have to mention, is that you can provide not only one, but several fields to arctpl, and all of them will be plotted:</p>
+<p>One more thing that I have to mention, is that you can provide not only one, but several fields to arctpl, and all of them will be&nbsp;plotted:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -20048,7 +20048,7 @@ ZS0yLjAKOZN0DQAAAABJRU5ErkJggg==
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>As a result you will get .ps file with several pages:</p>
+<p>As a result you will get .ps file with several&nbsp;pages:</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -22567,7 +22567,7 @@ W+C1/lwYgiBa3pnjwjjfdgPvD+M/WZb9w7sDAAAAwNvqHR6Goqj20lhvddnb1hjyJQAAAID2xdhY
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>You can indicate depth of the fields by setting <em>levon=True</em> and by providing values from your depth variable (<em>lev</em> in our case): </p>
+<p>You can indicate depth of the fields by setting <em>levon=True</em> and by providing values from your depth variable (<em>lev</em> in our&nbsp;case): </p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -25115,7 +25115,7 @@ TkSuQmCC
 </div>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There is another function in komod, that provide similar capabilities, but work directly with netCDF file - <em>arctpltnc</em>. You have to specify file name, name of the data variable and names of the coordinate variables. Then cross your fingers and run it. If everything is fine and your netCDF file is more or less standard, this function should plot every field that it will find in there (might take veeery long time).</p>
+<p>There is another function in komod, that provide similar capabilities, but work directly with netCDF file - <em>arctpltnc</em>. You have to specify file name, name of the data variable and names of the coordinate variables. Then cross your fingers and run it. If everything is fine and your netCDF file is more or less standard, this function should plot every field that it will find in there (might take veeery long&nbsp;time).</p>
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
@@ -27850,8 +27850,8 @@ AAAASUVORK5CYII=
 <p>It will put time stamp (Climatology in out case) and level as figure title, and content of the <em>.units</em> attribute from the data variable, as units. You can tune figures the same way as you do for <em>arctplt</em>. </p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Next time I will show you how to use komod to plot the grid of your data and make a transect.</p>
-</div></div>                </article>
+<p>Next time I will show you how to use komod to plot the grid of your data and make a&nbsp;transect.</p>
+</div></div><p>There are <a href="../komod-mitplot-drawmap.html#disqus_thread">comments</a>.</p>                </article>
                                                                 </aside><!-- /#featured -->
                                                 </ol><!-- /#posts-list -->
                         </section><!-- /#content -->
@@ -27859,22 +27859,11 @@ AAAASUVORK5CYII=
                         <div class="blogroll">
                         <h2>blogroll</h2>
                         <ul>
-                                                    <li><a href="http://docs.notmyidea.org/alexis/pelican/">Pelican</a></li>
-                                                    <li><a href="http://python.org">Python.org</a></li>
-                                                    <li><a href="http://jinja.pocoo.org">Jinja2</a></li>
-                                                    <li><a href="#">You can modify those links in your config file</a></li>
+                                                    <li><a href="http://pyaos.johnny-lin.com/">Python for the Atmospheric and Oceanic Sciences</a></li>
+                                                    <li><a href="http://koldunov.net">koldunov.net (in Russian)</a></li>
                                                 </ul>
                 </div><!-- /.blogroll -->
-                                <div class="social">
-                        <h2>social</h2>
-                        <ul>
-                            <li><a href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
-                            
-                                                    <li><a href="#">You can add links in your config file</a></li>
-                                                    <li><a href="#">Another social link</a></li>
-                                                </ul>
-                </div><!-- /.social -->
-                </section><!-- /#extras -->
+                        </section><!-- /#extras -->
 
         <footer id="contentinfo" class="body">
                 <address id="about" class="vcard body">
@@ -27884,5 +27873,14 @@ AAAASUVORK5CYII=
                 <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
         </footer><!-- /#contentinfo -->
 
+<script type="text/javascript">
+    var disqus_shortname = 'earthpy';
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script>
 </body>
 </html>
