@@ -7,6 +7,9 @@
 &lt;pre&gt;&lt;code&gt;Basemap.interp function&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/notebooks/interpolation_between_grids_with_basemap.ipynb"&gt;Notebook file&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Unfortunately geophysical data distributed on a large variety of grids, and from time to time we have to compare our variables to each other. Often plotting a simple map is enough, but if you want to go a bit beyond qualitative comparison then you have to interpolate data from one grid to another. One of the easiest way to do this is to use &lt;em&gt;basemap.interp&lt;/em&gt; function from Matplotlib Basemap library. Here I will show how to prepare your data and how to perform interpolation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
