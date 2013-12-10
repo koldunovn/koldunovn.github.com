@@ -1767,7 +1767,7 @@ init_mathjax();
 <p><strong>Solution:</strong> <a href="https://code.google.com/p/pyresample/">pyresample</a></p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="path/to/file">Notebook file</a></p>
+<p><a href="http://nbviewer.ipython.org/github/koldunovn/earthpy.org/blob/master/content/notebooks/interpolation_between_grids_with_pyresample.ipynb">Notebook file</a></p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Following two excellent contributions on interpolation between grids by <a href="http://earthpy.org/interpolation_between_grids_with_basemap.html">Nikolay</a> Koldunov and <a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html">Oleksandr</a> Huziy I would like to introduce a solution using the <a href="https://code.google.com/p/pyresample">pyresample</a> package. I feel it is timely since pyresample does encapsulate the strategy presented by Oleksandr (which I totally support) in fewer function calls. There might also be a speed-up factor to consider for big datasets, since pyresample comes with its own implementation of KD-Trees which was tested faster than the scipy.spatial.cKDTree.</p>
