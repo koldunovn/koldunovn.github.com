@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>EarthPy - Data processing</title>
+        <title>EarthPy - pyresample</title>
         <link rel="stylesheet" href="http://earthpy.org/theme/css/main.css" />
         <link href="http://earthpy.org/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="EarthPy Atom Feed" />
 
@@ -15,7 +15,7 @@
         <header id="banner" class="body">
                 <h1><a href="http://earthpy.org/">EarthPy </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="http://earthpy.org/category/data-processing.html">Data processing</a></li>
+                    <li><a href="http://earthpy.org/category/data-processing.html">Data processing</a></li>
                     <li><a href="http://earthpy.org/category/information.html">Information</a></li>
                     <li><a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a></li>
                     <li><a href="http://earthpy.org/category/visualization.html">Visualization</a></li>
@@ -5623,201 +5623,6 @@ MrqeCDv4AAAAAElFTkSuQmCC
 <p>Check the <a href="https://code.google.com/p/pyresample/">pyressample</a> for more cool re-projection stuff, including resampling of satellite data!</p>
 </div></p><p>There are <a href="http://earthpy.org/interpolation_between_grids_with_pyresample.html#disqus_thread">comments</a>.</p>                </article>
             </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html" rel="bookmark"
-                           title="Permalink to Interpolation between grids with cKDTree">Interpolation between grids with cKDTree</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-12-07T00:00:00">
-                Published: Sa 07 Dezember 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/oleksandr-huziy.html">Oleksandr Huziy</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/scipy.html">scipy</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Task:</strong> Interpolate data from regular to curvilinear grid</p>
-<p><strong>Solution:</strong> scipy.spatial.cKDTree</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://raw.github.com/guziy/PyNotebooks/master/interpolation_between_grids_with_ckdtree.ipynb">Notebook file</a></p>
-<p><a href="http://cnrcwp.uqam.ca/node/98">About author</a></p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>The problem of interpolation between various grids and projections is the one that Earth and Atmospheric scientists have to deal with sooner or later, whether for data analysis or for model validation. And when this happens it is very useful to know convnient, suitable, fast algorithms and approaches. Following the <a href="http://earthpy.org/interpolation_between_grids_with_basemap.html">post</a> by Nikolay Koldunov about this problem, where he proposes to deal with it using interp function from basemap package, here I present the approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html">cKDTree</a> class from scipy.spatial package. Basically this ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html">read more</a>
-<p>There are <a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/near_realtime_data_from_arctic_ice_mass_balance_buoys.html" rel="bookmark"
-                           title="Permalink to Near realtime data from Arctic ice mass balance buoys">Near realtime data from Arctic ice mass balance buoys</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-11-25T00:00:00">
-                Published: Mo 25 November 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/arcticio.html">Arcticio</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/basemap.html">basemap</a><a href="http://earthpy.org/tag/matplotlib.html">matplotlib</a><a href="http://earthpy.org/tag/arctic.html">Arctic</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/u/354885/notebooks/Pub-01-Buoys-Active.ipynb">Notebook file</a></p>
-<p><a href="https://twitter.com/ArcticIo">Author's twitter</a></p>
-<p>Arctic sea ice thickness is a very important information and tells a lot about the state of the floating ice sheet. Unfortunately direct measurements are rare and an area-wide assessment from the ground is too costly. Satellites can fill the gap by using freeboard as a proxy but there are still some obstacles like e.g. determining snow cover. Mass balance buoys offer a near realtime view at a few sites and show the characteristics of melting sea ice in summer and freezing in winter. This notebook accesses latest available data and plots daily thickness ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/near_realtime_data_from_arctic_ice_mass_balance_buoys.html">read more</a>
-<p>There are <a href="http://earthpy.org/near_realtime_data_from_arctic_ice_mass_balance_buoys.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/interpolation_between_grids_with_basemap.html" rel="bookmark"
-                           title="Permalink to Interpolation between grids with Basemap">Interpolation between grids with Basemap</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-11-23T00:00:00">
-                Published: Sa 23 November 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/nikolay-koldunov.html">Nikolay Koldunov</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/basemap.html">basemap</a><a href="http://earthpy.org/tag/matplotlib.html">matplotlib</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Task:</strong></p>
-<pre><code>Interpolate data from regular to curvilinear grid</code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>Basemap.interp function</code></pre>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/notebooks/interpolation_between_grids_with_basemap.ipynb">Notebook file</a></p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Unfortunately geophysical data distributed on a large variety of grids, and from time to time we have to compare our variables to each other. Often plotting a simple map is enough, but if you want to go a bit beyond qualitative comparison then you have to interpolate data from one grid to another. One of the easiest way to do this is to use <em>basemap.interp</em> function from Matplotlib Basemap library. Here I will show how to prepare your data and how to perform interpolation.</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Some ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/interpolation_between_grids_with_basemap.html">read more</a>
-<p>There are <a href="http://earthpy.org/interpolation_between_grids_with_basemap.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/analyzing-whale-tracks.html" rel="bookmark"
-                           title="Permalink to Analyzing whale tracks">Analyzing whale tracks</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-09-23T00:00:00">
-                Published: Mo 23 September 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/rob-de-almeida.html">Rob De Almeida</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/marinexplore.html">marinexplore</a><a href="http://earthpy.org/tag/data-analysis.html">data analysis</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Dr. Roberto De Almeida</strong> <script type="text/javascript">
-<!--
-h='&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#114;&#x6f;&#98;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'&lt;rob@marinexplore.com&gt;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#60;&#114;&#x6f;&#98;&#64;&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#46;&#x63;&#x6f;&#x6d;&#62;&#32;&#40;&#114;&#x6f;&#98;&#32;&#x61;&#116;&#32;&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></p>
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/robertodealmeida/notebooks/master/earth_day_data_challenge/Analyzing%2520whale%2520tracks.ipynb"><strong>Notebook file</strong></a></p>
-<p>In this iPython notebook we use ocean data to look at the trajectory of a migrating whale. When traveling on the surface of the Earth one cannot take a constant heading (an angle with respect to North) to travel the shortest route from point <span class="math">\(A\)</span> to <span class="math">\(B\)</span>. Instead, the heading must be constantly readjusted so that the arc of the trajectory corresponds to the intersection between the globe and a plane that passes through the center of the Earth:</p>
-<p><a href="http://quezi.com/11698"><img src="http://quezi.com/wp-content/uploads/2010/03/great-circle.png"></a></p>
-<p>This is called ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/analyzing-whale-tracks.html">read more</a>
-<p>There are <a href="http://earthpy.org/analyzing-whale-tracks.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/ulmo.html" rel="bookmark"
-                           title="Permalink to Climatology data access with ulmo">Climatology data access with ulmo</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-04-16T00:00:00">
-                Published: Di 16 April 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/nikolay-koldunov.html">Nikolay Koldunov</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/pandas.html">pandas</a><a href="http://earthpy.org/tag/data-analysis.html">data analysis</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Task:</strong></p>
-<pre><code>easy access to climatology data </code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>ulmo</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/ulmo.ipynb"><strong>Notebook file</strong></a></p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>One of the main things that bothers me most at work is data conversion. World would be a much better place for somebody like me if everybody use netCDF file format for data distribution. While situation slightly changing, and more and more organisations switch to netCDF, there are still plenty of those who distribute their data in some crazy forms.</p>
-<p>Would it be nice if somebody once and for all create converters for all this formats and provide a way to directly search and access data from python? Imagine - instead ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/ulmo.html">read more</a>
-<p>There are <a href="http://earthpy.org/ulmo.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://earthpy.org/pandas-basics.html" rel="bookmark"
-                           title="Permalink to Time series analysis with pandas">Time series analysis with pandas</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2013-03-30T00:00:00">
-                Published: Sa 30 März 2013
-        </abbr>
-
-        <address class="vcard author">
-                By <a class="url fn" href="http://earthpy.org/author/nikolay-koldunov.html">Nikolay Koldunov</a>
-        </address>
-<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/pandas.html">pandas</a><a href="http://earthpy.org/tag/data-analysis.html">data analysis</a><a href="http://earthpy.org/tag/visualization.html">visualization</a></p>
-</footer><!-- /.post-info -->                <p>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Task</strong>:</p>
-<pre><code>analysis of several time series data (AO, NAO)</code></pre>
-<p><strong>Modules</strong>:</p>
-<pre><code>pandas</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a></p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
-<p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation ...</p></div></p>
-                <a class="readmore" href="http://earthpy.org/pandas-basics.html">read more</a>
-<p>There are <a href="http://earthpy.org/pandas-basics.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
-            </article></li>
             </ol><!-- /#posts-list -->
             </section><!-- /#content -->
         <section id="extras" class="body">

@@ -1740,7 +1740,7 @@ init_mathjax();
                 By <a class="url fn" href="http://earthpy.org/author/oleksandr-huziy.html">Oleksandr Huziy</a>
         </address>
 <p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
-<p>tags: <a href="http://earthpy.org/tag/scipy.html">scipy</a><a href="http://earthpy.org/tag/matplotlib.html">matplotlib</a></p>
+<p>tags: <a href="http://earthpy.org/tag/scipy.html">scipy</a></p>
 </footer><!-- /.post-info -->      <p>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong> Interpolate data from regular to curvilinear grid</p>
@@ -1748,6 +1748,7 @@ init_mathjax();
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://raw.github.com/guziy/PyNotebooks/master/interpolation_between_grids_with_ckdtree.ipynb">Notebook file</a></p>
+<p><a href="http://cnrcwp.uqam.ca/node/98">About author</a></p>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The problem of interpolation between various grids and projections is the one that Earth and Atmospheric scientists have to deal with sooner or later, whether for data analysis or for model validation. And when this happens it is very useful to know convnient, suitable, fast algorithms and approaches. Following the <a href="http://earthpy.org/interpolation_between_grids_with_basemap.html">post</a> by Nikolay Koldunov about this problem, where he proposes to deal with it using interp function from basemap package, here I present the approach using <a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html">cKDTree</a> class from scipy.spatial package. Basically this object introduces an index in k-dimensional coordinate space upon creation in order to provide very efficient querying when needed.</p>
