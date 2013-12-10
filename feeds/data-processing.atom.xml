@@ -258,7 +258,7 @@ In&amp;nbsp;[14]:
 
 &lt;/div&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now let us plot the results from these two approaches. We use imshow() that does not introduce additional interpolation.&lt;/p&gt;
+&lt;p&gt;Now let us plot the results from these three approaches. We use imshow() that does not introduce additional interpolation.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div class="cell border-box-sizing code_cell vbox"&gt;
 &lt;div class="input hbox"&gt;
