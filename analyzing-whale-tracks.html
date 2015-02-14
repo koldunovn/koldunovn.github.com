@@ -1747,17 +1747,12 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Dr. Roberto De Almeida</strong> <script type="text/javascript">
-<!--
-h='&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#46;&#x63;&#x6f;&#x6d;';a='&#64;';n='&#114;&#x6f;&#98;';e=n+a+h;
-document.write('<a h'+'ref'+'="ma'+'ilto'+':'+e+'">'+'&lt;rob@marinexplore.com&gt;'+'<\/'+'a'+'>');
-// -->
-</script><noscript>&#60;&#114;&#x6f;&#98;&#64;&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#46;&#x63;&#x6f;&#x6d;&#62;&#32;&#40;&#114;&#x6f;&#98;&#32;&#x61;&#116;&#32;&#x6d;&#x61;&#114;&#x69;&#110;&#x65;&#120;&#112;&#108;&#x6f;&#114;&#x65;&#32;&#100;&#x6f;&#116;&#32;&#x63;&#x6f;&#x6d;&#x29;</noscript></p>
+<p><strong>Dr. Roberto De Almeida</strong> <a href="mailto:rob@marinexplore.com">&lt;rob@marinexplore.com&gt;</a></p>
 <p><a href="http://nbviewer.ipython.org/urls/raw.github.com/robertodealmeida/notebooks/master/earth_day_data_challenge/Analyzing%2520whale%2520tracks.ipynb"><strong>Notebook file</strong></a></p>
-<p>In this iPython notebook we use ocean data to look at the trajectory of a migrating whale. When traveling on the surface of the Earth one cannot take a constant heading (an angle with respect to North) to travel the shortest route from point <span class="math">\(A\)</span> to <span class="math">\(B\)</span>. Instead, the heading must be constantly readjusted so that the arc of the trajectory corresponds to the intersection between the globe and a plane that passes through the center of the Earth:</p>
+<p>In this iPython notebook we use ocean data to look at the trajectory of a migrating whale. When traveling on the surface of the Earth one cannot take a constant heading (an angle with respect to North) to travel the shortest route from point $A$ to $B$. Instead, the heading must be constantly readjusted so that the arc of the trajectory corresponds to the intersection between the globe and a plane that passes through the center of the Earth:</p>
 <p><a href="http://quezi.com/11698"><img src="http://quezi.com/wp-content/uploads/2010/03/great-circle.png"></a></p>
 <p>This is called <a href="http://en.wikipedia.org/wiki/Great-circle_navigation">Great-circle Navigation</a>, and is done by airplanes and ships (wherever possible).</p>
-<p>There are also other factors that define the shortest route <em>in time</em> when travelling from <span class="math">\(A\)</span> to <span class="math">\(B\)</span>. For airplanes the wind is an important factor (the jet streams are the reason why it's faster to fly from west to east compared to east to west), and for ships the ocean currents, tides and storms may be an important factor.</p>
+<p>There are also other factors that define the shortest route <em>in time</em> when travelling from $A$ to $B$. For airplanes the wind is an important factor (the jet streams are the reason why it&#39;s faster to fly from west to east compared to east to west), and for ships the ocean currents, tides and storms may be an important factor.</p>
 <p>What about whales? I always wondered if whales could benefit from the ocean currents when migrating, by travelling along favorable currents and avoiding counter-currents. To investigate this, we develop here an algorithm for identifying the optimal path along two points considering a 2D field of ocean velocity that varies in time. We then compare the whale track with the optimal path to see how much they agree.</p>
 <h2 id="the-data">The data</h2>
 <p>The data used corresponds to a track of a humpback whale travelling from the coast of Brazil to the Southern Ocean. The whale started its migration on 2003-12-24 leaving from 20.465 S, 40.04 W, and finished on 2004-02-28 at 54.67 S, 26.261 W:</p>
@@ -2269,7 +2264,7 @@ JMCEEEKUpP8DDhA8qFkWns8AAAAASUVORK5CYII=
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For the ocean current data I've created a <a href="http://marinexplore.org/explore/#explore/2d/s22l24-d1=htxvk0:d2=hp7i80">dataset in Marinexplore with OSCAR products from 2003-12-01 to 2004-03-01 for the South Atlantic</a>. We can access it using <a href="http://pydap.org/">Pydap</a> as an Opendap client:</p>
+<p>For the ocean current data I&#39;ve created a <a href="http://marinexplore.org/explore/#explore/2d/s22l24-d1=htxvk0:d2=hp7i80">dataset in Marinexplore with OSCAR products from 2003-12-01 to 2004-03-01 for the South Atlantic</a>. We can access it using <a href="http://pydap.org/">Pydap</a> as an Opendap client:</p>
 </div>
 </div>
 </div>
@@ -6522,7 +6517,7 @@ YHhdYUqIDAwMDAxvJEwAY2BgYGB4I2ECGAMDAwPDGwkTwBgYGBgY3kiYAMbAwMDA8Eby/wFbWkB9
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In order to calculate the shortest path between the starting and finishing positions of the whale we need a few accessory functions. First, we need to be able to calculate the distance between two points in the sphere. While on a flat surface we could use Pythagora's theorem, on a sphere the calculations are bit more complicated:</p>
+<p>In order to calculate the shortest path between the starting and finishing positions of the whale we need a few accessory functions. First, we need to be able to calculate the distance between two points in the sphere. While on a flat surface we could use Pythagora&#39;s theorem, on a sphere the calculations are bit more complicated:</p>
 </div>
 </div>
 </div>
@@ -6553,9 +6548,9 @@ YHhdYUqIDAwMDAxvJEwAY2BgYGB4I2ECGAMDAwPDGwkTwBgYGBgY3kiYAMbAwMDA8Eby/wFbWkB9
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We also need to calculate the heading between two points. This is important because given two points we need to calculate the speed of the current along the path between them, and this is done by projecting the <span class="math">\(u\)</span> and <span class="math">\(v\)</span> components of the ocean current along the path:</p>
-<p><span class="math">\(s = s0 + u\cos(a) + v\sin(a)\)</span></p>
-<p>Where <span class="math">\(s\)</span>, the resulting speed along a path, is given by the whale velocity <span class="math">\(s0\)</span>, plus the projection of the currents on the path with heading <span class="math">\(a\)</span>. The formula to calculate the heading between two points on the sphere is:</p>
+<p>We also need to calculate the heading between two points. This is important because given two points we need to calculate the speed of the current along the path between them, and this is done by projecting the $u$ and $v$ components of the ocean current along the path:</p>
+<p>$s = s0 + u\cos(a) + v\sin(a)$</p>
+<p>Where $s$, the resulting speed along a path, is given by the whale velocity $s0$, plus the projection of the currents on the path with heading $a$. The formula to calculate the heading between two points on the sphere is:</p>
 </div>
 </div>
 </div>
@@ -6585,8 +6580,8 @@ YHhdYUqIDAwMDAxvJEwAY2BgYGB4I2ECGAMDAwPDGwkTwBgYGBgY3kiYAMbAwMDA8Eby/wFbWkB9
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We now adapt [Dijkstra's algorithm](http://en.wikipedia.org/wiki/Dijkstra's_algorithm) to determine the optimal route. Since OSCAR is gridded, we'll use the grid points as the nodes of our graph, connecting vertical, horizontal and diagonal grid points to form the graph. The cost to travel between two nodes is determine by the time to travel from one to another, and depends on the distance between them and the current field, which will vary in time.</p>
-<p>First let's construct our graph, by connecting neighbors:</p>
+<p>We now adapt <a href="http://en.wikipedia.org/wiki/Dijkstra&#39;s_algorithm">Dijkstra&#39;s algorithm</a> to determine the optimal route. Since OSCAR is gridded, we&#39;ll use the grid points as the nodes of our graph, connecting vertical, horizontal and diagonal grid points to form the graph. The cost to travel between two nodes is determine by the time to travel from one to another, and depends on the distance between them and the current field, which will vary in time.</p>
+<p>First let&#39;s construct our graph, by connecting neighbors:</p>
 </div>
 </div>
 </div>
@@ -6631,7 +6626,7 @@ YHhdYUqIDAwMDAxvJEwAY2BgYGB4I2ECGAMDAwPDGwkTwBgYGBgY3kiYAMbAwMDA8Eby/wFbWkB9
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In our graph <code>G</code> the node <code>(j, i)</code> corresponds to the grid cell at indexes <code>(j, i)</code> from the OSCAR dataset.</p>
-<p>We then implement Dijkstra's algorithm with one simple change: the travel cost between two nodes will depend on the time when the node is reached, since the currents are non-stationary. This means that nodes maybe be revisited, since they may be reached at different times from different paths, resulting in different costs:</p>
+<p>We then implement Dijkstra&#39;s algorithm with one simple change: the travel cost between two nodes will depend on the time when the node is reached, since the currents are non-stationary. This means that nodes maybe be revisited, since they may be reached at different times from different paths, resulting in different costs:</p>
 </div>
 </div>
 </div>

@@ -26,7 +26,7 @@
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;The problem of interpolation between various grids and projections is the one that Earth and Atmospheric scientists have to deal with sooner or later, whether for data analysis or for model validation. And when this happens it is very useful to know convnient, suitable, fast algorithms and approaches. Following the &lt;a href="http://earthpy.org/interpolation_between_grids_with_basemap.html"&gt;post&lt;/a&gt; by Nikolay Koldunov about this problem, where he proposes to deal with it using interp function from basemap package, here I present the approach using &lt;a href="http://docs.scipy.org/doc/scipy-0.12.0/reference/generated/scipy.spatial.cKDTree.html"&gt;cKDTree&lt;/a&gt; class from scipy.spatial package. Basically this object introduces an index in k-dimensional coordinate space upon creation in order to provide very efficient querying when needed.&lt;/p&gt;
-&lt;p&gt;The algorithm I try to follow when solving this problem is: convert lat/lon coordinates to a 3D Cartesian coordinate system (here is an assumption of the spherical Earth is used), then use obtained &lt;code&gt;x_s,y_s,z_s&lt;/code&gt; - coordinates of the source grid to construct the &lt;code&gt;cKDTree&lt;/code&gt; object, then query the distances and indices of &lt;code&gt;m&lt;/code&gt; closest source grid points to each target grid point. This querying is vectorized for efficinecy. Two methods of interpolation are considered here: nearest neighbour and weighting with the inverse of distance squared (i.e. &lt;span class="math"&gt;\(T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}\)&lt;/span&gt;, &lt;span class="math"&gt;\(w_i = 1/d_i^2\)&lt;/span&gt;). The same data as in Nikolay's post will be used for the comparison sake. Netcdf4-python will be used for handling netcdf files.&lt;/p&gt;
+&lt;p&gt; The algorithm I try to follow when solving this problem is: convert lat/lon coordinates to a 3D Cartesian coordinate system (here is an assumption of the spherical Earth is used), then use obtained &lt;code&gt;x_s,y_s,z_s&lt;/code&gt; - coordinates of the source grid to construct the &lt;code&gt;cKDTree&lt;/code&gt; object, then query the distances and indices of &lt;code&gt;m&lt;/code&gt; closest source grid points to each target grid point. This querying is vectorized for efficinecy. Two methods of interpolation are considered here: nearest neighbour and weighting with the inverse of distance squared (i.e. $T_t = \frac{\sum_{i=1}^{m}T_{s,i}w_i}{\sum_{i=1}^{m}w_i}$, $w_i = 1/d_i^2$). The same data as in Nikolay&amp;#39;s post will be used for the comparison sake. Netcdf4-python will be used for handling netcdf files.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -184,7 +184,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We also need coordinates of the curvilinear grid:&lt;/p&gt;
+&lt;p&gt;We also need coordinates of the curvilinear grid: &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -206,7 +206,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's have a look at our curvilinear grid:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s have a look at our curvilinear grid:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

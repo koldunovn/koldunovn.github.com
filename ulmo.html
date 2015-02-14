@@ -1748,10 +1748,10 @@ jQuery(document).ready(function($) {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-<pre><code>easy access to climatology data </code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>ulmo</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/ulmo.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>easy access to climatology data 
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>ulmo
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/ulmo.ipynb"><strong>Notebook file</strong></a></p>
 </div>
 </div>
 </div>
@@ -1856,7 +1856,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We are going to work with data from <a href="http://www.ncdc.noaa.gov/oa/climate/ghcn-daily/">National Climatic Data Center Global Historical Climate Network - Daily</a> dataset. Say, we would like to find station in our home town. It's a good idea to start by getting information obout stations in the country of interest. Ulmo has a function <strong>ulmo.ncdc.ghcn_daily.get_stations</strong> that can obtain information about stations available in GHCN dataset and also let you define some conditions for the search, like country, time span, and specific variables.</p>
+<p>We are going to work with data from <a href="http://www.ncdc.noaa.gov/oa/climate/ghcn-daily/">National Climatic Data Center Global Historical Climate Network - Daily</a> dataset. Say, we would like to find station in our home town. It&#39;s a good idea to start by getting information obout stations in the country of interest. Ulmo has a function <strong>ulmo.ncdc.ghcn_daily.get_stations</strong> that can obtain information about stations available in GHCN dataset and also let you define some conditions for the search, like country, time span, and specific variables. </p>
 <p>Country should be provided as a country code, and list of countries available <a href="http://www1.ncdc.noaa.gov/pub/data/ghcn/daily/ghcnd-countries.txt">here</a>. We will search for station in Germany (GM) and ask to return pandas Data Frame. Be patient it might take some time.</p>
 </div>
 </div>
@@ -2028,7 +2028,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's search for Hamburg stations:</p>
+<p>Let&#39;s search for Hamburg stations:</p>
 </div>
 </div>
 </div>
@@ -2132,7 +2132,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There are only two stations, and we are interested only in data from HAMBURG FUHLSBUETTEL.</p>
+<p>There are only two stations, and we are interested only in data from HAMBURG FUHLSBUETTEL. </p>
 </div>
 </div>
 </div>
@@ -2234,7 +2234,7 @@ dtypes: object(4)}
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's get maximum daily temperatures:</p>
+<p>Let&#39;s get maximum daily temperatures:</p>
 </div>
 </div>
 </div>
@@ -3239,8 +3239,8 @@ ELTA1mg0mgzh/wHcUUhjt09WHQAAAABJRU5ErkJggg==
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Unfortunately something like</p>
-<pre><code>tm.value.resample(&#39;A&#39;)</code></pre>
-<p>will not work, since <em>value</em> have a type that pandas can't process in this case. We first have to convert <em>value</em> variable to float:</p>
+<pre><code>tm.value.resample(&#39;A&#39;)
+</code></pre><p>will not work, since <em>value</em> have a type that pandas can&#39;t process in this case. We first have to convert <em>value</em> variable to float:</p>
 </div>
 </div>
 </div>
@@ -3262,7 +3262,7 @@ ELTA1mg0mgzh/wHcUUhjt09WHQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now it's working:</p>
+<p>Now it&#39;s working:</p>
 </div>
 </div>
 </div>
@@ -3749,7 +3749,7 @@ gg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now you know how to easily find meteo station and get it's data with ulmo. Maybe if you want data only for one station ulmo is not that useful, but when you begin to collect statistics about many stations, then it became very handy. If you use hydrological data you certainly has to give ulmo a try (<a href="http://ulmo.readthedocs.org/en/latest/index.html#api-reference">see list of supported data sets</a>). Hopefully authors will continue development and add more data sources in future:)</p>
+<p>Now you know how to easily find meteo station and get it&#39;s data with ulmo. Maybe if you want data only for one station ulmo is not that useful, but when you begin to collect statistics about many stations, then it became very handy. If you use hydrological data you certainly has to give ulmo a try (<a href="http://ulmo.readthedocs.org/en/latest/index.html#api-reference">see list of supported data sets</a>). Hopefully authors will continue development and add more data sources in future:)</p>
 </div>
 </div>
 </div>

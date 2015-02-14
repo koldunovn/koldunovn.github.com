@@ -25,7 +25,7 @@
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Following two excellent contributions on interpolation between grids by &lt;a href="http://earthpy.org/interpolation_between_grids_with_basemap.html"&gt;Nikolay&lt;/a&gt; Koldunov and &lt;a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html"&gt;Oleksandr&lt;/a&gt; Huziy I would like to introduce a solution using the &lt;a href="https://code.google.com/p/pyresample"&gt;pyresample&lt;/a&gt; package. I feel it is timely since pyresample does encapsulate the strategy presented by Oleksandr (which I totally support) in fewer function calls. There might also be a speed-up factor to consider for big datasets, since pyresample comes with its own implementation of KD-Trees which was tested faster than the scipy.spatial.cKDTree.&lt;/p&gt;
-&lt;p&gt;The same data as in Nikolay's and Oleksandr's post will be used for easing comparison.&lt;/p&gt;
+&lt;p&gt;The same data as in Nikolay&amp;#39;s and Oleksandr&amp;#39;s post will be used for easing comparison.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -99,7 +99,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;I repeat Oleksandr's routine for downloading data, and download of the NCEP dataset, as well as the target curvilinear grid:&lt;/p&gt;
+&lt;p&gt;I repeat Oleksandr&amp;#39;s routine for downloading data, and download of the NCEP dataset, as well as the target curvilinear grid:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -150,7 +150,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We also need coordinates of the curvilinear grid:&lt;/p&gt;
+&lt;p&gt;We also need coordinates of the curvilinear grid: &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -172,7 +172,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now I'll skip exploring the data (take a look at Oleksandr's post) and concentrate on the reprojection of the NCEP values and the model's curvilinear grid.&lt;/p&gt;
+&lt;p&gt;Now I&amp;#39;ll skip exploring the data (take a look at Oleksandr&amp;#39;s post) and concentrate on the reprojection of the NCEP values and the model&amp;#39;s curvilinear grid.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -208,7 +208,7 @@ Populating the interactive namespace from numpy and matplotlib
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;When all the necessary inputs are read in memory, that's where we start using pyresample's magic.&lt;/p&gt;
+&lt;p&gt;When all the necessary inputs are read in memory, that&amp;#39;s where we start using pyresample&amp;#39;s magic.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2958,7 +2958,7 @@ jaBDsDukQzqk3wg6BLtDOqRD+o2g/x/dMftBUF9TKAAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Now let's say we do not want to resample to the curvilinear coordinates, but to a predefined Lambert Azimuthal Equal Area covering Southern Hemisphere (something based on NSIDC's &lt;a href="nsidc.org/data/ease"&gt;EASE&lt;/a&gt; grids).&lt;/p&gt;
+&lt;p&gt;Now let&amp;#39;s say we do not want to resample to the curvilinear coordinates, but to a predefined Lambert Azimuthal Equal Area covering Southern Hemisphere (something based on NSIDC&amp;#39;s &lt;a href="nsidc.org/data/ease"&gt;EASE&lt;/a&gt; grids).&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

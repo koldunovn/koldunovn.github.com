@@ -1743,9 +1743,10 @@ jQuery(document).ready(function($) {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-<pre><code>continue interactive analysis of time series (AO, NAO indexes)</code></pre>
-<p><strong>Module:</strong></p>
-<pre><code>pandas</code></pre>
+<pre><code>continue interactive analysis of time series (AO, NAO indexes)
+</code></pre><p><strong>Module:</strong></p>
+<pre><code>pandas
+</code></pre>
 </div>
 </div>
 </div>
@@ -1763,7 +1764,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>In the <a href="http://earthpy.org/pandas-basics.html">previous part</a> we looked at very basic ways of work with pandas. Here I am going to introduce couple of more advance tricks. We will use very powerful pandas IO capabilities to create time series directly from the text file, try to create seasonal means with <em>resample</em> and multi-year monthly means with <em>groupby</em>. At the end I will show how new functionality from the upcoming IPython 2.0 can be used to explore your data more efficiently with sort of a simple GUI (<em>interact</em> function). There might be easier or better ways to do some of the things discussed here, and I will be happy to hear about them in comments :)</p>
+<p>In the <a href="http://earthpy.org/pandas-basics.html">previous part</a> we looked at very basic ways of work with pandas. Here I am going to introduce couple of more advance tricks. We will use very powerful pandas IO capabilities to create time series directly from the text file, try to create seasonal means with <em>resample</em> and multi-year monthly means with <em>groupby</em>. At the end I will show how new functionality from the upcoming IPython 2.0 can be used to explore your data more efficiently with sort of a simple GUI (<em>interact</em> function). There might be easier or better ways to do some of the things discussed here, and I will be happy to hear about them in comments :) </p>
 </div>
 </div>
 </div>
@@ -1863,7 +1864,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's open NAO. First remind ourselves how the file looks like:</p>
+<p>Now let&#39;s open NAO. First remind ourselves how the file looks like:</p>
 </div>
 </div>
 </div>
@@ -1980,9 +1981,9 @@ Name: 2, Length: 770
 <p>Some explanations:</p>
 <ul>
 <li>first argument is obviously the file name</li>
-<li>'' - regular expression, that describe separator.</li>
+<li>&#39;\s*&#39; - regular expression, that describe separator.</li>
 <li>parse_dates - combine columns 0 and 1, convert resulting column to dates and give it the name <em>&quot;dates&quot;</em></li>
-<li>header - don't use 0 row as header</li>
+<li>header - don&#39;t use 0 row as header</li>
 <li>index_col - make column 0 (this will be already result of the <em>parse_dates</em> parsing)</li>
 <li>squeeze - create Series instead of DataFrame.</li>
 </ul>
@@ -2107,7 +2108,7 @@ Name: 2, Length: 770
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>But our data are monthly means, so they are related not to some particular point in time, but rather to the time interval, or time span. We can convert time stamps in our Series to time periods, and then combine them.</p>
+<p>But our data are monthly means, so they are related not to some particular point in time, but rather to the time interval, or time span. We can convert time stamps in our Series to time periods, and then combine them. </p>
 </div>
 </div>
 </div>
@@ -2301,7 +2302,7 @@ pandas.tseries.period.PeriodIndex
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Initially pandas was created for analysis of financial information and it thinks not in seasons, but in quarters. So we have to resample our data to quarters. We also need to make a shift from standard quarters, so they correspond with seasons. This is done by using 'Q-NOV' as a time frequency, indicating that year in our case ends in November:</p>
+<p>Initially pandas was created for analysis of financial information and it thinks not in seasons, but in quarters. So we have to resample our data to quarters. We also need to make a shift from standard quarters, so they correspond with seasons. This is done by using &#39;Q-NOV&#39; as a time frequency, indicating that year in our case ends in November: </p>
 </div>
 </div>
 </div>
@@ -3052,7 +3053,7 @@ TkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>If you don't mind to sacrifice first two data points (that strictly speaking can't represent the whole winter of 1949-1950), there is another way to do similar thing by just resampling to 3M (3 months) interval starting from March (third data point):</p>
+<p>If you don&#39;t mind to sacrifice first two data points (that strictly speaking can&#39;t represent the whole winter of 1949-1950), there is another way to do similar thing by just resampling to 3M (3 months) interval starting from March (third data point):</p>
 </div>
 </div>
 </div>
@@ -4631,7 +4632,7 @@ gg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Say we would like to look at variability of our indexes by individual months, and also (if necessary) do a bit of smoothing in order to filter out high frequencies. Something like this will work:</p>
+<p>Say we would like to look at variability of our indexes by individual months, and also (if necessary) do a bit of smoothing in order to filter out high frequencies. Something like this will work: </p>
 </div>
 </div>
 </div>
@@ -5679,7 +5680,7 @@ gg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>And now you call <em>interact</em> with our previously defined function as first argument. Other arguments are our parameters with value limits and step size:</p>
+<p>And now you call <em>interact</em> with our previously defined function as first argument. Other arguments are our parameters with value limits and step size: </p>
 </div>
 </div>
 </div>
@@ -6057,10 +6058,10 @@ XDDOs6WY9u7dSzs7O/r4+NDX15e+vr7csmULr1+/zg4dOrBevXoMCAgw7sSR5MSJE+np6UkvLy9u
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-<pre><code>easy access to climatology data </code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>ulmo</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/ulmo.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>easy access to climatology data 
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>ulmo
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/ulmo.ipynb"><strong>Notebook file</strong></a></p>
 </div>
 </div>
 </div>
@@ -6099,10 +6100,10 @@ XDDOs6WY9u7dSzs7O/r4+NDX15e+vr7csmULr1+/zg4dOrBevXoMCAgw7sSR5MSJE+np6UkvLy9u
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task</strong>:</p>
-<pre><code>analysis of several time series data (AO, NAO)</code></pre>
-<p><strong>Modules</strong>:</p>
-<pre><code>pandas</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>analysis of several time series data (AO, NAO)
+</code></pre><p><strong>Modules</strong>:</p>
+<pre><code>pandas
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a>   </p>
 </div>
 </div>
 </div>
@@ -6111,7 +6112,7 @@ XDDOs6WY9u7dSzs7O/r4+NDX15e+vr7csmULr1+/zg4dOrBevXoMCAgw7sSR5MSJE+np6UkvLy9u
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
+<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it&#39;s the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
 <p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation ...</p></div></div></div></p>
                 <a class="readmore" href="http://earthpy.org/pandas-basics.html">read more</a>
 <p>There are <a href="http://earthpy.org/pandas-basics.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->

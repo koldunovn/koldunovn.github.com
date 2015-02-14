@@ -1748,10 +1748,10 @@ jQuery(document).ready(function($) {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task</strong>:</p>
-<pre><code>analysis of several time series data (AO, NAO)</code></pre>
-<p><strong>Modules</strong>:</p>
-<pre><code>pandas</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>analysis of several time series data (AO, NAO)
+</code></pre><p><strong>Modules</strong>:</p>
+<pre><code>pandas
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a>   </p>
 </div>
 </div>
 </div>
@@ -1760,8 +1760,8 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
-<p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation of 1D data, especially time series, MUCH faster. Before pandas working with time series in python was a pain for me, now it's fun. Ease of use stimulate in-depth exploration of the data: why wouldn't you make some additional analysis if it's just one line of code? Hope you will also find this great tool helpful and useful. So, let's begin.</p>
+<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it&#39;s the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
+<p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation of 1D data, especially time series, MUCH faster. Before pandas working with time series in python was a pain for me, now it&#39;s fun. Ease of use stimulate in-depth exploration of the data: why wouldn&#39;t you make some additional analysis if it&#39;s just one line of code? Hope you will also find this great tool helpful and useful. So, let&#39;s begin.</p>
 </div>
 </div>
 </div>
@@ -1904,7 +1904,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now, when we are done with preparations, let's get some data. If you work on Windows download monthly AO data <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii">from here</a>. If you on *nix machine, you can do it directly from ipython notebook using system call to wget command:</p>
+<p>Now, when we are done with preparations, let&#39;s get some data. If you work on Windows download monthly AO data <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii">from here</a>. If you on *nix machine, you can do it directly from ipython notebook using system call to wget command:</p>
 </div>
 </div>
 </div>
@@ -2065,7 +2065,7 @@ array([[  1.95000000e+03,   1.00000000e+00,  -6.03100000e-02],
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We would like to convert this data in to time series, that can be manipulated naturally and easily. First step, that we have to do is to create the range of dates for our time series. From the file it is clear, that record starts at January 1950 and ends at February 2013 (at the time I am writing this, of course). Frequency of the data is one month (freq='M').</p>
+<p>We would like to convert this data in to time series, that can be manipulated naturally and easily. First step, that we have to do is to create the range of dates for our time series. From the file it is clear, that record starts at January 1950 and ends at February 2013 (at the time I am writing this, of course). Frequency of the data is one month (freq=&#39;M&#39;). </p>
 </div>
 </div>
 </div>
@@ -3441,7 +3441,7 @@ NQ9FNxM7AAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Reference to the time periods is done in a very natural way. You, of course, can also get individual values. By number:</p>
+<p>Reference to the time periods is done in a very natural way. You, of course, can also get individual values. By number: </p>
 </div>
 </div>
 </div>
@@ -3574,7 +3574,7 @@ Freq: M
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Isn't that great? :)</p>
+<p>Isn&#39;t that great? :)</p>
 </div>
 </div>
 </div>
@@ -3645,7 +3645,7 @@ Length: 347
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Now let's make live a bit more interesting and download more data. This will be NOA time series (Windowd users can get it <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii">here</a>).</p>
+<p>Now let&#39;s make live a bit more interesting and download more data. This will be NOA time series (Windowd users can get it <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii">here</a>).</p>
 </div>
 </div>
 </div>
@@ -5550,7 +5550,7 @@ Freq: M, Length: 758
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas provide easy way to resample data to different time frequency. Two main parameters for resampling is time period you resemple to and the method that you use. By default the method is mean. Following example calculates annual ('A') mean:</p>
+<p>Pandas provide easy way to resample data to different time frequency. Two main parameters for resampling is time period you resemple to and the method that you use. By default the method is mean. Following example calculates annual (&#39;A&#39;) mean:</p>
 </div>
 </div>
 </div>
@@ -8801,7 +8801,7 @@ sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That's it. I hope you at least get a rough impression of what pandas can do for you. Comments are very welcome (below). If you have intresting examples of pandas usage in Earth Science, we would be happy to put them on <a href="http://earthpy.org">EarthPy</a>.</p>
+<p>That&#39;s it. I hope you at least get a rough impression of what pandas can do for you. Comments are very welcome (below). If you have intresting examples of pandas usage in Earth Science, we would be happy to put them on <a href="http://earthpy.org">EarthPy</a>.</p>
 </div>
 </div>
 </div>

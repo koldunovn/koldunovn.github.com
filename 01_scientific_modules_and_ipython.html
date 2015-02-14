@@ -1775,7 +1775,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>When people say that they do their scientific computations in Python it's only half true. Python is a construction set, similar to MITgcm or other models. Without packages it's only a core, that although very powerful, does not seems to be able to do much by itself.</p>
+<p>When people say that they do their scientific computations in Python it&#39;s only half true. Python is a construction set, similar to MITgcm or other models. Without packages it&#39;s only a core, that although very powerful, does not seems to be able to do much by itself.</p>
 <p>There is a set of packages, that almost every scientist would need:</p>
 <p><img  height="200" src="core.png"></p>
 </div>
@@ -1808,11 +1808,12 @@ jQuery(document).ready(function($) {
 <p>In order to be productive you need comfortable environment, and this is what IPython provide. It was started as enhanced python interactive shell, but with time become architecture for interactive computing.</p>
 <p>Starting IPython with <em>--pylab</em> option loads some necessary modules (NumPy for data array support and Matplotlib for plotting support), that make it similar to Matlab console.</p>
 <p>In order to use latest version of IPython on zmaw computers one has to load appropriate module:</p>
-<pre><code>module load python/2.7-ve2</code></pre>
-<p>and then</p>
-<pre><code>ipython --pylab</code></pre>
-<p>On Ubuntu or other Debian-based distributions something like this will set you up for the rest of the course:</p>
-<pre><code>sudo apt-get install ipython-notebook python-matplotlib python-scipy python-pandas python-sympy python-mpltoolkits.basemap netcdf-bin cdo</code></pre>
+<pre><code>module load python/2.7-ve2
+</code></pre><p>and then</p>
+<pre><code>ipython --pylab
+</code></pre><p>On Ubuntu or other Debian-based distributions something like this will set you up for the rest of the course:</p>
+<pre><code>sudo apt-get install ipython-notebook python-matplotlib python-scipy python-pandas python-sympy python-mpltoolkits.basemap netcdf-bin cdo
+</code></pre>
 </div>
 </div>
 </div>
@@ -1893,10 +1894,11 @@ I love Python
 <p>List:</p>
 <ul>
 <li><a href="http://www.codecademy.com/tracks/python">Python on Codeacademy</a></li>
-<li><a href="https://developers.google.com/edu/python/">Google's Python Class</a></li>
+<li><a href="https://developers.google.com/edu/python/">Google&#39;s Python Class</a></li>
 </ul>
 <p>Code:</p>
-<pre><code>print(&#39;hello world&#39;)</code></pre>
+<pre><code>print(&#39;hello world&#39;)
+</code></pre>
 </div>
 </div>
 </div>
@@ -1905,7 +1907,7 @@ I love Python
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="\(\LaTeX\)-equations"><span class="math">\(\LaTeX\)</span> equations<a class="anchor-link" href="#\(\LaTeX\)-equations">&#182;</a></h4>
+<h4 id="$\LaTeX$-equations">$\LaTeX$ equations<a class="anchor-link" href="#$\LaTeX$-equations">&#182;</a></h4>
 </div>
 </div>
 </div>
@@ -1915,14 +1917,15 @@ I love Python
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><span class="math">\[\int_0^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}\]</span> <span class="math">\[
+<p>$$\int_0^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}$$
+$$
 F(x,y)=0 ~~\mbox{and}~~
 \left| \begin{array}{ccc}
-  F&#39;&#39;_{xx} &amp; F&#39;&#39;_{xy} &amp;  F&#39;_x \\
-  F&#39;&#39;_{yx} &amp; F&#39;&#39;_{yy} &amp;  F&#39;_y \\
-  F&#39;_x     &amp; F&#39;_y     &amp; 0 
+  F''_{xx} &amp; F''_{xy} &amp;  F'_x \\
+  F''_{yx} &amp; F''_{yy} &amp;  F'_y \\
+  F'_x     &amp; F'_y     &amp; 0 
   \end{array}\right| = 0
-\]</span></p>
+$$</p>
 </div>
 </div>
 </div>
@@ -2146,7 +2149,7 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li><a href="http://ipython.org/">IPython website</a></li>
-<li><a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">Notebook gallery</a></li>
+<li><a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">Notebook gallery</a> </li>
 </ul>
 </div>
 </div>
@@ -2167,11 +2170,12 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to start IPython notebook you have to type:</p>
-<pre><code>ipython notebook</code></pre>
-<p>but in order to work in the notebook efficiently one has to start it with <em>pylab</em> and <em>inline</em> mode, that allow inline graphics</p>
-<pre><code>ipython notebook --pylab inline</code></pre>
-<p>on ZMAW computers, where default browser is Konqueror, you might need to use:</p>
-<pre><code>ipython notebook --pylab inline --browser=&quot;firefox&quot;</code></pre>
+<pre><code>ipython notebook
+</code></pre><p>but in order to work in the notebook efficiently one has to start it with <em>pylab</em> and <em>inline</em> mode, that allow inline graphics</p>
+<pre><code>ipython notebook --pylab inline
+</code></pre><p>on ZMAW computers, where default browser is Konqueror, you might need to use:</p>
+<pre><code>ipython notebook --pylab inline --browser=&quot;firefox&quot;
+</code></pre>
 </div>
 </div>
 </div>
@@ -2200,12 +2204,13 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can download them as .zip file:</p>
-<pre><code>wget https://github.com/koldunovn/python_for_geosciences/archive/master.zip</code></pre>
-<p>Unzip:</p>
-<pre><code>unzip master.zip</code></pre>
-<p>And run:</p>
+<pre><code>wget https://github.com/koldunovn/python_for_geosciences/archive/master.zip
+</code></pre><p>Unzip:</p>
+<pre><code>unzip master.zip
+</code></pre><p>And run:</p>
 <pre><code>cd python_for_geosciences-master/
-ipython notebook --pylab inline</code></pre>
+ipython notebook --pylab inline
+</code></pre>
 </div>
 </div>
 </div>
@@ -2256,7 +2261,7 @@ ipython notebook --pylab inline</code></pre>
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Question mark after a function will open pager with documentation. Double question mark will show you source code of the function.</p>
+<p>Question mark after a function will open pager with documentation. Double question mark will show you source code of the function. </p>
 </div>
 </div>
 </div>
@@ -2526,7 +2531,9 @@ cdo nyear: Processed 1 variable over 1464 timesteps. ( 0.01s )
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The magic function system provides a series of functions which allow you to control the behavior of IPython itself, plus a lot of system-type features.</p>
+<p>The magic function system provides a series of functions which allow you to
+control the behavior of IPython itself, plus a lot of system-type
+features.</p>
 </div>
 </div>
 </div>
@@ -2535,7 +2542,7 @@ cdo nyear: Processed 1 variable over 1464 timesteps. ( 0.01s )
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Let's create some set of numbers using <a href="http://docs.python.org/2/library/functions.html#range">range</a> command:</p>
+<p>Let&#39;s create some set of numbers using <a href="http://docs.python.org/2/library/functions.html#range">range</a> command:</p>
 </div>
 </div>
 </div>
@@ -2661,7 +2668,7 @@ Interactive namespace is empty.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Receive as argument both the current line where they are declared and the whole body of the cell.</p>
+<p>Receive as argument both the current line where they are declared and the whole body of the cell. </p>
 </div>
 </div>
 </div>

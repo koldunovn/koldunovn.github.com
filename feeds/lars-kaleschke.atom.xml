@@ -5,10 +5,11 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;Task:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Acces SMOS Sea Ice Thickness data&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt;&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;pydap&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;Task:&lt;/strong&gt; &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Acces SMOS Sea Ice Thickness data
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; &lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;pydap
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -28,7 +29,7 @@
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Sea ice thickens is one of the most important environmental variables in the Arctic, but unfortunately is one of the hardest to measure. Unlike sea ice concentration, which is measured by satellites operationally now for more than three decades, only recently we begin to obtain limited satellite sea ice thickness information from missions like &lt;a href="http://icesat.gsfc.nasa.gov/icesat/"&gt;ICESat&lt;/a&gt;, &lt;a href="http://www.esa.int/Our_Activities/Observing_the_Earth/CryoSat"&gt;Cryosat-2&lt;/a&gt; and &lt;a href="http://www.esa.int/Our_Activities/Observing_the_Earth/The_Living_Planet_Programme/Earth_Explorers/SMOS"&gt;SMOS&lt;/a&gt;. The later is not specifically dedicated to cryospheric applications, but turns out that its information can be used to obtain data about the thin sea ice.&lt;/p&gt;
 &lt;p&gt;Here you can learn more about &lt;a href="https://wiki.zmaw.de/ifm/SMOSIce"&gt;SMOS sea ice thickness project&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;In the following we learn how to access a SMOS dataset with the OpenNDAP protocol. This allows the analysis of some parts of the data while the complete dataset can stay on the remote server. Data hosted by &lt;a href="http://icdc.zmaw.de/l3c_smos_sit.html"&gt;ICDC&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In the following we learn how to access a SMOS dataset with the OpenNDAP protocol. This allows the analysis of some parts of the data  while the complete dataset can stay on the remote server. Data hosted by &lt;a href="http://icdc.zmaw.de/l3c_smos_sit.html"&gt;ICDC&lt;/a&gt;.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -37,7 +38,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We would need Python OpenNDAP client &lt;a href="http://www.pydap.org/"&gt;pydap&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;We would need Python OpenNDAP client &lt;a href="http://www.pydap.org/"&gt;pydap&lt;/a&gt;. &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -81,7 +82,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's have a look at the contents of the dataset&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s have a look at the contents of the dataset&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -230,7 +231,7 @@ array([ 35076.,  35100.,  35124.,  35148.,  35172.,  35196.,  35220.,
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Doesn't really look like a human readable time. Let's have a look at its units:&lt;/p&gt;
+&lt;p&gt;Doesn&amp;#39;t really look like a human readable time. Let&amp;#39;s have a look at its units:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -270,7 +271,7 @@ array([ 35076.,  35100.,  35124.,  35148.,  35172.,  35196.,  35220.,
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Here we define function to convert from 'hours since' to something more understandable:&lt;/p&gt;
+&lt;p&gt;Here we define function to convert from &amp;#39;hours since&amp;#39; to something more understandable:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;

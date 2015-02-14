@@ -1745,9 +1745,9 @@ jQuery(document).ready(function($) {
 <p><strong>Task:</strong></p>
 <pre><code>    Show how to work with river discharge data.
     Also show cople of ways to visualise this data with Basemap. 
-    </code></pre>
-<p><strong>Solution</strong></p>
-<pre><code>    Pandas, Basemap</code></pre>
+</code></pre><p><strong>Solution</strong></p>
+<pre><code>    Pandas, Basemap
+</code></pre>
 </div>
 </div>
 </div>
@@ -1774,7 +1774,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I begin with the visualization of river discharge data, that I did for one of my projects. It is performed in <a href="http://www.tableausoftware.com/public">Tableau</a>, and use <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth Global River Flow and Continental Discharge Dataset</a>. This data set is also available on Marinexplore.</p>
+<p>I begin with the visualization of river discharge data, that I did for one of my projects. It is performed in <a href="http://www.tableausoftware.com/public">Tableau</a>, and use <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth Global River Flow and Continental Discharge Dataset</a>. This data set is also available on Marinexplore. </p>
 </div>
 </div>
 </div>
@@ -1813,7 +1813,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This visualization is interactive, so if you choose several rivers on the map it will show a bar chart with distribution of river discharges.</p>
+<p>This visualization is interactive, so if you choose several rivers on the map it will show a bar chart with distribution of river discharges. </p>
 </div>
 </div>
 </div>
@@ -1822,7 +1822,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There is an intresting story related to this visualization. After my first attempt to plot the data it was obvious that something is wrong - Niger had discarge close to the Amazon, and there were also cople of rivers in the top that I never heard of. I check my scripts, they were fine, so the problem was with the original data set. I wrote to the autors and now the error is fixed, and there is red letter warning on the <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth dataset website</a>. Funny thing is, that for four years, that this data set is used nobody notices the error, and it took only one simple visualization to find it. So visualization might serve as simple, but very efficient way to check your data for errors.</p>
+<p>There is an intresting story related to this visualization. After my first attempt to plot the data it was obvious that something is wrong - Niger had discarge close to the Amazon, and there were also cople of rivers in the top that I never heard of. I check my scripts, they were fine, so the problem was with the original data set. I wrote to the autors and now the error is fixed, and there is red letter warning on the <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth dataset website</a>. Funny thing is, that for four years, that this data set is used nobody notices the error, and it took only one simple visualization to find it. So visualization might serve as simple, but very efficient way to check your data for errors. </p>
 </div>
 </div>
 </div>
@@ -1831,7 +1831,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I also want to show some simple statistics about my data, so I create another visualization with only 20 biggest rivers:</p>
+<p>I also want  to show some simple statistics about my data, so I create another visualization with only 20 biggest rivers:</p>
 </div>
 </div>
 </div>
@@ -1869,7 +1869,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Look at Amazon. I knew that it's a biggest river in the world, but I never though it's domination is so overwhelming. This huge river discharge should be visible somehow in salinity field of the ocean. In order to test this I decide to look at satellite salinity data.</p>
+<p>Look at Amazon. I knew that it&#39;s a biggest river in the world, but I never though it&#39;s domination is so overwhelming. This huge river discharge should be visible somehow in salinity field of the ocean. In order to test this I decide to look at satellite salinity data.</p>
 </div>
 </div>
 </div>
@@ -1878,7 +1878,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>But first we would need to plot our river discharge data in pyhton. <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/coastal-stns-byVol-updated-oct2007.txt">Text file</a> with anual mean river discharge values from Dai and Trenberth have been converted in .csv format with vertical bar as separator and is available <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/rivers2.csv">here</a>. We are going to open it with <a href="http://pandas.pydata.org/">pandas</a>, and plot with <a href="http://matplotlib.org/basemap/users/examples.html">basemap</a>.</p>
+<p>But first we would need to plot our river discharge data in pyhton. <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/coastal-stns-byVol-updated-oct2007.txt">Text file</a> with anual mean river discharge values from Dai and Trenberth have been converted in .csv format with vertical bar as separator and is available <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/rivers2.csv">here</a>. We are going to open it with <a href="http://pandas.pydata.org/">pandas</a>, and plot with <a href="http://matplotlib.org/basemap/users/examples.html">basemap</a>. </p>
 </div>
 </div>
 </div>
@@ -2096,7 +2096,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We need only several values to work with:</p>
+<p>We need only several values to work with: </p>
 </div>
 </div>
 </div>
@@ -2118,7 +2118,7 @@ For more information, type &apos;help(pylab)&apos;.
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We don't need missing values:</p>
+<p>We don&#39;t need missing values:</p>
 </div>
 </div>
 </div>
@@ -4245,7 +4245,7 @@ Xl5lNmDZzN8Ts8NjxowZM2bMmPnbY552ZsaMGTNmzJj522N2eMyYMWPGjBkzf3vMDo8ZM2bMmDFj
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This is discharge of first 50 rivers from Dai and Trenberth data set. Let's add some salinity.</p>
+<p>This is discharge of first 50 rivers from Dai and Trenberth data set. Let&#39;s add some salinity.</p>
 </div>
 </div>
 </div>
@@ -4255,7 +4255,7 @@ Xl5lNmDZzN8Ts8NjxowZM2bMmPnbY552ZsaMGTNmzJj522N2eMyYMWPGjBkzf3vMDo8ZM2bMmDFj
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to do so I first generated <a href="https://s3.amazonaws.com/download.marinexplore.com/mx_4970_20130618T2008_d86ff396-d852-11e2-a9b6-22000a1c5967.zip">subset of the AQUARIUS sea surface salinity data</a>. The data set is very short, so I took only one year (2012). I also need only annual mean, and had to generate it by myself with use of <a href="https://code.zmaw.de/projects/cdo">cdo</a>. At this point I encountered some probelms. The output is in netCDF4, that is still not very abundant, and soft for handling netCDF files in standard linux distributions (like cdo, or scipy.io.netcdf) is still compiled without netCDF4 support. This is a bit annoying, and it would be nice to be able to choose between netCDF3 and 4.</p>
-<p>The file with annual mean sea surface salinity for 2012 is available from <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/AQUARIUS.L3.7DAY_tm.nc">here</a> and it's nerCDF3. I use <a href="http://www.pyngl.ucar.edu/Nio.shtml">Nio</a> to open it, but it should be very similar to scipy.io.netcdf.</p>
+<p>The file with annual mean sea surface salinity for 2012 is available from <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/AQUARIUS.L3.7DAY_tm.nc">here</a> and it&#39;s nerCDF3. I use <a href="http://www.pyngl.ucar.edu/Nio.shtml">Nio</a> to open it, but it should be very similar to scipy.io.netcdf.</p>
 </div>
 </div>
 </div>
@@ -7704,7 +7704,7 @@ UoxXAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>One can see that there is some reduced salinity, however it is located not to the east of the Amazon river mouth, but more to the north of it. Let's have a closer look:</p>
+<p>One can see that there is some reduced salinity, however it is located not to the east of the Amazon river mouth, but more to the north of it. Let&#39;s have a closer look:</p>
 </div>
 </div>
 </div>
@@ -8719,7 +8719,7 @@ FQAAAABJRU5ErkJggg==
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The fresh water plume is obviously going to the north, and then at some point partly turn to the east. There is also some signature of big rivers from the western coast of the African continent. However we will concentrate on the Amazon river plume. What is causing the shape of it's surface distribution? Maybe winds?</p>
+<p>The fresh water plume is obviously going to the north, and then at some point partly turn to the east. There is also some signature of big rivers from the western coast of the African continent. However we will concentrate on the Amazon river plume. What is causing the shape of it&#39;s surface distribution? Maybe winds?</p>
 <p>In order to test this I create data set with <a href="https://s3.amazonaws.com/download.marinexplore.com/mx_4970_20130618T2145_6342013c-d860-11e2-80c3-22000a1c5967.zip">NCDC sea winds</a> for 2012, and calculate annual mean (available from <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/NOAA.NCDC.SEAWINDS.RT.DAILY_tm.nc">here</a>).</p>
 </div>
 </div>
@@ -10522,7 +10522,7 @@ pMH/Ad0dtUH23KlnAAAAAElFTkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The mean wind is classical, like from the text books, and can't lead to such distribution. This was strange idea from the beginning, but sometimes it worth to test even strange ideas :)</p>
+<p>The mean wind is classical, like from the text books, and can&#39;t lead to such distribution. This was strange idea from the beginning, but sometimes it worth to test even strange ideas :)</p>
 <p>So, what about ocean currents, how do they look like in this area?</p>
 </div>
 </div>
@@ -14958,10 +14958,10 @@ TkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-<pre><code>Draw a grid and a transect with PyNGL module</code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>komod module</code></pre>
-<p><a href="https://raw.github.com/koldunovn/earthpy.org/master/content/earthpy_mitplot2.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>Draw a grid and a transect with PyNGL module
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>komod module
+</code></pre><p><a href="https://raw.github.com/koldunovn/earthpy.org/master/content/earthpy_mitplot2.ipynb"><strong>Notebook file</strong></a></p>
 </div>
 </div>
 </div>
@@ -15033,10 +15033,10 @@ TkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-<pre><code>Quickly draw maps with PyNGL module</code></pre>
-<p><strong>Solution:</strong></p>
-<pre><code>komod module</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/earthpy_mitplot.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>Quickly draw maps with PyNGL module
+</code></pre><p><strong>Solution:</strong></p>
+<pre><code>komod module
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/earthpy_mitplot.ipynb"><strong>Notebook file</strong></a></p>
 </div>
 </div>
 </div>
@@ -15045,7 +15045,7 @@ TkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The PyNGL module produce very nice looking maps, and it's capabilities in fine tuning the resulting image in many cases are much better compared to matplotlib Basemap module. However this flexibility come at a price: in order to draw a map of an acceptable appearance one has to write quite a long script, and specify many parameters. Of course once you find your &quot;best ever&quot; set of parameters, you basically copy/paste them from one script to another with only slight modifications. But at some point you ...</p></div></div></div></p>
+<p>The PyNGL module produce very nice looking maps, and it&#39;s capabilities in fine tuning the resulting image in many cases are much better compared to matplotlib Basemap module. However this flexibility come at a price: in order to draw a map of an acceptable appearance one has to write quite a long script, and specify many parameters. Of course once you find your &quot;best ever&quot; set of parameters, you basically copy/paste them from one script to another with only slight modifications. But at some point you ...</p></div></div></div></p>
                 <a class="readmore" href="http://earthpy.org/komod-mitplot-drawmap.html">read more</a>
 <p>There are <a href="http://earthpy.org/komod-mitplot-drawmap.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
             </article></li>
@@ -15074,10 +15074,10 @@ TkSuQmCC
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task</strong>:</p>
-<pre><code>analysis of several time series data (AO, NAO)</code></pre>
-<p><strong>Modules</strong>:</p>
-<pre><code>pandas</code></pre>
-<p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a></p>
+<pre><code>analysis of several time series data (AO, NAO)
+</code></pre><p><strong>Modules</strong>:</p>
+<pre><code>pandas
+</code></pre><p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a>   </p>
 </div>
 </div>
 </div>
@@ -15086,7 +15086,7 @@ TkSuQmCC
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
+<p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it&#39;s the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
 <p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation ...</p></div></div></div></p>
                 <a class="readmore" href="http://earthpy.org/pandas-basics.html">read more</a>
 <p>There are <a href="http://earthpy.org/pandas-basics.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->

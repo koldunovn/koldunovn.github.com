@@ -119,7 +119,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;FORTRAN and Matlab are used for decades, and have a lot of libraries for all kinds of scientific needs. Although now main functionality is covered by python modules, there are still many specific areas where no python solution is available. This problem can be partly solved by python's integration with other languages (&lt;a href="http://mlabwrap.sourceforge.net/"&gt;MLabWrap&lt;/a&gt;, &lt;a href="http://www.f2py.com/"&gt;F2py&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;FORTRAN and Matlab are used for decades, and have a lot of libraries for all kinds of scientific needs. Although now main functionality is covered by python modules, there are still many specific areas where no python solution is available. This problem can be partly solved by python&amp;#39;s integration with other languages (&lt;a href="http://mlabwrap.sourceforge.net/"&gt;MLabWrap&lt;/a&gt;, &lt;a href="http://www.f2py.com/"&gt;F2py&lt;/a&gt;).&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -138,7 +138,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;... if you don't use vectorization or &lt;a href="http://www.cython.org/"&gt;Cython&lt;/a&gt; when loops are inevitable. Critical parts still can be written in FORTRAN or C.&lt;/p&gt;
+&lt;p&gt;... if you don&amp;#39;t use vectorization or &lt;a href="http://www.cython.org/"&gt;Cython&lt;/a&gt; when loops are inevitable. Critical parts still can be written in FORTRAN or C.  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -181,8 +181,10 @@
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Though it has been around for two decades, it exploded into use in the atmospheric sciences just a few years ago after the development community converged upon the standard scientific packages (e.g., array handling) needed for atmospheric sciences work.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Much more robust and flexible workflow. Everything from data download to data analysys, visualization and finally writing a paper can be done in one environment.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Though it has been around for two decades, it exploded into use in the atmospheric sciences just a few years ago after the development community converged upon the standard scientific packages (e.g., array handling) needed for atmospheric sciences work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Much more robust and flexible workflow. Everything from data download to data analysys, visualization and finally writing a paper can be done in one environment.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -193,8 +195,10 @@
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Ability to access innovations from industries outside of the Earth sciences (cloud computing, big data, mobile computing).&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Institutional support includes groups at Lawrence Livermore National Laboratory’s Program for Climate Model Diagnosis and Intercomparison, NCAR’s Computer Information Systems Laboratory, and the British Atmospheric Data Centre.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Ability to access innovations from industries outside of the Earth sciences (cloud computing, big data, mobile computing).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Institutional support includes groups at Lawrence Livermore National Laboratory’s Program for Climate Model Diagnosis and Intercomparison, NCAR’s Computer Information Systems Laboratory, and the British Atmospheric Data Centre.&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -257,7 +261,7 @@
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;When people say that they do their scientific computations in Python it's only half true. Python is a construction set, similar to MITgcm or other models. Without packages it's only a core, that although very powerful, does not seems to be able to do much by itself.&lt;/p&gt;
+&lt;p&gt;When people say that they do their scientific computations in Python it&amp;#39;s only half true. Python is a construction set, similar to MITgcm or other models. Without packages it&amp;#39;s only a core, that although very powerful, does not seems to be able to do much by itself.&lt;/p&gt;
 &lt;p&gt;There is a set of packages, that almost every scientist would need:&lt;/p&gt;
 &lt;p&gt;&lt;img  height="200" src="core.png"&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -290,11 +294,12 @@
 &lt;p&gt;In order to be productive you need comfortable environment, and this is what IPython provide. It was started as enhanced python interactive shell, but with time become architecture for interactive computing.&lt;/p&gt;
 &lt;p&gt;Starting IPython with &lt;em&gt;--pylab&lt;/em&gt; option loads some necessary modules (NumPy for data array support and Matplotlib for plotting support), that make it similar to Matlab console.&lt;/p&gt;
 &lt;p&gt;In order to use latest version of IPython on zmaw computers one has to load appropriate module:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;module load python/2.7-ve2&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;and then&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ipython --pylab&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;On Ubuntu or other Debian-based distributions something like this will set you up for the rest of the course:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;sudo apt-get install ipython-notebook python-matplotlib python-scipy python-pandas python-sympy python-mpltoolkits.basemap netcdf-bin cdo&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;module load python/2.7-ve2
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ipython --pylab
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;On Ubuntu or other Debian-based distributions something like this will set you up for the rest of the course:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo apt-get install ipython-notebook python-matplotlib python-scipy python-pandas python-sympy python-mpltoolkits.basemap netcdf-bin cdo
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -375,10 +380,11 @@ I love Python
 &lt;p&gt;List:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://www.codecademy.com/tracks/python"&gt;Python on Codeacademy&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://developers.google.com/edu/python/"&gt;Google's Python Class&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://developers.google.com/edu/python/"&gt;Google&amp;#39;s Python Class&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Code:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;print(&amp;#39;hello world&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;print(&amp;#39;hello world&amp;#39;)
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -387,7 +393,7 @@ I love Python
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h4 id="\(\LaTeX\)-equations"&gt;&lt;span class="math"&gt;\(\LaTeX\)&lt;/span&gt; equations&lt;a class="anchor-link" href="#\(\LaTeX\)-equations"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
+&lt;h4 id="$\LaTeX$-equations"&gt;$\LaTeX$ equations&lt;a class="anchor-link" href="#$\LaTeX$-equations"&gt;&amp;#182;&lt;/a&gt;&lt;/h4&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -397,14 +403,15 @@ I love Python
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;span class="math"&gt;\[\int_0^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}\]&lt;/span&gt; &lt;span class="math"&gt;\[
+&lt;p&gt;$$\int_0^\infty e^{-x^2} dx=\frac{\sqrt{\pi}}{2}$$
+$$
 F(x,y)=0 ~~\mbox{and}~~
 \left| \begin{array}{ccc}
-  F&amp;#39;&amp;#39;_{xx} &amp;amp; F&amp;#39;&amp;#39;_{xy} &amp;amp;  F&amp;#39;_x \\
-  F&amp;#39;&amp;#39;_{yx} &amp;amp; F&amp;#39;&amp;#39;_{yy} &amp;amp;  F&amp;#39;_y \\
-  F&amp;#39;_x     &amp;amp; F&amp;#39;_y     &amp;amp; 0 
+  F''_{xx} &amp;amp; F''_{xy} &amp;amp;  F'_x \\
+  F''_{yx} &amp;amp; F''_{yy} &amp;amp;  F'_y \\
+  F'_x     &amp;amp; F'_y     &amp;amp; 0 
   \end{array}\right| = 0
-\]&lt;/span&gt;&lt;/p&gt;
+$$&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -628,7 +635,7 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href="http://ipython.org/"&gt;IPython website&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks"&gt;Notebook gallery&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks"&gt;Notebook gallery&lt;/a&gt; &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -649,11 +656,12 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;In order to start IPython notebook you have to type:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ipython notebook&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;but in order to work in the notebook efficiently one has to start it with &lt;em&gt;pylab&lt;/em&gt; and &lt;em&gt;inline&lt;/em&gt; mode, that allow inline graphics&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ipython notebook --pylab inline&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;on ZMAW computers, where default browser is Konqueror, you might need to use:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;ipython notebook --pylab inline --browser=&amp;quot;firefox&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;ipython notebook
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;but in order to work in the notebook efficiently one has to start it with &lt;em&gt;pylab&lt;/em&gt; and &lt;em&gt;inline&lt;/em&gt; mode, that allow inline graphics&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ipython notebook --pylab inline
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;on ZMAW computers, where default browser is Konqueror, you might need to use:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;ipython notebook --pylab inline --browser=&amp;quot;firefox&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -682,12 +690,13 @@ D9fAMA4apl2cAAAAAElFTkSuQmCC
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;You can download them as .zip file:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;wget https://github.com/koldunovn/python_for_geosciences/archive/master.zip&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Unzip:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;unzip master.zip&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;And run:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;wget https://github.com/koldunovn/python_for_geosciences/archive/master.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Unzip:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;unzip master.zip
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;And run:&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;cd python_for_geosciences-master/
-ipython notebook --pylab inline&lt;/code&gt;&lt;/pre&gt;
+ipython notebook --pylab inline
+&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -738,7 +747,7 @@ ipython notebook --pylab inline&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Question mark after a function will open pager with documentation. Double question mark will show you source code of the function.&lt;/p&gt;
+&lt;p&gt;Question mark after a function will open pager with documentation. Double question mark will show you source code of the function. &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1008,7 +1017,9 @@ cdo nyear: Processed 1 variable over 1464 timesteps. ( 0.01s )
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;The magic function system provides a series of functions which allow you to control the behavior of IPython itself, plus a lot of system-type features.&lt;/p&gt;
+&lt;p&gt;The magic function system provides a series of functions which allow you to
+control the behavior of IPython itself, plus a lot of system-type
+features.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1017,7 +1028,7 @@ cdo nyear: Processed 1 variable over 1464 timesteps. ( 0.01s )
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's create some set of numbers using &lt;a href="http://docs.python.org/2/library/functions.html#range"&gt;range&lt;/a&gt; command:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s create some set of numbers using &lt;a href="http://docs.python.org/2/library/functions.html#range"&gt;range&lt;/a&gt; command:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1143,7 +1154,7 @@ Interactive namespace is empty.
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Receive as argument both the current line where they are declared and the whole body of the cell.&lt;/p&gt;
+&lt;p&gt;Receive as argument both the current line where they are declared and the whole body of the cell. &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1439,7 +1450,8 @@ a          str     hello world!
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;a href="http://www.python.org/"&gt;Python&lt;/a&gt; is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages such as C. The language provides constructs intended to enable clear programs on both a small and large scale.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://www.python.org/"&gt;Python&lt;/a&gt; is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages 
+such as C. The language provides constructs intended to enable clear programs on both a small and large scale.&lt;/p&gt;
 &lt;p&gt;-- &lt;cite&gt;From Wikipedia, the free encyclopedia&lt;/cite&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1880,7 +1892,7 @@ float
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;In IPython you can get the list of object's methods and attributes by typing dot and pressing TAB:&lt;/p&gt;
+&lt;p&gt;In IPython you can get the list of object&amp;#39;s methods and attributes by typing dot and pressing TAB:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2449,7 +2461,7 @@ float
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's have a look at the 4th element of our list:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s have a look at the 4th element of our list:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2489,7 +2501,7 @@ float
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;It's also a list, and its values can be accessed by indexes as well:&lt;/p&gt;
+&lt;p&gt;It&amp;#39;s also a list, and its values can be accessed by indexes as well:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2569,7 +2581,7 @@ float
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Slice will start with the first slice index and go up to but not including the second slice index.&lt;/p&gt;
+&lt;p&gt;Slice will start with the first slice index and go up to but not including the second slice index. &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2674,7 +2686,7 @@ three
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Two interesting thins here. First: indentation, it's in the code, you must use it, otherwise code will not work:&lt;/p&gt;
+&lt;p&gt;Two interesting thins here. First: indentation, it&amp;#39;s in the code, you must use it, otherwise code will not work:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3001,7 +3013,7 @@ Freezing
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;But generally I think it's a bad idea, because your name-space is populated by things that you don't really need and it's hard to tell where the function comes from.&lt;/p&gt;
+&lt;p&gt;But generally I think it&amp;#39;s a bad idea, because your name-space is populated by things that you don&amp;#39;t really need and it&amp;#39;s hard to tell where the function comes from.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3465,7 +3477,7 @@ array([[ 1950.   ,     1.   ,    -0.06 ],
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;So it's a &lt;em&gt;row-major&lt;/em&gt; order. Matlab and Fortran use &lt;em&gt;column-major&lt;/em&gt; order for arrays.&lt;/p&gt;
+&lt;p&gt;So it&amp;#39;s a &lt;em&gt;row-major&lt;/em&gt; order. Matlab and Fortran use &lt;em&gt;column-major&lt;/em&gt; order for arrays.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3545,7 +3557,7 @@ dtype(&amp;apos;float64&amp;apos;)
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;You can't assign value of different type to element of the numpy array:&lt;/p&gt;
+&lt;p&gt;You can&amp;#39;t assign value of different type to element of the numpy array:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4230,7 +4242,7 @@ array([[ 1950.   ,    10.   ,    -0.379],
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;You don't have to create separate variable for mask, but apply it directly. Here instead of first five rows I show five last rows:&lt;/p&gt;
+&lt;p&gt;You don&amp;#39;t have to create separate variable for mask, but apply it directly. Here instead of first five rows I show five last rows:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -4972,7 +4984,8 @@ array([   1.,    4.,    9.,   16.,   25.,   36.,   49.,   64.,   81.,
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;We use &lt;em&gt;uint8&lt;/em&gt; data type. &lt;a href="http://docs.scipy.org/doc/numpy/user/basics.types.html"&gt;List of numpy data types&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;We use &lt;em&gt;uint8&lt;/em&gt; data type. 
+&lt;a href="http://docs.scipy.org/doc/numpy/user/basics.types.html"&gt;List of numpy data types&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -5976,7 +5989,7 @@ UzUAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's mask all land and missing values:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s mask all land and missing values:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -6703,7 +6716,7 @@ DAAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Check variable's shape:&lt;/p&gt;
+&lt;p&gt;Check variable&amp;#39;s shape:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7690,7 +7703,7 @@ Length: 30793412 (29M) (unauthoritative)
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;It's not really file id, it's &lt;em&gt;netcdf_file&lt;/em&gt; object, that have some methods and attributes:&lt;/p&gt;
+&lt;p&gt;It&amp;#39;s not really file id, it&amp;#39;s &lt;em&gt;netcdf_file&lt;/em&gt; object, that have some methods and attributes:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -7826,7 +7839,7 @@ Length: 30793412 (29M) (unauthoritative)
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;This time we create &lt;em&gt;netcdf_variable&lt;/em&gt; object, that contain among other things attributes of the netCDF variable as well as data themselves.&lt;/p&gt;
+&lt;p&gt;This time we create &lt;em&gt;netcdf_variable&lt;/em&gt; object, that contain among other things attributes of the netCDF variable as well as data themselves. &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8953,7 +8966,7 @@ WQylDiv0OAAAAABJRU5ErkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Data are packed. In order to unpack we have to use &lt;em&gt;scale_factor&lt;/em&gt; and &lt;em&gt;add_offset&lt;/em&gt; values from attributes of the netCDF &lt;em&gt;air&lt;/em&gt; variable. We also convert to &lt;span class="math"&gt;\(^{\circ}\)&lt;/span&gt;C:&lt;/p&gt;
+&lt;p&gt;Data are packed. In order to unpack we have to use &lt;em&gt;scale_factor&lt;/em&gt; and &lt;em&gt;add_offset&lt;/em&gt; values from attributes of the netCDF &lt;em&gt;air&lt;/em&gt; variable. We also convert to $^{\circ}$C:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9958,7 +9971,7 @@ rkJggg==
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://www.pyngl.ucar.edu/Nio.shtml"&gt;PyNio - library that reads NetCDF, GRIB, HDF and so on ...&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://www.pyngl.ucar.edu/Nio.shtml"&gt;PyNio - library that reads NetCDF, GRIB, HDF and so on ... &lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://netcdf4-python.googlecode.com/svn/trunk/docs/netCDF4-module.html"&gt;netCDF4 - advanced netCDF module&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="http://wiki.scipy.org/Cookbook"&gt;Scipy cookbook&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -9997,7 +10010,7 @@ rkJggg==
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's prepare some data:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s prepare some data:&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -21405,7 +21418,7 @@ UFBQUFBQUFBQUFCQBUVsKCgoKCgoKCgoKCjIgiI2FBQUFBQUFBQUFBRkQREbCgoKCgoKCgoKCgqy
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;a href="http://scitools.org.uk/iris/"&gt;Iris&lt;/a&gt; seeks to provide a powerful, easy to use, and community-driven Python library for analysing and visualising meteorological and oceanographic data sets. Kind of Ferret replacement. Developed in the Met Office by group of 7 full time developers. There are more than 300 active python users in Met Office.&lt;/p&gt;
+&lt;p&gt; &lt;a href="http://scitools.org.uk/iris/"&gt;Iris&lt;/a&gt; seeks to provide a powerful, easy to use, and community-driven Python library for analysing and visualising meteorological and oceanographic data sets. Kind of Ferret replacement. Developed in the Met Office by group of 7 full time developers. There are more than 300 active python users in Met Office.&lt;/p&gt;
 &lt;p&gt;With Iris you can:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Use a single API to work on your data, irrespective of its original format.&lt;/li&gt;
@@ -32741,7 +32754,7 @@ Optional arguments:
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Let's download one more file from NCEP reanalysis data:&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s download one more file from NCEP reanalysis data: &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -33421,7 +33434,7 @@ wq2PUJVTwmAAAAAASUVORK5CYII=
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;Note that we don't have to apply &lt;em&gt;scale factor&lt;/em&gt; and &lt;em&gt;add offset&lt;/em&gt;, it's done automatically.&lt;/p&gt;
+&lt;p&gt;Note that we don&amp;#39;t have to apply &lt;em&gt;scale factor&lt;/em&gt; and &lt;em&gt;add offset&lt;/em&gt;, it&amp;#39;s done automatically.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
