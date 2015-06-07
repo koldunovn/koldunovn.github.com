@@ -1810,7 +1810,7 @@ jQuery(document).ready(function($) {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you still prefer pip:</p>
-<pre><code>pip install dask
+<pre><code>pip install dask[array]
 </code></pre><p>should do the trick, but I am not sure if the visualization will work</p>
 </div>
 </div>
@@ -1848,7 +1848,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="kn">import</span> <span class="nn">os</span>
@@ -2012,7 +2012,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="numpy-array">numpy.array</h4>
+<p><strong>numpy.array</strong></p>
 <p>This is our usual way with numpy array. Open the file, load the data, calculate the mean:</p>
 </div>
 </div>
@@ -2054,7 +2054,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="cdo">cdo</h4>
+<p><strong>cdo</strong></p>
 <p>Same thing with cdo for comparison</p>
 </div>
 </div>
@@ -2094,7 +2094,7 @@ jQuery(document).ready(function($) {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="dask-array">dask.array</h4>
+<p><strong>dask.array</strong></p>
 <p>And finally dask arrays:</p>
 </div>
 </div>
@@ -7157,6 +7157,41 @@ width=400
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>numpy.array</strong></p>
+<p>Didn&#39;t even try to compute, immediately rise MemoryError</p>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class="highlight-ipynb"><pre class="ipynb"><span class="c">#%%timeit</span>
+<span class="c">#f = Dataset(&#39;ncep_temperature.nc&#39;)</span>
+<span class="c">#numpyresult = f.variables[&#39;air&#39;][:].mean()</span>
+<span class="c">#f.close()</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>cdo</strong></p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[59]:</div>
@@ -7187,6 +7222,15 @@ Wall time: 51.8 s
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>dask.array</strong></p>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -7231,6 +7275,15 @@ Wall time: 48.3 s
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>cdo</strong></p>
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[61]:</div>
@@ -7261,6 +7314,15 @@ Wall time: 1min 36s
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>dask.array</strong></p>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
@@ -7338,13 +7400,13 @@ Wall time: 1min 37s
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class="highlight-ipynb"><pre class="ipynb"><span class="o">%%</span><span class="k">time</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s">&#39;ncep_temperature.nc&#39;</span><span class="p">)</span>
 <span class="n">daskarray</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s">&#39;air&#39;</span><span class="p">],</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">5000</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">144</span><span class="p">))</span>
-<span class="n">daskresult</span> <span class="o">=</span> <span class="n">daskarray</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>                   
+<span class="n">daskresult</span> <span class="o">=</span> <span class="n">daskarray</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>                   
 <span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 
@@ -7359,8 +7421,8 @@ Wall time: 1min 37s
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
-CPU times: user 19.1 s, sys: 13 s, total: 32.1 s
-Wall time: 58.8 s
+CPU times: user 17.4 s, sys: 13.3 s, total: 30.7 s
+Wall time: 1min 5s
 
 </pre>
 </div>
@@ -7375,7 +7437,7 @@ Wall time: 58.8 s
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Maybe not two times, but still 40 seconds faster, and if you process a lot of files this might sum up in to some good hours :) </p>
+<p>Maybe not two times, but still about 30 seconds faster, and if you process a lot of files this might sum up in to some good hours :) </p>
 </div>
 </div>
 </div>
