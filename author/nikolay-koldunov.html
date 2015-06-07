@@ -1746,6 +1746,47 @@ jQuery(document).ready(function($) {
 
             <li><article class="hentry">
                 <header>
+                    <h1><a href="http://earthpy.org/dask.html" rel="bookmark"
+                           title="Permalink to Calculations with arrays bigger than your memory (dask arrays)">Calculations with arrays bigger than your memory (dask arrays)</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2015-06-07T00:00:00+02:00">
+                Published: So 07 Juni 2015
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="http://earthpy.org/author/nikolay-koldunov.html">Nikolay Koldunov</a>
+        </address>
+<p>In <a href="http://earthpy.org/category/data-processing.html">Data processing</a>. </p>
+<p>tags: <a href="http://earthpy.org/tag/netcdf.html">netCDF</a> </p>
+</footer><!-- /.post-info -->                <p>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Task</strong></p>
+<pre><code>Process numpy arrays in parallel
+</code></pre><p><strong>Solution</strong></p>
+<pre><code>dask
+</code></pre>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Geophysical models get higher and higher resolutions, producing more and more data. However numpy arrays and pandas data frames only work with data that fit in to a memory. For many of us it means that before real analysis we have to somehow subsample or aggregate initial data with some heavy lifting tools (like <a href="https://code.azmaw.de/projects/cdo/embedded/index.html">cdo</a>) and only then switch to convenience and beauty of python. These times might come to an end soon with introduction of <a href="http://dask.pydata.org/en/latest/">dask</a> - library that helps to parallelize computations on big chunks of data. This allows analyzing data ...</p></div></div></div></p>
+                <a class="readmore" href="http://earthpy.org/dask.html">read more</a>
+<p>There are <a href="http://earthpy.org/dask.html#disqus_thread">comments</a>.</p>                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
                     <h1><a href="http://earthpy.org/pandas_netcdf.html" rel="bookmark"
                            title="Permalink to Select time ranges in multidimensional arrays with pandas">Select time ranges in multidimensional arrays with pandas</a></h1>
                 </header>
