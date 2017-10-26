@@ -192,6 +192,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -212,11 +213,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -954,8 +950,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -966,9 +964,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1007,151 +1007,127 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>===========</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--It's-easy-to-learn,-easy-to-read-and-fast-to-develop">- It's easy to learn, easy to read and fast to develop<a class="anchor-link" href="#--It's-easy-to-learn,-easy-to-read-and-fast-to-develop">&#182;</a></h2>
+<h2 id="--It's-easy-to-learn,-easy-to-read-and-fast-to-develop">- It's easy to learn, easy to read and fast to develop<a class="anchor-link" href="#--It's-easy-to-learn,-easy-to-read-and-fast-to-develop">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It is considered to be the language of choice for beginners, and proper code formatting is in the design of the language. This is especially useful when you remember, that we are the scientist not programmers. What we need is to have a language that can be learned quickly, but at the same time is powerful enough to satisfy our needs.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--It's-free-and-opensource.">- It's free and opensource.<a class="anchor-link" href="#--It's-free-and-opensource.">&#182;</a></h2>
+<h2 id="--It's-free-and-opensource.">- It's free and opensource.<a class="anchor-link" href="#--It's-free-and-opensource.">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You will be able to use your scripts even if your institute does not have enough money to buy expensive software (MATLAB or IDL). You can make changes in the code, or at least have the possibility to look at the source code if you suspect that there is a bug.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--It's-multiplatform">- It's multiplatform<a class="anchor-link" href="#--It's-multiplatform">&#182;</a></h2>
+<h2 id="--It's-multiplatform">- It's multiplatform<a class="anchor-link" href="#--It's-multiplatform">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can find it on many systems, so you are not tide to Windows, Mac or Linux. It sounds great, but not always the case, some modules will work only on limited number of operating systems (e.g. PyNGL, pyFerret).</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--It's-general-purpose-language">- It's general purpose language<a class="anchor-link" href="#--It's-general-purpose-language">&#182;</a></h2>
+<h2 id="--It's-general-purpose-language">- It's general purpose language<a class="anchor-link" href="#--It's-general-purpose-language">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can use it not only for data processing and visualization, but also for system administration, web development, database programming and so on. It is relatively easy to make your code run in the parallel mode. Last but not the least - if you ever decide to leave academia your chances on the market are much better with some python skills.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Downsides:">Downsides:<a class="anchor-link" href="#Downsides:">&#182;</a></h1>
+<h1 id="Downsides:">Downsides:<a class="anchor-link" href="#Downsides:">¶</a></h1>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--There-is-a-smaller-legacy-code-base">- There is a smaller legacy code base<a class="anchor-link" href="#--There-is-a-smaller-legacy-code-base">&#182;</a></h2>
+<h2 id="--There-is-a-smaller-legacy-code-base">- There is a smaller legacy code base<a class="anchor-link" href="#--There-is-a-smaller-legacy-code-base">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>FORTRAN and Matlab are used for decades, and have a lot of libraries for all kinds of scientific needs. Although now main functionality is covered by python modules, there are still many specific areas where no python solution is available. This problem can be partly solved by python's integration with other languages (<a href="http://mlabwrap.sourceforge.net/">MLabWrap</a>, <a href="http://www.f2py.com/">F2py</a>).</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="--It's-slow">- It's slow<a class="anchor-link" href="#--It's-slow">&#182;</a></h2>
+<h2 id="--It's-slow">- It's slow<a class="anchor-link" href="#--It's-slow">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>... if you don't use vectorization or <a href="http://www.cython.org/">Cython</a> when loops are inevitable. Critical parts still can be written in FORTRAN or C.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1161,31 +1137,26 @@ h6:hover .anchor-link {
 <li><a href="http://stevetjoa.com/305/">I used Matlab. Now I use Python</a></li>
 <li><a href="http://phillipmfeldman.org/Python/Advantages_of_Python_Over_Matlab.html">Eight Advantages of Python Over Matlab</a></li>
 </ul>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Python-in-Earth-Sciences">Python in Earth Sciences<a class="anchor-link" href="#Python-in-Earth-Sciences">&#182;</a></h1>
+<h1 id="Python-in-Earth-Sciences">Python in Earth Sciences<a class="anchor-link" href="#Python-in-Earth-Sciences">¶</a></h1>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Lin, J. W.-B. (2012). <a href="http://journals.ametsoc.org/doi/full/10.1175/BAMS-D-12-00148.1"><strong>Why Python Is the Next Wave in Earth Sciences Computing</strong></a>. <em>Bulletin of the American Meteorological Society</em>, 93(12), 1823–1824. doi:10.1175/BAMS-D-12-00148.1</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1195,12 +1166,10 @@ h6:hover .anchor-link {
 <li><p>Much more robust and flexible workflow. Everything from data download to data analysys, visualization and finally writing a paper can be done in one environment.</p>
 </li>
 </ul>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1210,21 +1179,18 @@ h6:hover .anchor-link {
 <li><p>Institutional support includes groups at Lawrence Livermore National Laboratory’s Program for Climate Model Diagnosis and Intercomparison, NCAR’s Computer Information Systems Laboratory, and the British Atmospheric Data Centre.</p>
 </li>
 </ul>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Further-reading:">Further reading:<a class="anchor-link" href="#Further-reading:">&#182;</a></h2>
+<h2 id="Further-reading:">Further reading:<a class="anchor-link" href="#Further-reading:">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1235,10 +1201,10 @@ h6:hover .anchor-link {
 <li><a href="http://strata.oreilly.com/2013/03/python-data-tools-just-keep-getting-better.html">Python data tools just keep getting better</a></li>
 <li><a href="http://annual.ametsoc.org/2013/index.cfm/programs-and-events/conferences-and-symposia/third-symposium-on-advances-in-modeling-and-analysis-using-python/">Third Symposium on Advances in Modeling and Analysis Using Python</a></li>
 </ul>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
@@ -1291,68 +1257,57 @@ h6:hover .anchor-link {
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>================</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Core-scientific-packages">Core scientific packages<a class="anchor-link" href="#Core-scientific-packages">&#182;</a></h2>
+<h2 id="Core-scientific-packages">Core scientific packages<a class="anchor-link" href="#Core-scientific-packages">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When people say that they do their scientific computations in Python it's only half true. Python is a construction set, similar to MITgcm or other models. Without packages it's only a core, that although very powerful, does not seems to be able to do much by itself.</p>
 <p>There is a set of packages, that almost every scientist would need:</p>
-<p><img height="200" src="core.png"></p>
-
+<p><img height="200" src="core.png" /></p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We are going to talk about all exept Sympy</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="IPython-and-pylab">IPython and pylab<a class="anchor-link" href="#IPython-and-pylab">&#182;</a></h2>
+<h2 id="IPython-and-pylab">IPython and pylab<a class="anchor-link" href="#IPython-and-pylab">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1379,63 +1334,53 @@ h6:hover .anchor-link {
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>================</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://www.python.org/">Python</a> is a widely used general-purpose, high-level programming language. Its design philosophy emphasizes code readability, and its syntax allows programmers to express concepts in fewer lines of code than would be possible in languages 
 such as C. The language provides constructs intended to enable clear programs on both a small and large scale.</p>
 <p>-- <cite>From Wikipedia, the free encyclopedia</cite></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Variables">Variables<a class="anchor-link" href="#Variables">&#182;</a></h2>
+<h2 id="Variables">Variables<a class="anchor-link" href="#Variables">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Python uses <a href="http://en.wikipedia.org/wiki/Duck_typing">duck typing</a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Int">Int<a class="anchor-link" href="#Int">&#182;</a></h3>
+<h3 id="Int">Int<a class="anchor-link" href="#Int">¶</a></h3>
 </div>
 </div>
 </div>
@@ -1463,38 +1408,31 @@ such as C. The language provides constructs intended to enable clear programs on
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>================</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img height="100" src="numpy.png"></p>
-
+<p><img height="100" src="numpy.png" /></p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1504,7 +1442,6 @@ such as C. The language provides constructs intended to enable clear programs on
 <li>tools for integrating C/C++ and Fortran code</li>
 <li>useful linear algebra, Fourier transform, and random number capabilities</li>
 </ul>
-
 </div>
 </div>
 </div>
@@ -1532,51 +1469,43 @@ such as C. The language provides constructs intended to enable clear programs on
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>================</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Binary-data">Binary data<a class="anchor-link" href="#Binary-data">&#182;</a></h2>
+<h2 id="Binary-data">Binary data<a class="anchor-link" href="#Binary-data">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Open-binary">Open binary<a class="anchor-link" href="#Open-binary">&#182;</a></h3>
+<h3 id="Open-binary">Open binary<a class="anchor-link" href="#Open-binary">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Data from <a href="http://nsidc.org/data/nsidc-0051.html">Sea Ice Concentrations from Nimbus-7 SMMR and DMSP SSM/I-SSMIS Passive Microwave Data</a>.</p>
-
 </div>
 </div>
 </div>
@@ -1604,43 +1533,35 @@ such as C. The language provides constructs intended to enable clear programs on
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>=============</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://matplotlib.org/">Matplotlib</a> is a python 2D plotting library which produces publication quality figures in a variety of hardcopy formats and interactive environments across platforms.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's prepare some data:</p>
-
 </div>
 </div>
 </div>
@@ -1668,47 +1589,39 @@ such as C. The language provides constructs intended to enable clear programs on
 <p>In <a href="http://earthpy.org/category/introduction-to-python.html">Introduction to Python</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is part of <a href="https://github.com/koldunovn/python_for_geosciences"><strong>Python for Geosciences</strong></a> notes.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>=============</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some of the things will not work on ZMAW computers (Iris, Cartopy).</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Iris">Iris<a class="anchor-link" href="#Iris">&#182;</a></h2>
+<h2 id="Iris">Iris<a class="anchor-link" href="#Iris">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -1740,57 +1653,47 @@ such as C. The language provides constructs intended to enable clear programs on
 <p>In <a href="http://earthpy.org/category/information.html">Information</a>.</p>
 <p>tags: <a href="http://earthpy.org/tag/python-for-geosciences.html">python for geosciences</a> </p>
 </footer><!-- /.post-info -->                
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here is small collection of links that I find useful.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Websites:">Websites:<a class="anchor-link" href="#Websites:">&#182;</a></h3>
+<h3 id="Websites:">Websites:<a class="anchor-link" href="#Websites:">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://github.com/jrjohansson/scientific-python-lectures#online-read-only-versions">Lectures on Scientific Computing with Python.</a> - very good introduction to the topic writen as a collection of IPython Notebooks.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="https://github.com/ipython/ipython/wiki/A-gallery-of-interesting-IPython-Notebooks">A gallery of interesting IPython Notebooks</a> - constant source of inspiration :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://oceanpython.org/">OceanPython.org</a> - OceanPython.org is a website to learn Python Programming Language for ocean- and marine-science applications and to share Python code. OceanPython.org is maintained by students, staff and post-docs at the Department of Oceanography of Dalhousie University (Canada)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">

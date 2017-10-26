@@ -197,6 +197,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -217,11 +218,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -959,8 +955,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -971,9 +969,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1012,517 +1012,439 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-
 <pre><code>    Show how to work with river discharge data.
     Also show cople of ways to visualise this data with Basemap. 
 
 </code></pre>
 <p><strong>Solution</strong></p>
-
 <pre><code>    Pandas, Basemap</code></pre>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This notebook was originally created for <a href="http://marinexplore.org/challenges/1-earth-day-data-challenge">Marinexplore Earth Data Challenge</a>, in order to show how data for the submission was processed. I think it might be also interesting for those who begin to use python in geoscience, because it demonstrate couple of ways to handle csv and netCDF data and plotting capabilities of the Basemap module. There will be no extensive explanations though, moistly the code.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I want to show a small example of the work flow that is more or less typical during research process. Often you see some interesting feature in your data and want to investigate it in more detail. If you not lucky enough to work with the model data, this would require dealing with multiple data sources, and possibly multiple file formats. Having all data sets in one place in consistent format becomes very handy for this type of applications.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I begin with the visualization of river discharge data, that I did for one of my projects. It is performed in <a href="http://www.tableausoftware.com/public">Tableau</a>, and use <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth Global River Flow and Continental Discharge Dataset</a>. This data set is also available on Marinexplore.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">HTML</span>
-<span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe src=http://public.tableausoftware.com/views/rivers_0/</span><span class="se">\</span>
-<span class="s1">top925rivers?:embed=y&amp;:display_count=no width=800 height=700&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
+<span class="n">HTML</span><span class="p">(</span><span class="s1">'<iframe src="http://public.tableausoftware.com/views/rivers_0/&lt;/span"><span class="se">\</span>
+<span class="s1">top925rivers?:embed=y&:display_count=no width=800 height=700></iframe>'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[1]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[1]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
-<iframe src="http://public.tableausoftware.com/views/rivers_0/top925rivers?:embed=y&amp;:display_count=no" width="800" height="700"></iframe>
-</div>
-
-</div>
-
+<iframe height="700" src="http://public.tableausoftware.com/views/rivers_0/top925rivers?:embed=y&amp;:display_count=no" width="800"></iframe>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This visualization is interactive, so if you choose several rivers on the map it will show a bar chart with distribution of river discharges.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There is an intresting story related to this visualization. After my first attempt to plot the data it was obvious that something is wrong - Niger had discarge close to the Amazon, and there were also cople of rivers in the top that I never heard of. I check my scripts, they were fine, so the problem was with the original data set. I wrote to the autors and now the error is fixed, and there is red letter warning on the <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/index.html">Dai and Trenberth dataset website</a>. Funny thing is, that for four years, that this data set is used nobody notices the error, and it took only one simple visualization to find it. So visualization might serve as simple, but very efficient way to check your data for errors.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I also want  to show some simple statistics about my data, so I create another visualization with only 20 biggest rivers:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&lt;iframe src=http://public.tableausoftware.com/</span><span class="se">\</span>
-<span class="s1">views/rivers_0/top20rivers width=800 height=700&gt;&lt;/iframe&gt;&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">'<iframe src="http://public.tableausoftware.com/&lt;/span"><span class="se">\</span>
+<span class="s1">views/rivers_0/top20rivers width=800 height=700></iframe>'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[3]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[3]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
-<iframe src="http://public.tableausoftware.com/views/rivers_0/top20rivers" width="800" height="700"></iframe>
-</div>
-
-</div>
-
+<iframe height="700" src="http://public.tableausoftware.com/views/rivers_0/top20rivers" width="800"></iframe>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Look at Amazon. I knew that it's a biggest river in the world, but I never though it's domination is so overwhelming. This huge river discharge should be visible somehow in salinity field of the ocean. In order to test this I decide to look at satellite salinity data.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>But first we would need to plot our river discharge data in pyhton. <a href="http://www.cgd.ucar.edu/cas/catalog/surface/dai-runoff/coastal-stns-byVol-updated-oct2007.txt">Text file</a> with anual mean river discharge values from Dai and Trenberth have been converted in .csv format with vertical bar as separator and is available <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/rivers2.csv">here</a>. We are going to open it with <a href="http://pandas.pydata.org/">pandas</a>, and plot with <a href="http://matplotlib.org/basemap/users/examples.html">basemap</a>.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Welcome to pylab, a matplotlib-based Python environment [backend: module://IPython.kernel.zmq.pylab.backend_inline].
-For more information, type &#39;help(pylab)&#39;.
+For more information, type 'help(pylab)'.
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/home/magik/NOTEBOOKS/marine/rivers2.csv&#39;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;|&#39;</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39; Null&#39;</span><span class="p">,</span> <span class="s1">&#39;  Null&#39;</span><span class="p">])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'/home/magik/NOTEBOOKS/marine/rivers2.csv'</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">'|'</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s1">' Null'</span><span class="p">,</span> <span class="s1">'  Null'</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here is our data in pandas DataFrame:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>  No</th>
-      <th>m2s_ra</th>
-      <th> lonm</th>
-      <th>latm</th>
-      <th>   area(km2)</th>
-      <th>Vol</th>
-      <th>  nyr</th>
-      <th>  yrb</th>
-      <th> yre</th>
-      <th> elev(m)</th>
-      <th> CT</th>
-      <th> CN</th>
-      <th> River_Name</th>
-      <th>OCN</th>
-      <th>Station_Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td> 1</td>
-      <td> 12462</td>
-      <td> -51.75</td>
-      <td> -0.75</td>
-      <td> 4618750</td>
-      <td> 5389.537</td>
-      <td> 79.0</td>
-      <td> 1928</td>
-      <td> 2006</td>
-      <td>   37</td>
-      <td>  BR</td>
-      <td>  SA</td>
-      <td>       Amazon</td>
-      <td> ATL</td>
-      <td> Obidos, Bra</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td> 2</td>
-      <td> 10291</td>
-      <td>  12.75</td>
-      <td> -5.75</td>
-      <td> 3475000</td>
-      <td> 1270.203</td>
-      <td> 97.1</td>
-      <td> 1903</td>
-      <td> 2000</td>
-      <td>  270</td>
-      <td>  CD</td>
-      <td>  AF</td>
-      <td>        Congo</td>
-      <td> ATL</td>
-      <td> Kinshasa, C</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td> 3</td>
-      <td> 11474</td>
-      <td> -61.75</td>
-      <td>  9.25</td>
-      <td>  836000</td>
-      <td>  980.088</td>
-      <td> 75.8</td>
-      <td> 1923</td>
-      <td> 1999</td>
-      <td>-9999</td>
-      <td>  VE</td>
-      <td>  SA</td>
-      <td>      Orinoco</td>
-      <td> ATL</td>
-      <td> Pte Angostu</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td> 4</td>
-      <td> 10374</td>
-      <td> 120.75</td>
-      <td> 32.25</td>
-      <td> 1705383</td>
-      <td>  905.141</td>
-      <td> 99.6</td>
-      <td> 1900</td>
-      <td> 2000</td>
-      <td>   19</td>
-      <td>  CN</td>
-      <td>  AS</td>
-      <td>   Changjiang</td>
-      <td> PAC</td>
-      <td> Datong, Chi</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td> 5</td>
-      <td> 10245</td>
-      <td>  89.75</td>
-      <td> 24.25</td>
-      <td>  554542</td>
-      <td>  670.943</td>
-      <td> 44.3</td>
-      <td> 1956</td>
-      <td> 2000</td>
-      <td>   19</td>
-      <td>  BD</td>
-      <td>  AS</td>
-      <td>  Brahmaputra</td>
-      <td> IND</td>
-      <td> Bahadurabad</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>  No</th>
+<th>m2s_ra</th>
+<th> lonm</th>
+<th>latm</th>
+<th>   area(km2)</th>
+<th>Vol</th>
+<th>  nyr</th>
+<th>  yrb</th>
+<th> yre</th>
+<th> elev(m)</th>
+<th> CT</th>
+<th> CN</th>
+<th> River_Name</th>
+<th>OCN</th>
+<th>Station_Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>0</th>
+<td> 1</td>
+<td> 12462</td>
+<td> -51.75</td>
+<td> -0.75</td>
+<td> 4618750</td>
+<td> 5389.537</td>
+<td> 79.0</td>
+<td> 1928</td>
+<td> 2006</td>
+<td>   37</td>
+<td>  BR</td>
+<td>  SA</td>
+<td>       Amazon</td>
+<td> ATL</td>
+<td> Obidos, Bra</td>
+</tr>
+<tr>
+<th>1</th>
+<td> 2</td>
+<td> 10291</td>
+<td>  12.75</td>
+<td> -5.75</td>
+<td> 3475000</td>
+<td> 1270.203</td>
+<td> 97.1</td>
+<td> 1903</td>
+<td> 2000</td>
+<td>  270</td>
+<td>  CD</td>
+<td>  AF</td>
+<td>        Congo</td>
+<td> ATL</td>
+<td> Kinshasa, C</td>
+</tr>
+<tr>
+<th>2</th>
+<td> 3</td>
+<td> 11474</td>
+<td> -61.75</td>
+<td>  9.25</td>
+<td>  836000</td>
+<td>  980.088</td>
+<td> 75.8</td>
+<td> 1923</td>
+<td> 1999</td>
+<td>-9999</td>
+<td>  VE</td>
+<td>  SA</td>
+<td>      Orinoco</td>
+<td> ATL</td>
+<td> Pte Angostu</td>
+</tr>
+<tr>
+<th>3</th>
+<td> 4</td>
+<td> 10374</td>
+<td> 120.75</td>
+<td> 32.25</td>
+<td> 1705383</td>
+<td>  905.141</td>
+<td> 99.6</td>
+<td> 1900</td>
+<td> 2000</td>
+<td>   19</td>
+<td>  CN</td>
+<td>  AS</td>
+<td>   Changjiang</td>
+<td> PAC</td>
+<td> Datong, Chi</td>
+</tr>
+<tr>
+<th>4</th>
+<td> 5</td>
+<td> 10245</td>
+<td>  89.75</td>
+<td> 24.25</td>
+<td>  554542</td>
+<td>  670.943</td>
+<td> 44.3</td>
+<td> 1956</td>
+<td> 2000</td>
+<td>   19</td>
+<td>  BD</td>
+<td>  AS</td>
+<td>  Brahmaputra</td>
+<td> IND</td>
+<td> Bahadurabad</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We need only several values to work with:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39; lonm&#39;</span><span class="p">,</span> <span class="s1">&#39;latm&#39;</span><span class="p">,</span>  <span class="s1">&#39;Vol&#39;</span><span class="p">,</span> <span class="s1">&#39;m2s_ra&#39;</span><span class="p">]]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">' lonm'</span><span class="p">,</span> <span class="s1">'latm'</span><span class="p">,</span>  <span class="s1">'Vol'</span><span class="p">,</span> <span class="s1">'m2s_ra'</span><span class="p">]]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We don't need missing values:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span> <span class="o">=</span> <span class="n">df_data</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And convert values to floats:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Vol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Vol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-<span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;lonm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39; lonm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-<span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;latm&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;latm&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
-<span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;m2s_ra&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;m2s_ra&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_data</span><span class="p">[</span><span class="s1">'Vol'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">'Vol'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">df_data</span><span class="p">[</span><span class="s1">'lonm'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">' lonm'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">df_data</span><span class="p">[</span><span class="s1">'latm'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">'latm'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
+<span class="n">df_data</span><span class="p">[</span><span class="s1">'m2s_ra'</span><span class="p">]</span> <span class="o">=</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">'m2s_ra'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">'float32'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now plot the map:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="k">import</span> <span class="n">Basemap</span>
 <span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;robin&#39;</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
-<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;lonm&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">],</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;latm&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'robin'</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'c'</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">m</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">'lonm'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">],</span> <span class="n">df_data</span><span class="p">[</span><span class="s1">'latm'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
-<span class="n">m</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#eeefff&#39;</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-<span class="n">m</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'#eeefff'</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
-<span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Vol&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;m2s_ra&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span><span class="p">))</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">m</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">'Vol'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">'m2s_ra'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span><span class="p">))</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.collections.PathCollection at 0xf5e822c&gt;</pre>
+<pre><matplotlib.collections.pathcollection at 0xf5e822c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAjwAAAEpCAYAAACX/PgvAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4FHX+x19b0ivpvYeSkEAKnSQQmiIdT1AQPQVBwYrl
@@ -3518,135 +3440,113 @@ cxu1Oh8PjzZ8++23NG5sulYPZuSJ2eEx8xSnT59m8+bNBAUFkZ6eDkD58uVxMuE0cTNmzJh5XvR6
 PdnZ2VhbW9O8eXPeeustZs6cibOzacbhmPnfwOzwmPlT1Go1o0ePpmHDhiYfuGjGjBkzz4OlpSVe
 Xl5lNmDZzN8Ts8NjxowZM2bMmPnbY552ZsaMGTNmzJj522N2eMyYMWPGjBkzf3vMDo8ZM2bMmDFj
 5m+P2eExY8aMGTNmzPztMTs8ZsyYMWPGjJm/Pf8PP+zxH1qc/e0AAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is discharge of first 50 rivers from Dai and Trenberth data set. Let's add some salinity.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to do so I first generated <a href="https://s3.amazonaws.com/download.marinexplore.com/mx_4970_20130618T2008_d86ff396-d852-11e2-a9b6-22000a1c5967.zip">subset of the AQUARIUS sea surface salinity data</a>. The data set is very short, so I took only one year (2012). I also need only annual mean, and had to generate it by myself with use of <a href="https://code.zmaw.de/projects/cdo">cdo</a>. At this point I encountered some probelms. The output is in netCDF4, that is still not very abundant, and soft for handling netCDF files in standard linux distributions (like cdo, or scipy.io.netcdf) is still compiled without netCDF4 support. This is a bit annoying, and it would be nice to be able to choose between netCDF3 and 4.</p>
 <p>The file with annual mean sea surface salinity for 2012 is available from <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/AQUARIUS.L3.7DAY_tm.nc">here</a> and it's nerCDF3. I use <a href="http://www.pyngl.ucar.edu/Nio.shtml">Nio</a> to open it, but it should be very similar to scipy.io.netcdf.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">Nio</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">&#39;/home/magik/NOTEBOOKS/marine/AQUARIUS.L3.7DAY_tm.nc&#39;</span><span class="p">)</span>
-<span class="n">sal</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;sea_water.salinity&#39;</span><span class="p">][:]</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:]</span>
-<span class="n">lon</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ff</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">'/home/magik/NOTEBOOKS/marine/AQUARIUS.L3.7DAY_tm.nc'</span><span class="p">)</span>
+<span class="n">sal</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'sea_water.salinity'</span><span class="p">][:]</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">][:]</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">][:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="k">as</span> <span class="nn">cm</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;robin&#39;</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'robin'</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'c'</span><span class="p">)</span>
 <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">m2</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">m2</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">m2</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
-<span class="n">m2</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;#eeefff&#39;</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'#eeefff'</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
 <span class="n">m2</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">m2</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">cs</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">y2</span><span class="p">,</span><span class="n">sal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mf">37.7</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>  <span class="n">vmin</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">37.5</span> <span class="p">)</span>
-<span class="n">m2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;Vol&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">&#39;m2s_ra&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span><span class="p">))</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Paired</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">&quot;5%&quot;</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;psu&#39;</span><span class="p">)</span>
+<span class="n">m2</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">'Vol'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">df_data</span><span class="p">[</span><span class="s1">'m2s_ra'</span><span class="p">][</span><span class="mi">0</span><span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">/</span><span class="mi">10000</span><span class="p">))</span><span class="o">*</span><span class="mi">10</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">,</span><span class="n">zorder</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">Paired</span><span class="p">,</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m2</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">"5%"</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'psu'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAkYAAAFeCAYAAABgsNAHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd4VGXah++paZPeeyWhhSQQCB1CKCLSVBBUiq5lUVwL
@@ -6978,69 +6878,57 @@ CqlUqrWYCSHtFxVGhBCt6tevH7Zu3QpnZ2eIRCKEh4dj9OjREAqFGDx4MDZu3AgA+PDDD3H27Fl4
 eHggJSWFNl8TQjSCjgQhhGhNVlYWxowZgz///FPboRBCCAC6Y0QI0TJ6uowQ8jKhO0aEEEIIIXXo
 jhEhhBBCSB0qjAghhBBC6lBhRAghhBBShwojQgghhJA6VBgRQgghhNShwogQQgghpM7/AT4dYpKw
 UoxXAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One can see that there is some reduced salinity, however it is located not to the east of the Amazon river mouth, but more to the north of it. Let's have a closer look:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In [24]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m3</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;merc&#39;</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
-            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m3</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'merc'</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'c'</span><span class="p">)</span>
 <span class="n">x3</span><span class="p">,</span> <span class="n">y3</span> <span class="o">=</span> <span class="n">m3</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In [25]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">m3</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">m3</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
-<span class="n">m3</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">&#39;aqua&#39;</span><span class="p">)</span>
-<span class="n">m3</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">m3</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">'aqua'</span><span class="p">)</span>
+<span class="n">m3</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
 <span class="n">m3</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">m3</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">cs</span> <span class="o">=</span> <span class="n">m3</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span><span class="n">y3</span><span class="p">,</span><span class="n">sal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mf">37.5</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>  <span class="n">vmin</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">38.5</span> <span class="p">)</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">m3</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">&quot;5%&quot;</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;psu&#39;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m3</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">"5%"</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'psu'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlEAAAELCAYAAAD5gdPSAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXeYLGWZNn5X6O7pnpxzDifgBcthBURQlGBG/PhU1lUM
@@ -7993,126 +7881,106 @@ M2PGDPz85z9HU1MThoaGsHr1aixatAgtLS246qqr8NxzzwEA7rnnHrzzzjuYO3cu9uzZQ4nlBEHY
 Dh37QhCEbXR0dGDx4sX4+OOP7Z4KQRCEbsiJIgjCVmiXHUEQ6Qo5UQRBEARBEAYgJ4ogCIIgCMIA
 JKIIgiAIgiAMQCKKIAiCIAjCACSiCIIgCIIgDEAiiiAIgiAIwgAkogiCIAiCIAzw/wHh/tbBeEUs
 FQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The fresh water plume is obviously going to the north, and then at some point partly turn to the east. There is also some signature of big rivers from the western coast of the African continent. However we will concentrate on the Amazon river plume. What is causing the shape of it's surface distribution? Maybe winds?</p>
 <p>In order to test this I create data set with <a href="https://s3.amazonaws.com/download.marinexplore.com/mx_4970_20130618T2145_6342013c-d860-11e2-80c3-22000a1c5967.zip">NCDC sea winds</a> for 2012, and calculate annual mean (available from <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/NOAA.NCDC.SEAWINDS.RT.DAILY_tm.nc">here</a>).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fw</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">&#39;/home/magik/NOTEBOOKS/marine/NOAA.NCDC.SEAWINDS.RT.DAILY_tm.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fw</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">'/home/magik/NOTEBOOKS/marine/NOAA.NCDC.SEAWINDS.RT.DAILY_tm.nc'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to be able to plot vectors with Basemap we have to flip our data (lat should be monotonically increasing):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">latw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:])</span>
-<span class="n">lonw</span> <span class="o">=</span> <span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
-<span class="n">uw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;wind.vector_u&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
-<span class="n">vw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;wind.vector_v&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">latw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">][:])</span>
+<span class="n">lonw</span> <span class="o">=</span> <span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">][:]</span>
+<span class="n">uw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'wind.vector_u'</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
+<span class="n">vw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fw</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'wind.vector_v'</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m4</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;merc&#39;</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
-            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m4</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'merc'</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'i'</span><span class="p">)</span>
 <span class="n">x4</span><span class="p">,</span> <span class="n">y4</span> <span class="o">=</span> <span class="n">m4</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">uwproj</span><span class="p">,</span><span class="n">vwproj</span><span class="p">,</span><span class="n">xxw</span><span class="p">,</span><span class="n">yyw</span> <span class="o">=</span> \
 <span class="n">m4</span><span class="o">.</span><span class="n">transform_vector</span><span class="p">(</span><span class="n">uw</span><span class="p">,</span><span class="n">vw</span><span class="p">,</span><span class="n">lonw</span><span class="p">,</span><span class="n">latw</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="mi">20</span><span class="p">,</span><span class="n">returnxy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">masked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">m4</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">m4</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
-<span class="n">m4</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">&#39;aqua&#39;</span><span class="p">)</span>
-<span class="n">m4</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">m4</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">'aqua'</span><span class="p">)</span>
+<span class="n">m4</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
 <span class="n">m4</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">m4</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">cs</span> <span class="o">=</span> <span class="n">m4</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span><span class="n">y4</span><span class="p">,</span><span class="n">sal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mf">37.5</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>  <span class="n">vmin</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">38.5</span> <span class="p">)</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="n">m4</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">xxw</span><span class="p">,</span><span class="n">yyw</span><span class="p">,</span><span class="n">uwproj</span><span class="p">,</span><span class="n">vwproj</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.002</span><span class="p">)</span>
-<span class="n">qk</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiverkey</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;10 m/s&#39;</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
-<span class="c1">#colorbar(orientation = &#39;horizontal&#39;)</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">m4</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">&quot;5%&quot;</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;psu&#39;</span><span class="p">)</span>
+<span class="n">qk</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiverkey</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">'10 m/s'</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s1">'W'</span><span class="p">)</span>
+<span class="c1">#colorbar(orientation = 'horizontal')</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m4</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">"5%"</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'psu'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlEAAAGdCAYAAAAyviaMAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd8W9Xd/9+SZXlb3nsmduKE7IQsQpIyyqYQShmlC0rZ
@@ -9797,139 +9665,117 @@ tddew+nTpwEA8fHx+PrrrwEAR44cQX9/v245ExEBHKKISGfz5s3DW2+9BYvFgu7ubtjtdixduhSK
 omDhwoV4/fXXAQDr1q3D8ePHYbVa0dDQwAvLiUh3/NoXItJNa2srsrOz8c033+idChHRiPFMFBHp
 infZEVG44pkoIiIiIg14JoqIiIhIAw5RRERERBpwiCIiIiLSgEMUERERkQYcooiIiIg04BBFRERE
 pMH/Ad0dtUH23KlnAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The mean wind is classical, like from the text books, and can't lead to such distribution. This was strange idea from the beginning, but sometimes it worth to test even strange ideas :)</p>
 <p>So, what about ocean currents, how do they look like in this area?</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Data set that we will use is <a href="https://s3.amazonaws.com/download.marinexplore.com/mx_4970_20130618T2146_8eb15656-d860-11e2-80c3-22000a1c5967.zip">here</a> and time mean for 2012 is located <a href="https://dl.dropboxusercontent.com/u/107639/notebooks/amazon/NOAA.OSCAR.CURRENTS_tm.nc">here</a>.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fc</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">&#39;/home/magik/NOTEBOOKS/marine/NOAA.OSCAR.CURRENTS_tm.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">fc</span> <span class="o">=</span> <span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">'/home/magik/NOTEBOOKS/marine/NOAA.OSCAR.CURRENTS_tm.nc'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:])</span>
-<span class="n">lons</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
-<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;sea_water.current.vector_u&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
-<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;sea_water.current.vector_v&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">][:])</span>
+<span class="n">lons</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">][:]</span>
+<span class="n">u</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'sea_water.current.vector_u'</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flipud</span><span class="p">(</span><span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'sea_water.current.vector_v'</span><span class="p">][</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">lonuv</span><span class="p">,</span> <span class="n">latuv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span><span class="n">lats</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m5</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;merc&#39;</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
-            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;i&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">m5</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">'merc'</span><span class="p">,</span><span class="n">llcrnrlat</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span><span class="n">urcrnrlat</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>\
+            <span class="n">llcrnrlon</span><span class="o">=-</span><span class="mi">80</span><span class="p">,</span><span class="n">urcrnrlon</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'i'</span><span class="p">)</span>
 <span class="n">x5</span><span class="p">,</span> <span class="n">y5</span> <span class="o">=</span> <span class="n">m5</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span><span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">uproj</span><span class="p">,</span><span class="n">vproj</span><span class="p">,</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span> <span class="o">=</span> \
 <span class="n">m5</span><span class="o">.</span><span class="n">transform_vector</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">lons</span><span class="p">,</span><span class="n">lats</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="n">returnxy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">masked</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
 <span class="n">m5</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 <span class="n">m5</span><span class="o">.</span><span class="n">drawcountries</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)</span>
 
-<span class="n">m5</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">&#39;aqua&#39;</span><span class="p">)</span>
-<span class="n">m5</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">)</span>
+<span class="n">m5</span><span class="o">.</span><span class="n">fillcontinents</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">'gray'</span><span class="p">,</span><span class="n">lake_color</span><span class="o">=</span><span class="s1">'aqua'</span><span class="p">)</span>
+<span class="n">m5</span><span class="o">.</span><span class="n">drawmapboundary</span><span class="p">(</span><span class="n">fill_color</span><span class="o">=</span><span class="s1">'white'</span><span class="p">)</span>
 <span class="n">m5</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">360</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">m5</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">))</span>
 <span class="n">cs</span> <span class="o">=</span> <span class="n">m5</span><span class="o">.</span><span class="n">contourf</span><span class="p">(</span><span class="n">x5</span><span class="p">,</span><span class="n">y5</span><span class="p">,</span><span class="n">sal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">levels</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mf">37.5</span><span class="p">,</span><span class="mf">0.1</span><span class="p">),</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">coolwarm</span><span class="p">,</span>  <span class="n">vmin</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">38.5</span> <span class="p">)</span>
 <span class="n">Q</span> <span class="o">=</span> <span class="n">m5</span><span class="o">.</span><span class="n">quiver</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span><span class="n">yy</span><span class="p">,</span><span class="n">uproj</span><span class="p">,</span><span class="n">vproj</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.0012</span><span class="p">)</span>
-<span class="n">qk</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiverkey</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;0.1 m/s&#39;</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s1">&#39;W&#39;</span><span class="p">)</span>
-<span class="c1">#colorbar(orientation = &#39;horizontal&#39;)</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">m5</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">&quot;5%&quot;</span><span class="p">)</span>
-<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;psu&#39;</span><span class="p">)</span>
+<span class="n">qk</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">quiverkey</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">'0.1 m/s'</span><span class="p">,</span> <span class="n">labelpos</span><span class="o">=</span><span class="s1">'W'</span><span class="p">)</span>
+<span class="c1">#colorbar(orientation = 'horizontal')</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">m5</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">,</span><span class="n">location</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span><span class="n">pad</span><span class="o">=</span><span class="s2">"5%"</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'psu'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlEAAAGdCAYAAAAyviaMAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXd0FdX6/j+npjfSEzoJLbRQQgelg4LYRQW59obYuGIX
@@ -14186,39 +14032,22 @@ UUIIK/Px8WHBggX4+/uTlZXF+PHjefTRRwkKCqJbt258+umnADz11FPs3r2b4OBg9u/fL4nlQgir
 k2NfhBBWc+bMGfr27cu///5r7a4IIcQtk5koIYRVySo7IURVJTNRQgghhBBlIDNRQgghhBBlIEGU
 EEIIIUQZSBAlhBBCCFEGEkQJIYQQQpSBBFFCCCGEEGUgQZQQQgghRBn8PzNT9xJKfYuJAAAAAElF
 TkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The configuration of surface ocean currents match distribution of Amazon fresh water plume very well. Now one can look at the monthly and daily data in order to reveal more details about evolution of the plume.</p>
 <p>This is a kind of analysis that can be done very quickly in case of easy availability of different data sets that <a href="http://marinexplore.org">Marinexplore</a> provide.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
 </div>
 </div>
 </div>
 
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

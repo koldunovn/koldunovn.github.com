@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>EarthPy - Rob De Almeida</title><link>http://earthpy.org/</link><description></description><lastBuildDate>Mon, 23 Sep 2013 00:00:00 +0200</lastBuildDate><item><title>Analyzing whale tracks</title><link>http://earthpy.org/analyzing-whale-tracks.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;p&gt;&lt;strong&gt;Dr. Roberto De Almeida&lt;/strong&gt; &lt;a href="mailto:rob@marinexplore.com"&gt;&amp;lt;rob@marinexplore.com&amp;gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dr. Roberto De Almeida&lt;/strong&gt; &lt;a href="mailto:rob@marinexplore.com"&gt;&lt;rob@marinexplore.com&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://nbviewer.ipython.org/urls/raw.github.com/robertodealmeida/notebooks/master/earth_day_data_challenge/Analyzing%2520whale%2520tracks.ipynb"&gt;&lt;strong&gt;Notebook file&lt;/strong&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;In this iPython notebook we use ocean data to look at the trajectory of a migrating whale. When traveling on the surface of the Earth one cannot take a constant heading (an angle with respect to North) to travel the shortest route from point $A$ to $B$. Instead, the heading must be constantly readjusted so that the arc of the trajectory corresponds to the intersection between the globe and a plane that passes through the center of the Earth:&lt;/p&gt;
-&lt;p&gt;&lt;a href="http://quezi.com/11698"&gt;&lt;img src="http://quezi.com/wp-content/uploads/2010/03/great-circle.png"&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://quezi.com/11698"&gt;&lt;img src="http://quezi.com/wp-content/uploads/2010/03/great-circle.png" /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;This is called &lt;a href="http://en.wikipedia.org/wiki/Great-circle_navigation"&gt;Great-circle Navigation&lt;/a&gt;, and is done by airplanes and ships (wherever possible).&lt;/p&gt;
 &lt;p&gt;There are also other factors that define the shortest route &lt;em&gt;in time&lt;/em&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Rob De Almeida</dc:creator><pubDate>Mon, 23 Sep 2013 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:earthpy.org,2013-09-23:/analyzing-whale-tracks.html</guid><category>marinexplore</category><category>data analysis</category></item></channel></rss>

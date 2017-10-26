@@ -197,6 +197,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -217,11 +218,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -959,8 +955,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -971,9 +969,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1012,514 +1012,420 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task</strong></p>
-
 <pre><code>Process numpy arrays in parallel
 
 </code></pre>
 <p><strong>Solution</strong></p>
-
 <pre><code>dask</code></pre>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Geophysical models get higher and higher resolutions, producing more and more data. However numpy arrays and pandas data frames only work with data that fit in to a memory. For many of us it means that before real analysis we have to somehow subsample or aggregate initial data with some heavy lifting tools (like <a href="https://code.azmaw.de/projects/cdo/embedded/index.html">cdo</a>) and only then switch to convenience and beauty of python. These times might come to an end soon with introduction of <a href="http://dask.pydata.org/en/latest/">dask</a> - library that helps to parallelize computations on big chunks of data. This allows analyzing data that do not (or barely) fit in to your computer's memory as well as to utilize multiprocessing capabilities of your machine.</p>
 <p>Below I will briefly describe dask arrays and show results of some simple benchmarks.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Instllation:">Instllation:<a class="anchor-link" href="#Instllation:">&#182;</a></h2>
+<h2 id="Instllation:">Instllation:<a class="anchor-link" href="#Instllation:">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="dask">dask<a class="anchor-link" href="#dask">&#182;</a></h3>
+<h3 id="dask">dask<a class="anchor-link" href="#dask">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you don't use <a href="http://conda.pydata.org/miniconda.html">conda</a>, it's time to start now. This will install dask and some additional libraries that allow visualization of dask task graphs.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-
 <pre><code>conda install dask pydot networkx</code></pre>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you still prefer pip:</p>
-
 <pre><code>pip install dask[array]
 
 </code></pre>
 <p>should do the trick, but I am not sure if the visualization will work</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="cdo">cdo<a class="anchor-link" href="#cdo">&#182;</a></h3>
+<h3 id="cdo">cdo<a class="anchor-link" href="#cdo">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you use Ubuntu 14.04, don’t install cdo from <code>apt-get</code>, they are compiled without netCDF4 support. Instructions of how to do it properly can be found <a href="http://nbviewer.ipython.org/github/koldunovn/nk_public_notebooks/blob/master/Install%20climate%20data%20operators%20%28cdo%29%20on%20Ubuntu%20with%20netCDF4%20and%20hdf5%20support.ipynb">here</a>. I am not sure if the problem appears also in the latest versions of Ubuntu.</p>
 <p>Mac users should be able to install them with:</p>
-
 <pre><code>brew install cdo</code></pre>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Necessary imports</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">import</span> <span class="nn">dask.array</span> <span class="kn">as</span> <span class="nn">da</span>
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="kn">import</span> <span class="n">Dataset</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Download-the-data">Download the data<a class="anchor-link" href="#Download-the-data">&#182;</a></h2>
+<h2 id="Download-the-data">Download the data<a class="anchor-link" href="#Download-the-data">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As usual I am going to use <a href="http://www.esrl.noaa.gov/psd/data/gridded/data.ncep.reanalysis.surface.html">good old NCEP reanalysis surface temperature data</a>. This time we need to download all years and then merge them together in one file with cdo. Uncomment the code below to do so:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In [ ]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#for y in range(1948,2015):</span>
 <span class="c1">#    print(y)</span>
-<span class="c1">#    os.system(&#39;wget ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis/surface/air.sig995.{}.nc&#39;.format(str(y)))</span>
+<span class="c1">#    os.system('wget ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis/surface/air.sig995.{}.nc'.format(str(y)))</span>
 
 <span class="c1">#!cdo mergetime air.sig995.*.nc ncep_temperature.nc</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Small-file">Small file<a class="anchor-link" href="#Small-file">&#182;</a></h2>
+<h2 id="Small-file">Small file<a class="anchor-link" href="#Small-file">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First just let’s play with a small file that easily fits in to the memory. My test computer is a 5-year-old machine with only 3Gb of memory and 2 cores. No SSD, just usual classical hard drive.</p>
 <p>We are going to calculate overall mean for one year. This file is about 22 Mb, but array in memory will occupy about 60 Mb (due to netCDF4 compression). There are 4 time steps a day (1464 in total) and 73x144 points in every field.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;air.sig995.1948.nc&#39;</span><span class="p">)</span>
-<span class="n">air</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">][:]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">'air.sig995.1948.nc'</span><span class="p">)</span>
+<span class="n">air</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'air'</span><span class="p">][:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">air</span><span class="o">.</span><span class="n">nbytes</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>61558272</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">air</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(1464, 73, 144)</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>numpy.array</strong></p>
 <p>This is our usual way with numpy array. Open the file, load the data, calculate the mean:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">timeit</span>
-f = Dataset(&#39;air.sig995.1948.nc&#39;)
-numpyresult = f.variables[&#39;air&#39;][:].mean()
+f = Dataset('air.sig995.1948.nc')
+numpyresult = f.variables['air'][:].mean()
 f.close()
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1 loops, best of 3: 844 ms per loop
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>cdo</strong></p>
 <p>Same thing with cdo for comparison</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">timeit</span>
 !cdo -s fldmean -timmean air.sig995.1948.nc t.nc
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1 loops, best of 3: 857 ms per loop
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>dask.array</strong></p>
 <p>And finally dask arrays:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">timeit</span>
-f = Dataset(&#39;air.sig995.1948.nc&#39;)
-daskarray = da.from_array(f.variables[&#39;air&#39;], chunks=(500,73,144))
+f = Dataset('air.sig995.1948.nc')
+daskarray = da.from_array(f.variables['air'], chunks=(500,73,144))
 daskresult = daskarray.mean().compute()                   
 f.close()
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>1 loops, best of 3: 723 ms per loop
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Seems to be just a tiny bit faster, but not significantly. Let's stop here and have a look at what we did. Before doing any calculations we construct a dask array with <code>from array</code> method using handler for netCDF variable. As an additional parameter we provide <code>chunks</code>, that indicate the way of how we split our array in to parts. Then we create  <code>daskresult</code> variable by specifying some operation (<code>mean</code> in our case) on <code>daskarray</code> and calling <code>compute()</code>. The later executes the computation, but the interesting part is happening before. Let's create <code>daskresult</code> without computing it:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[56]:</div>
+<div class="prompt input_prompt">In [56]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;air.sig995.1948.nc&#39;</span><span class="p">)</span>
-<span class="n">daskarray</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">],</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">144</span><span class="p">))</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">f</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">'air.sig995.1948.nc'</span><span class="p">)</span>
+<span class="n">daskarray</span> <span class="o">=</span> <span class="n">da</span><span class="o">.</span><span class="n">from_array</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'air'</span><span class="p">],</span> <span class="n">chunks</span><span class="o">=</span><span class="p">(</span><span class="mi">500</span><span class="p">,</span><span class="mi">73</span><span class="p">,</span><span class="mi">144</span><span class="p">))</span>
 <span class="n">daskresult</span> <span class="o">=</span> <span class="n">daskarray</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>What is created is a recipe of how to perform your operation in parallel. It can be accessed with <code>.dask</code> attribute</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">daskresult</span><span class="o">.</span><span class="n">dask</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[57]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[57]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;x_129&#39;: &lt;netCDF4.Variable at 0xac198adc&gt;,
- (&#39;x_129&#39;, 0, 0, 0): (&lt;function dask.array.core.getarray&gt;,
-  &#39;x_129&#39;,
+<pre>{'x_129': <netcdf4.variable at 0xac198adc>,
+ ('x_129', 0, 0, 0): (<function dask.array.core.getarray>,
+  'x_129',
   (slice(0, 500, None), slice(0, 73, None), slice(0, 144, None))),
- (&#39;x_129&#39;, 1, 0, 0): (&lt;function dask.array.core.getarray&gt;,
-  &#39;x_129&#39;,
+ ('x_129', 1, 0, 0): (<function dask.array.core.getarray>,
+  'x_129',
   (slice(500, 1000, None), slice(0, 73, None), slice(0, 144, None))),
- (&#39;x_129&#39;, 2, 0, 0): (&lt;function dask.array.core.getarray&gt;,
-  &#39;x_129&#39;,
+ ('x_129', 2, 0, 0): (<function dask.array.core.getarray>,
+  'x_129',
   (slice(1000, 1464, None), slice(0, 73, None), slice(0, 144, None))),
- (&#39;x_130&#39;, 0, 0, 0): (&lt;functools.partial at 0xab00d6bc&gt;, (&#39;x_129&#39;, 0, 0, 0)),
- (&#39;x_130&#39;, 1, 0, 0): (&lt;functools.partial at 0xab00d6bc&gt;, (&#39;x_129&#39;, 1, 0, 0)),
- (&#39;x_130&#39;, 2, 0, 0): (&lt;functools.partial at 0xab00d6bc&gt;, (&#39;x_129&#39;, 2, 0, 0)),
- (&#39;x_131&#39;,): (&lt;toolz.functoolz.Compose at 0xaaebd0d4&gt;,
-  [[[(&#39;x_130&#39;, 0, 0, 0)]], [[(&#39;x_130&#39;, 1, 0, 0)]], [[(&#39;x_130&#39;, 2, 0, 0)]]])}</pre>
-</div>
-
-</div>
-
+ ('x_130', 0, 0, 0): (<functools.partial at 0xab00d6bc>, ('x_129', 0, 0, 0)),
+ ('x_130', 1, 0, 0): (<functools.partial at 0xab00d6bc>, ('x_129', 1, 0, 0)),
+ ('x_130', 2, 0, 0): (<functools.partial at 0xab00d6bc>, ('x_129', 2, 0, 0)),
+ ('x_131',): (<toolz.functoolz.compose at 0xaaebd0d4>,
+  [[[('x_130', 0, 0, 0)]], [[('x_130', 1, 0, 0)]], [[('x_130', 2, 0, 0)]]])}</pre>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In this form it is not crystal clear, so let's put it in to a graph:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In [27]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">daskresult</span><span class="o">.</span><span class="n">_visualize</span><span class="p">()</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;mydask.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'mydask.png'</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Writing graph to mydask.pdf
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[27]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[27]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfgAAAMzCAYAAABKmAAhAAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzdeVhU9f4H8PdsCKIsbrihILjhvmW471lXK0uUbmraopbdymtuWWnrzTLT1LqouWuCa5YZ
@@ -2448,53 +2354,43 @@ jDEJ4gLPGGOMSRAXeMYYY0yCuMAzxhhjEsQFnjHGGJMgLvCMMcaYBHGBZ4wxxiSICzxjjDEmQVzg
 GWOMMQniAs8YY4xJEBd4xhhjTIL4efCM6VB2djaWLl0qOoZeys7Ohru7u+gYjEkWF3jGdMTZ2Rm/
 /vor3n77bdFR9Ja/v7/oCIxJloyISHQIxhhjjNUtvgfPGGOMSRAXeMYYY0yCuMAzxhhjEqQA8Kvo
 EIwxxhirW/8fp+HTehFkaUgAAAAASUVORK5CYII=
-" width="300">
-</div>
-
-</div>
-
+" width="300" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You should read it from the bottom to the top: initial array is splitted into three parts (remember our <code>chunks</code> size), then mean is performed for each of this parts (in parallel) and then results are finally composed in to one number. What happen when you call <code>compute()</code> is this recipe gets executed by <a href="http://dask.pydata.org/en/latest/shared.html">dask own parallel scheduler</a>. However you can write your own scheduler that is better for your specific task or system.</p>
 <p>Calculation of the total mean was sort of a trivial task, but when you do something a bit trickier, your recipes become more complicated:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[51]:</div>
+<div class="prompt input_prompt">In [51]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="p">(</span><span class="n">daskarray</span> <span class="o">-</span> <span class="n">daskarray</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">.</span><span class="n">_visualize</span><span class="p">()</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;mydask.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'mydask.png'</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Writing graph to mydask.pdf
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[51]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[51]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAr0AAAQACAIAAABjwnYeAAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzdd1wU1/438NkGK9Kkd6Q3ERPsQBQBS2KJRgVrYo0pmpvkKuamaBKTaO6N0VhBo6KJgmgs
@@ -3693,52 +3589,42 @@ sBsAAABAWdgNAAAAoCzsBgAAAFAWdgMAAAAoC7sBAAAAlIXdAAAAAMrCbgAAAABlYTcAAACAsrAb
 AAAAQFnYDQAAAKAs7AYAAABQFnYDAAAAKAu7AQAAAJSF3QAAAADK4pAOAKDX2Gx2Xl4eTdOkg6je
 8uXLSUcAANWjFQoF6QwA+uvGjRv19fWkU6iFi4vLa6+9RjoFAKgYdgMAAAAoC+c3AAAAgLKwGwAA
 AEBZ2A0AAACgrP8DqMlGPDw47GkAAAAASUVORK5CYII=
-" width="300">
-</div>
-
-</div>
-
+" width="300" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Or you can get even more wild:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In [55]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="p">((</span><span class="n">daskarray</span><span class="o">.</span><span class="n">T</span> <span class="o">-</span> <span class="n">daskarray</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span><span class="o">/</span><span class="n">daskarray</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">.</span><span class="n">_visualize</span><span class="p">()</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;mydask.png&#39;</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'mydask.png'</span><span class="p">,</span><span class="n">width</span><span class="o">=</span><span class="mi">400</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Writing graph to mydask.pdf
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[55]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABNAAAAVACAIAAAAGQTJFAAAABmJLR0QA/wD/AP+gvaeTAAAgAElE
 QVR4nOzdeUCM+R8H8O/MdCqF3NUmUshd2JSrZK27Hx1uuyh+2di1KaxrWeTOtSqi0IV1LSEVItZK
@@ -6374,355 +6260,294 @@ QMMJAAAAAAAAQoGGEwAAAAAAAIQCDScAAAAAAAAIBRpOAAAAAAAAEAo0nAAAAAAAACAUaDgBAAAA
 AABAKNBwAgAAAAAAgFDIkQ4AANBnLBYrPj6ewWCQDiJ48+fPJx0BAAAAQGAYNE2TzgAA0DfV1dWF
 hYWkUwiFlZXVyJEjSacAAAAAEAw0nAAAAAAAACAU+A4nAAAAAAAACAUaTgAAAAAAABAKNJwAAAAA
 AAAgFP8NqIS/o+DHMpIAAAAASUVORK5CYII=
-" width="400">
-</div>
-
-</div>
-
+" width="400" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So in essence dask allows you to create the task graph, which then can be executed by the parallel scheduler (from dask or from you).</p>
 <p>Or you can think of dask as of just a faster way to do your numpy.array operation :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="File-that-do-not-fit-in-to-the-memory">File that do not fit in to the memory<a class="anchor-link" href="#File-that-do-not-fit-in-to-the-memory">&#182;</a></h2>
+<h2 id="File-that-do-not-fit-in-to-the-memory">File that do not fit in to the memory<a class="anchor-link" href="#File-that-do-not-fit-in-to-the-memory">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here I just going to show results that I get with dask on my relatively old computer with the file that does not fit in to the memory (it's about 4 Gb, I have only 3 Gb). What you should look at is only <code>Wall time</code>, for cdo <code>CPU times</code> doesn’t make sense.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we just compute overall mean</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>numpy.array</strong></p>
 <p>Didn't even try to compute, immediately rise MemoryError</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1">#%%timeit</span>
-<span class="c1">#f = Dataset(&#39;ncep_temperature.nc&#39;)</span>
-<span class="c1">#numpyresult = f.variables[&#39;air&#39;][:].mean()</span>
+<span class="c1">#f = Dataset('ncep_temperature.nc')</span>
+<span class="c1">#numpyresult = f.variables['air'][:].mean()</span>
 <span class="c1">#f.close()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>cdo</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In [59]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 !cdo -s fldmean -timmean ./ncep_temperature.nc t.nc
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 236 ms, sys: 52 ms, total: 288 ms
 Wall time: 51.8 s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>dask.array</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In [60]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-f = Dataset(&#39;ncep_temperature.nc&#39;)
-daskarray = da.from_array(f.variables[&#39;air&#39;], chunks=(5000,73,144))
+f = Dataset('ncep_temperature.nc')
+daskarray = da.from_array(f.variables['air'], chunks=(5000,73,144))
 daskresult = daskarray.mean().compute()                   
 f.close()
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 15.4 s, sys: 11.3 s, total: 26.7 s
 Wall time: 48.3 s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>A bit faster, but not very impressive. Let's try something a bit more complicated - std:</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>cdo</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="prompt input_prompt">In [61]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 !cdo -s timstd ./ncep_temperature.nc t.nc
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 356 ms, sys: 64 ms, total: 420 ms
 Wall time: 1min 36s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>dask.array</strong></p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="prompt input_prompt">In [62]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-f = Dataset(&#39;ncep_temperature.nc&#39;)
-daskarray = da.from_array(f.variables[&#39;air&#39;], chunks=(5000,73,144))
+f = Dataset('ncep_temperature.nc')
+daskarray = da.from_array(f.variables['air'], chunks=(5000,73,144))
 daskresult = daskarray.std(axis=0).compute()                   
 f.close()
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 23.1 s, sys: 14.3 s, total: 37.4 s
 Wall time: 1min 2s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This is already something - more than 1.5 times faster. How about creating global mean for every time step?</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="prompt input_prompt">In [63]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
 !cdo -s fldmean ./ncep_temperature.nc t.nc
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 368 ms, sys: 68 ms, total: 436 ms
 Wall time: 1min 37s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%%</span><span class="k">time</span>
-f = Dataset(&#39;ncep_temperature.nc&#39;)
-daskarray = da.from_array(f.variables[&#39;air&#39;], chunks=(5000,73,144))
+f = Dataset('ncep_temperature.nc')
+daskarray = da.from_array(f.variables['air'], chunks=(5000,73,144))
 daskresult = daskarray.mean(axis=(1,2)).compute()                   
 f.close()
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>CPU times: user 17.4 s, sys: 13.3 s, total: 30.7 s
 Wall time: 1min 5s
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Maybe not two times, but still about 30 seconds faster, and if you process a lot of files this might sum up in to some good hours :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I also have tried to do this test on a faster computer with many cores (24) and a lot of memory (256 Gb). Results are even more impressive. For some of the tests I was able to get more than 15 times faster speed compared with cdo. So even if your big arrays fit in to the memory, you can seriously benefit from parallel computations with dask.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Matthew Rocklin, lead developer of dask, recently give a very <a href="https://www.youtube.com/watch?v=HLME2WKTJJ8">nice presentation at PyData Berlin</a>, it's really worth to watch if you are interested in dask.</p>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

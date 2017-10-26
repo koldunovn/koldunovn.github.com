@@ -1,29 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>EarthPy - Oleksandr Huziy</title><link>http://earthpy.org/</link><description></description><lastBuildDate>Sat, 07 Dec 2013 00:00:00 +0100</lastBuildDate><item><title>Interpolation between grids with cKDTree</title><link>http://earthpy.org/interpolation_between_grids_with_ckdtree.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;strong&gt;Task:&lt;/strong&gt; Interpolate data from regular to curvilinear grid&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; scipy.spatial.cKDTree&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;a href="https://raw.github.com/guziy/PyNotebooks/master/interpolation_between_grids_with_ckdtree.ipynb"&gt;Notebook file&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="http://cnrcwp.uqam.ca/node/98"&gt;About author&lt;/a&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;

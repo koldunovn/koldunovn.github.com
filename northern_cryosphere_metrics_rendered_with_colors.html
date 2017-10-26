@@ -197,6 +197,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -217,11 +218,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -959,8 +955,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -971,9 +969,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1012,70 +1012,62 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/u/354885/notebooks/Pub-02-Cryo-Colors.ipynb">Notebook file</a></p>
 <p><a href="https://twitter.com/ArcticIo">Author's twitter</a></p>
 <p>Arctic sea ice and snow cover and are two of the most prominent features of the cryosphere of the northern hemisphere and can be seen with a naked eye from the Moon. Measurements of sea ice area started around 1979 and snow cover a bit earlier. Both show a strong seasonal signal and area also a decline over the three decades. Even stronger is the decline calculated by a sea ice model run by the <a href="http://psc.apl.washington.edu/wordpress/research/projects/arctic-sea-ice-volume-anomaly/">Polar Science Center</a>, Washington. PIOMAS outputs daily sea ice volume for the same time allowing a good comparison of the three data sets. Instead of the usual line charts this notebook translates the daily data into a color range. Changes within a dataset are far better visible, while maintaining comparability.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="A-preview-of-the-final-results:">A preview of the final results:<a class="anchor-link" href="#A-preview-of-the-final-results:">&#182;</a></h3>
+<h3 id="A-preview-of-the-final-results:">A preview of the final results:<a class="anchor-link" href="#A-preview-of-the-final-results:">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[72]:</div>
+<div class="prompt input_prompt">In [72]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">matplotlib._png</span> <span class="k">import</span> <span class="n">read_png</span>
 
 <span class="n">fg</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">15</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">im</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s2">&quot;piomas-colored.png&quot;</span><span class="p">,</span> <span class="s2">&quot;area-colored.png&quot;</span><span class="p">,</span> <span class="s2">&quot;snow-colored.png&quot;</span><span class="p">],</span> <span class="n">axes</span><span class="p">)</span> <span class="p">:</span>
+<span class="k">for</span> <span class="n">im</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s2">"piomas-colored.png"</span><span class="p">,</span> <span class="s2">"area-colored.png"</span><span class="p">,</span> <span class="s2">"snow-colored.png"</span><span class="p">],</span> <span class="n">axes</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">read_png</span><span class="p">(</span><span class="n">im</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Populating the interactive namespace from numpy and matplotlib
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>WARNING: pylab import has clobbered these variables: [&#39;axes&#39;]
+<pre>WARNING: pylab import has clobbered these variables: ['axes']
 `%pylab --no-import-all` prevents importing * from pylab and numpy
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAWcAAANTCAYAAAByzNwfAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsfXecHMW19anqnpkNCruKKAGSDH42xsgWyQ8RDRhsDLZ5
@@ -3326,29 +3318,25 @@ MzMxbtw4uFwuXLhwAZIkYfny5VizZo0yNjee9w3f6wMHDiAqKqrpk+fXSFzI4XCIZsyYoSrLzMwk
 IlKSu/5a/Pjjj7Ry5UqaP3/+Pbn/7t2778l9G8OuXbvI7Xb/LPfasWOHx79t3LjxJ92bu9JxOBxO
 M4SbNTgcDqcZwoUzh8PhNEO4cOZwOJxmCBfOHA6H0wzhwpnD4XCaIVw4czgcTjPk/wEXmBIEvS6e
 QAAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Preparation,-imports-and-helpful-functions">Preparation, imports and helpful functions<a class="anchor-link" href="#Preparation,-imports-and-helpful-functions">&#182;</a></h3>
+<h3 id="Preparation,-imports-and-helpful-functions">Preparation, imports and helpful functions<a class="anchor-link" href="#Preparation,-imports-and-helpful-functions">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[73]:</div>
+<div class="prompt input_prompt">In [73]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 
 <span class="kn">import</span> <span class="nn">gzip</span><span class="o">,</span> <span class="nn">urllib</span><span class="o">,</span> <span class="nn">time</span>
@@ -3365,91 +3353,77 @@ QAAAAABJRU5ErkJggg==
 <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
 
 <span class="nb">print</span>
-<span class="nb">print</span> <span class="s2">&quot;   now: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">now</span>
-<span class="nb">print</span> <span class="s2">&quot;python: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:])</span>
-<span class="nb">print</span> <span class="s2">&quot; numpy: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__version__</span>
-<span class="nb">print</span> <span class="s2">&quot;   mpl: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span>
+<span class="nb">print</span> <span class="s2">"   now: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">now</span>
+<span class="nb">print</span> <span class="s2">"python: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:])</span>
+<span class="nb">print</span> <span class="s2">" numpy: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">numpy</span><span class="o">.</span><span class="n">__version__</span>
+<span class="nb">print</span> <span class="s2">"   mpl: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="n">matplotlib</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Populating the interactive namespace from numpy and matplotlib
 
    now: 2014-01-14 20:19:07.230332
-python: (2, 7, 4, &#39;final&#39;, 0)
+python: (2, 7, 4, 'final', 0)
  numpy: 1.7.1
    mpl: 1.2.1
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>WARNING: pylab import has clobbered these variables: [&#39;axes&#39;]
+<pre>WARNING: pylab import has clobbered these variables: ['axes']
 `%pylab --no-import-all` prevents importing * from pylab and numpy
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[74]:</div>
+<div class="prompt input_prompt">In [74]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## little helper to pixel-perfectly render a figure as an inline image</span>
 <span class="k">def</span> <span class="nf">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="n">dpi</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fg</span><span class="p">)</span> 
     <span class="k">return</span> <span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>None of the build-in color palettes really picks up the details of the data. Here is how to make an optimized color palette for this purpose:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[75]:</div>
+<div class="prompt input_prompt">In [75]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## the final result:</span>
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;colorbar.png&quot;</span><span class="p">)</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">"colorbar.png"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[75]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[75]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAAyCAYAAAByHI2dAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAPYQAAD2EBqD+naQAABl1JREFUeJzt1r+P3EQUB/Cv117vJsddJNIQIZD4USUBoSsoI0QRCRBS
@@ -3482,33 +3456,30 @@ wjCw8UwUmY+dYiDzfJUDBrZH5oK5gsYa1VEw8N8d19yjXjfM1TUq3P4Odu/eQuakXi88J/PX5qRR
 o8/nlitE6jh3QK5V7YXTeT445s6f1xzP7ZoLu317uos/pj9V46rIbd9wv8Ya6o8C/4YU+wEABwe1
 vLMXTjgukDqv0Mac2Nw97OEO7izlV+3r153am3uKKfbt27MY+zkHjc/sZejg6v28/wAtu9IeOwi8
 VQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[76]:</div>
+<div class="prompt input_prompt">In [76]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># human readable version</span>
 <span class="n">palette</span>  <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="mf">0.00</span><span class="p">,</span> <span class="s2">&quot;000000&quot;</span><span class="p">),</span> <span class="c1"># black</span>
-    <span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="s2">&quot;880000&quot;</span><span class="p">),</span> <span class="c1"># dark red</span>
-    <span class="p">(</span><span class="mf">0.14</span><span class="p">,</span> <span class="s2">&quot;ff0000&quot;</span><span class="p">),</span> <span class="c1"># red</span>
-    <span class="p">(</span><span class="mf">0.24</span><span class="p">,</span> <span class="s2">&quot;ff8800&quot;</span><span class="p">),</span> <span class="c1"># orange</span>
-    <span class="p">(</span><span class="mf">0.34</span><span class="p">,</span> <span class="s2">&quot;ffff00&quot;</span><span class="p">),</span> <span class="c1"># yellow</span>
-    <span class="p">(</span><span class="mf">0.44</span><span class="p">,</span> <span class="s2">&quot;33ff00&quot;</span><span class="p">),</span> <span class="c1"># green</span>
-    <span class="p">(</span><span class="mf">0.57</span><span class="p">,</span> <span class="s2">&quot;00ccff&quot;</span><span class="p">),</span> <span class="c1"># light blue</span>
-    <span class="p">(</span><span class="mf">0.74</span><span class="p">,</span> <span class="s2">&quot;4444cc&quot;</span><span class="p">),</span> <span class="c1"># dark blue</span>
-    <span class="p">(</span><span class="mf">0.84</span><span class="p">,</span> <span class="s2">&quot;aa00aa&quot;</span><span class="p">),</span> <span class="c1"># violett</span>
-    <span class="p">(</span><span class="mf">0.94</span><span class="p">,</span> <span class="s2">&quot;660066&quot;</span><span class="p">),</span> <span class="c1"># dark violett</span>
-    <span class="p">(</span><span class="mf">1.00</span><span class="p">,</span> <span class="s2">&quot;000000&quot;</span><span class="p">),</span> <span class="c1"># black</span>
+    <span class="p">(</span><span class="mf">0.00</span><span class="p">,</span> <span class="s2">"000000"</span><span class="p">),</span> <span class="c1"># black</span>
+    <span class="p">(</span><span class="mf">0.04</span><span class="p">,</span> <span class="s2">"880000"</span><span class="p">),</span> <span class="c1"># dark red</span>
+    <span class="p">(</span><span class="mf">0.14</span><span class="p">,</span> <span class="s2">"ff0000"</span><span class="p">),</span> <span class="c1"># red</span>
+    <span class="p">(</span><span class="mf">0.24</span><span class="p">,</span> <span class="s2">"ff8800"</span><span class="p">),</span> <span class="c1"># orange</span>
+    <span class="p">(</span><span class="mf">0.34</span><span class="p">,</span> <span class="s2">"ffff00"</span><span class="p">),</span> <span class="c1"># yellow</span>
+    <span class="p">(</span><span class="mf">0.44</span><span class="p">,</span> <span class="s2">"33ff00"</span><span class="p">),</span> <span class="c1"># green</span>
+    <span class="p">(</span><span class="mf">0.57</span><span class="p">,</span> <span class="s2">"00ccff"</span><span class="p">),</span> <span class="c1"># light blue</span>
+    <span class="p">(</span><span class="mf">0.74</span><span class="p">,</span> <span class="s2">"4444cc"</span><span class="p">),</span> <span class="c1"># dark blue</span>
+    <span class="p">(</span><span class="mf">0.84</span><span class="p">,</span> <span class="s2">"aa00aa"</span><span class="p">),</span> <span class="c1"># violett</span>
+    <span class="p">(</span><span class="mf">0.94</span><span class="p">,</span> <span class="s2">"660066"</span><span class="p">),</span> <span class="c1"># dark violett</span>
+    <span class="p">(</span><span class="mf">1.00</span><span class="p">,</span> <span class="s2">"000000"</span><span class="p">),</span> <span class="c1"># black</span>
 <span class="p">]</span>
 
 <span class="c1"># converter to mpl</span>
@@ -3520,11 +3491,11 @@ VQAAAABJRU5ErkJggg==
 			<span class="bp">self</span><span class="o">.</span><span class="n">g</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">],</span> <span class="mi">16</span><span class="p">))</span><span class="o">/</span><span class="mi">255</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">b</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">color</span><span class="p">[</span><span class="mi">4</span><span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="mi">16</span><span class="p">))</span><span class="o">/</span><span class="mi">255</span>
 		<span class="k">def</span> <span class="nf">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rgb</span><span class="p">)</span> <span class="p">:</span>
-			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="p">[</span><span class="n">rgb</span><span class="p">]</span>
+			<span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">rgb</span><span class="p">]</span>
 
 	<span class="n">p</span> <span class="o">=</span> <span class="p">{}</span>
 	
-	<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="s1">&#39;green&#39;</span><span class="p">,</span> <span class="s1">&#39;blue&#39;</span><span class="p">]:</span>
+	<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'red'</span><span class="p">,</span> <span class="s1">'green'</span><span class="p">,</span> <span class="s1">'blue'</span><span class="p">]:</span>
 		
 		<span class="n">akku</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">l</span> <span class="o">=</span> <span class="n">col</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span> 
 		
@@ -3537,29 +3508,24 @@ VQAAAABJRU5ErkJggg==
 				
 		<span class="n">p</span><span class="p">[</span><span class="n">col</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">akku</span><span class="p">)</span>
 		
-	<span class="k">return</span> <span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="s1">&#39;cryo&#39;</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+	<span class="k">return</span> <span class="n">LinearSegmentedColormap</span><span class="p">(</span><span class="s1">'cryo'</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
 
 <span class="c1">## convert and display</span>
 <span class="n">cmap</span> <span class="o">=</span> <span class="n">makeColormap</span><span class="p">(</span><span class="n">palette</span><span class="p">)</span>
 
 <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">4.00</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">ColorbarBase</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">'horizontal'</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_position</span><span class="p">((</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">,</span> <span class="mf">0.99</span><span class="p">))</span>
 
-<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">&quot;colorbar.png&quot;</span><span class="p">)</span>
+<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">"colorbar.png"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[76]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[76]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAZAAAAAyCAYAAAByHI2dAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAPYQAAD2EBqD+naQAABl1JREFUeJzt1r+P3EQUB/Cv117vJsddJNIQIZD4USUBoSsoI0QRCRBS
@@ -3592,30 +3558,25 @@ wjCw8UwUmY+dYiDzfJUDBrZH5oK5gsYa1VEw8N8d19yjXjfM1TUq3P4Odu/eQuakXi88J/PX5qRR
 o8/nlitE6jh3QK5V7YXTeT445s6f1xzP7ZoLu317uos/pj9V46rIbd9wv8Ya6o8C/4YU+wEABwe1
 vLMXTjgukDqv0Mac2Nw97OEO7izlV+3r153am3uKKfbt27MY+zkHjc/sZejg6v28/wAtu9IeOwi8
 VQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The plotting function for all three data sets. The only differences are axis decoration and scaling.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[105]:</div>
+<div class="prompt input_prompt">In [105]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">plotData</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">vmax</span><span class="p">,</span> <span class="n">xlocs</span><span class="p">,</span> <span class="n">xlbls</span><span class="p">,</span> <span class="n">ylocs</span><span class="o">=</span><span class="p">[],</span> <span class="n">ylbls</span><span class="o">=</span><span class="p">[])</span> <span class="p">:</span>
     
     <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -3623,91 +3584,81 @@ VQAAAABJRU5ErkJggg==
     <span class="n">ax</span><span class="o">.</span><span class="n">set_position</span><span class="p">([</span><span class="mf">0.08</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">0.81</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">])</span>
     
     <span class="c1">## here the magic happens</span>
-    <span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> 
+    <span class="n">img</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s2">"nearest"</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">'auto'</span><span class="p">,</span> 
         <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="n">cmap</span><span class="p">)</span>
     
     <span class="c1">## only decoration left over</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">xlocs</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">xlbls</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
     
     <span class="n">ylbls</span> <span class="o">=</span> <span class="n">ylbls</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ylbls</span><span class="p">)</span> <span class="k">else</span> \
-        <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%b&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">())</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
+        <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%b"</span><span class="p">,</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">())</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
     <span class="n">ylocs</span> <span class="o">=</span> <span class="n">ylocs</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ylocs</span><span class="p">)</span> <span class="k">else</span> \
-        <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%j&quot;</span><span class="p">,</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
+        <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%j"</span><span class="p">,</span> <span class="n">datetime</span><span class="p">(</span><span class="mi">2000</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">timetuple</span><span class="p">()))</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="n">ylocs</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">(</span><span class="n">ylbls</span><span class="p">)</span>
-    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'y'</span><span class="p">,</span> <span class="n">labelsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
     
-    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="s1">'y'</span><span class="p">)</span>
     
     <span class="n">cax</span> <span class="o">=</span> <span class="n">fg</span><span class="o">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.12</span><span class="p">,</span> <span class="mf">1.08</span><span class="p">,</span> <span class="mf">0.78</span><span class="p">],</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">cax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">cax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">cax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;vertical&#39;</span><span class="p">)</span>
+    <span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">cax</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">'vertical'</span><span class="p">)</span>
     <span class="n">fts</span> <span class="o">=</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">set_fontsize</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">bar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">get_yticklabels</span><span class="p">()]</span>
     
     <span class="k">return</span> <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Volume-First">Volume First<a class="anchor-link" href="#Volume-First">&#182;</a></h3>
+<h3 id="Volume-First">Volume First<a class="anchor-link" href="#Volume-First">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>PIOMAS volume comes as a three column text file, the import is simple. The data is usually updated once per month, well, except during a government shutdown.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[78]:</div>
+<div class="prompt input_prompt">In [78]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://psc.apl.washington.edu/wordpress/wp-content/uploads/schweiger/ice_volume/PIOMAS.vol.daily.1979.2013.Current.v2.dat.gz&quot;</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">"http://psc.apl.washington.edu/wordpress/wp-content/uploads/schweiger/ice_volume/PIOMAS.vol.daily.1979.2013.Current.v2.dat.gz"</span>
 <span class="n">rawVolu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">gzip</span><span class="o">.</span><span class="n">GzipFile</span><span class="p">(</span> \
     <span class="n">fileobj</span><span class="o">=</span><span class="n">StringIO</span><span class="p">(</span><span class="n">urllib</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())),</span> <span class="n">skiprows</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># check</span>
-<span class="nb">print</span> <span class="n">rawVolu</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;Last day&quot;</span><span class="p">,</span> \
+<span class="nb">print</span> <span class="n">rawVolu</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="s2">"Last day"</span><span class="p">,</span> \
     <span class="n">datetime</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rawVolu</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]),</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">rawVolu</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     
 <span class="n">tmp</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">rawVolu</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[ 2013.      365.       15.225] Last day 2013-12-31 00:00:00
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXsAAAD9CAYAAABdoNd6AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztfXtwXdV57+/IlmzJkmX5JcAysTA2fglbPGIuj4kYV7g0
@@ -4080,30 +4031,25 @@ WLVqVbBmzZrgxhtvDAYGBsb1+D/1qU8Fp556alBcXBzU1NQE3/3ud1Md74kTJ4JPfOITwZlnnhms
 X78+2LdvX97Gvn379uDMM88MTj/99JHvL2WjjLex6+MvKSkZufc6amtrR8i+UOOPVRtHIBAIBBML
 slOVQCAQTAEI2QsEAsEUgJC9QCAQTAEI2QsEAsEUgJC9QCAQTAEI2QsEAsEUwP8HYSBDNz0uupYA
 AAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I hope you'll like my tendency to spend similar variables the same amount of characters. Readability tops orthography ;)</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[79]:</div>
+<div class="prompt input_prompt">In [79]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># shape and resize the data, nan for missing</span>
 <span class="n">yirs</span> <span class="o">=</span> <span class="n">rawVolu</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">days</span> <span class="o">=</span> <span class="n">rawVolu</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span>
@@ -4116,69 +4062,57 @@ AAAASUVORK5CYII=
 <span class="n">volu</span> <span class="o">=</span> <span class="n">volu</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 
 <span class="c1"># PIOMAS ignores leap years, which makes days a little bit longer in a leap year.</span>
-<span class="nb">print</span> <span class="s2">&quot;shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> \
+<span class="nb">print</span> <span class="s2">"shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> \
     <span class="p">(</span><span class="n">volu</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">volu</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">volu</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>shape: (365, 35), min: 3.261, max: 33.035
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now same data with volume encoded as color.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[106]:</div>
+<div class="prompt input_prompt">In [106]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">xlbls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">2011</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">xlocs</span> <span class="o">=</span> <span class="p">[</span><span class="n">lbl</span> <span class="o">-</span> <span class="mi">1979</span> <span class="k">for</span> <span class="n">lbl</span> <span class="ow">in</span> <span class="n">xlbls</span><span class="p">]</span>
 
 <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plotData</span><span class="p">(</span><span class="n">volu</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="n">xlocs</span><span class="p">,</span> <span class="n">xlbls</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="s2">u&quot;PIOMAS - Arctic Sea Ice Volume (1000km³)&quot;</span><span class="p">,</span>
-    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"PIOMAS - Arctic Sea Ice Volume (1000km³)"</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"top"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">&quot;Credit: Zhang, Jinlun and D.A. Rothrock</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
-    <span class="s2">&quot;http://psc.apl.washington.edu/&quot;</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">"Credit: Zhang, Jinlun and D.A. Rothrock</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> 
+    <span class="s2">"http://psc.apl.washington.edu/"</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">&quot;piomas-colored.png&quot;</span><span class="p">)</span>
+<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">"piomas-colored.png"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[106]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[106]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAEsCAYAAAA1u0HIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAPYQAAD2EBqD+naQAAIABJREFUeJzsfXl8TOf3//veyY5UJCSxNJbWGi2hVbS1tUotbWz9UEtE
@@ -5004,95 +4938,77 @@ tnB3dyc5OZkZM2Zw9+5dDAwMaNmyJeHh4Zibm3P//n3Cw8N58OABjo6Orx3r+PHjxMfH4+HhwenT
 pwkPDycwMJCPPvqIxo0bExsbS3p6OiqVCk9PTxYvXszKlSsBOHjw4FtN3AOyl7skSZL0P0RERODr
 64u9vX2Fz48dO8aNGzfw9vYmJCSEZcuWATBkyBA2bNjwt39v+bPkdyk2NpY7d+5gZmb2j84/X9mk
 SZOIjo5WxvbXxH8B/csnS+/X75cAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Sea-Ice-Area">Sea Ice Area<a class="anchor-link" href="#Sea-Ice-Area">&#182;</a></h3>
+<h3 id="Sea-Ice-Area">Sea Ice Area<a class="anchor-link" href="#Sea-Ice-Area">¶</a></h3>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Sea ice area ignores the third dimension and reduces the ice pack to a flat feature. Will this data expose a similar trend like volume?</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In [86]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://arctic.atmos.uiuc.edu/cryosphere/timeseries.anom.1979-2008&quot;</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">"http://arctic.atmos.uiuc.edu/cryosphere/timeseries.anom.1979-2008"</span>
 <span class="n">rawArea</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="nb">print</span> <span class="n">rawArea</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[[  2.01403280e+03  -8.46257400e-01   1.19673138e+01   1.28135710e+01]]
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Data is organized in four columns: time of year, anomaly, actual area and climatology.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[91]:</div>
+<div class="prompt input_prompt">In [91]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## check</span>
 <span class="n">fg</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">dt</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">rawArea</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">rawArea</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">rawArea</span><span class="p">[:,</span><span class="mi">3</span><span class="p">]],</span> <span class="n">axes</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAb4AAAJMCAYAAACFP8NmAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXl4VEXWxt/OAgFkVQmYoOyGJSyC4qiMKAKCiCAOCo46
@@ -6126,94 +6042,79 @@ l19+oc2bN9P69evpxRdfJJ/PZyl/NTU1lJ2dTbm5ubR7927y+/1h7e+VV16hVatW0aJFi8hut9PR
 o0c19TM2NkYvvfQSrV27lrZs2UKSJOlp7yF/R44cobVr19KaNWsC7xdl5SJRePlTvEVFRQWe3XQc
 DkdgcQuRPt50/eQWgUAgEAiMRnxdgkAgEAgWFCLwCQQCgWBBIQKfQCAQCBYUIvAJBAKBYEEhAp9A
 IBAIFhQi8AkEAoFgQfF/tlPUHJLDvjAAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[92]:</div>
+<div class="prompt input_prompt">In [92]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## shape and resize</span>
 <span class="n">nans</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="mi">365</span><span class="p">);</span> <span class="n">nans</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
 <span class="n">yirs</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1979</span><span class="p">,</span> <span class="mi">2014</span><span class="p">)</span>
 
 <span class="c1">## Only the first 365 entries of a year will be used, dropping Dec 31th in case of a leap year.</span>
 <span class="k">def</span> <span class="nf">splitYearsArea</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span> <span class="p">:</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">[(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">y</span> <span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span><span class="p">[(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">>=</span> <span class="n">y</span><span class="p">)</span> <span class="o">&</span> <span class="p">(</span><span class="n">a</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o"><</span> <span class="n">y</span> <span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">d</span><span class="p">[:,</span> <span class="n">f</span><span class="p">],</span> <span class="n">nans</span><span class="p">))[:</span><span class="mi">365</span><span class="p">]</span>
 
 <span class="n">area</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">splitYearsArea</span><span class="p">(</span><span class="n">rawArea</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">yirs</span><span class="p">]))</span>
 
-<span class="nb">print</span> <span class="s2">&quot;shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">area</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
+<span class="nb">print</span> <span class="s2">"shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">area</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">area</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">area</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>shape: (365, 35), min: 2.2340095, max: 15.074604
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Plotting of area is similar to thickness</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In [107]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">xlbls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span> <span class="mi">2011</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">xlocs</span> <span class="o">=</span> <span class="p">[</span><span class="n">lbl</span> <span class="o">-</span> <span class="mi">1979</span> <span class="k">for</span> <span class="n">lbl</span> <span class="ow">in</span> <span class="n">xlbls</span><span class="p">]</span>
 
 <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plotData</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">xlocs</span><span class="p">,</span> <span class="n">xlbls</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="s2">u&quot;Arctic Sea Ice Area (1,000,000km²)&quot;</span><span class="p">,</span>
-    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"Arctic Sea Ice Area (1,000,000km²)"</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"top"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">&quot;Credit: The Cryosphere Today</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
-    <span class="s2">&quot;http://arctic.atmos.uiuc.edu/cryosphere/&quot;</span><span class="p">,</span> \
-    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">"Credit: The Cryosphere Today</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> 
+    <span class="s2">"http://arctic.atmos.uiuc.edu/cryosphere/"</span><span class="p">,</span> \
+    <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">&quot;area-colored.png&quot;</span><span class="p">)</span>
+<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">"area-colored.png"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[107]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[107]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAEsCAYAAAA1u0HIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAPYQAAD2EBqD+naQAAIABJREFUeJzsfXlclNX3//uZGYYZEBdASVPBJfdd6+NWLpmlpqmZn0wr
@@ -7079,69 +6980,58 @@ Fy5c4He/+x3Lly8nOjpaGd5vHxbm4uKiIQsgOzubqVOnAjBjxgyioqIYOHAg77zzjka7zZ8/n1On
 TmFhYYGFhQXJyclER0ejVqtxdnYmKiqKQYMGKU64sLCQmJgYZcW6jkRGRrJu3TpGjhyJmZkZ8+fP
 v2eek5MT/v7+PbuR2hASiUQi0Uni4uLElStXOqWfPHlSfPTRR0IIISIjIx92tR57Vq9eLRobG7s9
 59q1a2Lx4sUiLy+vRzJLSkrEH//4x96onhCiZ3XsyP8Bpoj0/DORaLIAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="NH-Snow-Cover">NH Snow Cover<a class="anchor-link" href="#NH-Snow-Cover">&#182;</a></h3>
+<h3 id="NH-Snow-Cover">NH Snow Cover<a class="anchor-link" href="#NH-Snow-Cover">¶</a></h3>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[95]:</div>
+<div class="prompt input_prompt">In [95]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://climate.rutgers.edu/snowcover/files/wkcov.nhland.txt&quot;</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">"http://climate.rutgers.edu/snowcover/files/wkcov.nhland.txt"</span>
 <span class="n">rawSnow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 <span class="nb">print</span> <span class="n">rawSnow</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>[[  2.01400000e+03   1.00000000e+00   4.57908620e+07]]
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Snow comes as weekly data and includes a few gaps, so processing is a bit different.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[96]:</div>
+<div class="prompt input_prompt">In [96]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;http://climate.rutgers.edu/snowcover/files/wkcov.nhland.txt&quot;</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">url</span> <span class="o">=</span> <span class="s2">"http://climate.rutgers.edu/snowcover/files/wkcov.nhland.txt"</span>
 <span class="n">rawSnow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">genfromtxt</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
 <span class="n">snow</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2015</span> <span class="o">-</span> <span class="mi">1966</span><span class="p">)</span> <span class="o">*</span> <span class="mi">52</span><span class="p">);</span> 
@@ -7149,31 +7039,26 @@ v2eek5MT/v7+PbuR2hASiUQi0Uni4uLElStXOqWfPHlSfPTRR0IIISIjIx92tR57Vq9eLRobG7s9
 <span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">rawSnow</span> <span class="p">:</span> <span class="n">snow</span><span class="p">[(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1966</span><span class="p">)</span> <span class="o">*</span> <span class="mi">52</span> <span class="o">+</span> <span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">/</span> <span class="mi">1000000</span>
 <span class="n">snow</span> <span class="o">=</span> <span class="n">snow</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">2015</span> <span class="o">-</span> <span class="mi">1966</span><span class="p">,</span> <span class="mi">52</span><span class="p">)</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
 
-<span class="nb">print</span> <span class="s2">&quot;shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> \
+<span class="nb">print</span> <span class="s2">"shape: </span><span class="si">%s</span><span class="s2">, min: </span><span class="si">%s</span><span class="s2">, max: </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span> \
     <span class="p">(</span><span class="n">snow</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">snow</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmax</span><span class="p">(</span><span class="n">snow</span><span class="p">))</span>
 
 <span class="c1">## check</span>
 <span class="n">tmp</span> <span class="o">=</span> <span class="n">plot</span><span class="p">(</span><span class="n">rawSnow</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>shape: (52, 49), min: 2.026924, max: 53.920493
 </pre>
 </div>
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXIAAAEECAYAAAA1X7/VAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztfXmcXVWV7ro1pCqVSiohhCQkYCCEISQkgSCDRAsUEUGG
@@ -7702,20 +7587,17 @@ iy+G2bNnw6WXXrrr+92xX0h1UZV+UYmX9q677iodeOCBpZkzZ5auuOKKSm41LOy1114rzZs3rzRv
 zi0ddthhpdNPP720YcOGXb8fqXXxwAMPlAqFQmnevHml+fPnl+bPn1+6++67d8t+wdXFXXfdVZV+
 UfGr3nLLLbfcchtcy98QlFtuueU2zC0H8txyyy23YW45kOeWW265DXPLgTy33HLLbZhbDuS55ZZb
 bsPcciDPLbfcchvm9v8BZ26NkE3ad4IAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[108]:</div>
+<div class="prompt input_prompt">In [108]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">xlbls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1975</span><span class="p">,</span> <span class="mi">2011</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
 <span class="n">xlocs</span> <span class="o">=</span> <span class="p">[</span><span class="n">lbl</span> <span class="o">-</span> <span class="mi">1970</span> <span class="k">for</span> <span class="n">lbl</span> <span class="ow">in</span> <span class="n">xlbls</span><span class="p">]</span>
 <span class="n">ylbls</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">49</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
@@ -7723,27 +7605,22 @@ bsPcciDPLbfcchvm9v8BZ26NkE3ad4IAAAAASUVORK5CYII=
 
 <span class="n">fg</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plotData</span><span class="p">(</span><span class="n">snow</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="n">xlocs</span><span class="p">,</span> <span class="n">xlbls</span><span class="p">,</span> <span class="n">ylocs</span><span class="p">,</span> <span class="n">ylbls</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="s2">u&quot;NH Weekly Snow Cover (1,000,000km²)&quot;</span><span class="p">,</span>
-    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="sa">u</span><span class="s2">"NH Weekly Snow Cover (1,000,000km²)"</span><span class="p">,</span>
+    <span class="n">ha</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"top"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">&quot;Credit: Global Snow Lab</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">+</span> 
-    <span class="s2">&quot;http://climate.rutgers.edu/snowcover/index.php&quot;</span><span class="p">,</span> \
-    <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">&#39;bottom&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.00</span><span class="p">,</span> <span class="s2">"Credit: Global Snow Lab</span><span class="se">\n</span><span class="s2">"</span> <span class="o">+</span> 
+    <span class="s2">"http://climate.rutgers.edu/snowcover/index.php"</span><span class="p">,</span> \
+    <span class="n">ha</span><span class="o">=</span><span class="s1">'right'</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s1">'bottom'</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 
-<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">&quot;snow-colored.png&quot;</span><span class="p">)</span>
+<span class="n">showFigure</span><span class="p">(</span><span class="n">fg</span><span class="p">,</span> <span class="s2">"snow-colored.png"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[108]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[108]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAEsCAYAAAA1u0HIAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAAPYQAAD2EBqD+naQAAIABJREFUeJzsnXlcFdX7xz9zL5uAqKC4oIjmvguZ+5q5paRmaZamWT/N
@@ -8426,41 +8303,33 @@ eHl5Ub9+fdVLQd5106N169bMmDGDc+fO0aJFC4YPH86kSZOoXLkyXl5eFjPFmDFjGDduHIsXL7a0
 V3Z2NpMmTbIsSVu0aJHVdT979iwffPAB8fHxjBs3TleX/MhlaxKJRHKPTJ06lb59+1K7dm1V+f79
 +4mOjqZ3796MGDGCefPmFZKGYnJycpg2bRpJSUk0aNCAwYMHP5B6g4ODefLJJ2nVqtUDqe9ecfZ1
 y/MjKIgLFy6waNEiq6l6I/wfPiyFeKX2fTUAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[112]:</div>
+<div class="prompt input_prompt">In [112]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fg</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">72</span><span class="p">,</span> <span class="n">nrows</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">ncols</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">top</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">bottom</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span> 
 
-<span class="k">for</span> <span class="n">im</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s2">&quot;piomas-colored.png&quot;</span><span class="p">,</span> <span class="s2">&quot;area-colored.png&quot;</span><span class="p">,</span> <span class="s2">&quot;snow-colored.png&quot;</span><span class="p">],</span> <span class="n">axes</span><span class="p">)</span> <span class="p">:</span>
+<span class="k">for</span> <span class="n">im</span><span class="p">,</span> <span class="n">ax</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s2">"piomas-colored.png"</span><span class="p">,</span> <span class="s2">"area-colored.png"</span><span class="p">,</span> <span class="s2">"snow-colored.png"</span><span class="p">],</span> <span class="n">axes</span><span class="p">)</span> <span class="p">:</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_yaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axes</span><span class="o">.</span><span class="n">get_xaxis</span><span class="p">()</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">set_frame_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">read_png</span><span class="p">(</span><span class="n">im</span><span class="p">))</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXYAAAKWCAYAAABd8rJ6AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXmcFMX5/9/dPcde7HLLrUhQDhPxQEWMJBoVAeOJeISo
@@ -11183,15 +11052,13 @@ NhMeHo7H48Hj8RAZGUloaCjNzc0kJibidDqxWCzo9Xo0Gg16vZ4XXniBZcuW0dLSQnR0NEqlkvb2
 dmJiYgLVsSIjI+no6Ag829OLuOHh4XR0dLBx40bmzJkTqEB1us1Oh2zOnDmzT+GSc0VW7DIyMjIX
 GLIrRkZGRuYCQ1bsMjIyMhcYsmKXkZGRucCQFbuMjIzMBYas2GVkZGQuMGTFLiMjI3OB8X9AQVUa
 TB/X2wAAAABJRU5ErkJggg==
-">
+" />
+</div>
+</div>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

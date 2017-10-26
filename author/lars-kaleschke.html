@@ -192,6 +192,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -212,11 +213,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -954,8 +950,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -966,9 +964,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1007,172 +1007,139 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-
 <pre><code>Acces SMOS Sea Ice Thickness data
 
 </code></pre>
 <p><strong>Solution:</strong></p>
-
 <pre><code>pydap</code></pre>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/notebooks/smos_sea_ice_thickness.ipynb">Notebook file</a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Sea ice thickens is one of the most important environmental variables in the Arctic, but unfortunately is one of the hardest to measure. Unlike sea ice concentration, which is measured by satellites operationally now for more than three decades, only recently we begin to obtain limited satellite sea ice thickness information from missions like <a href="http://icesat.gsfc.nasa.gov/icesat/">ICESat</a>, <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/CryoSat">Cryosat-2</a> and <a href="http://www.esa.int/Our_Activities/Observing_the_Earth/The_Living_Planet_Programme/Earth_Explorers/SMOS">SMOS</a>. The later is not specifically dedicated to cryospheric applications, but turns out that its information can be used to obtain data about the thin sea ice.</p>
 <p>Here you can learn more about <a href="https://wiki.zmaw.de/ifm/SMOSIce">SMOS sea ice thickness project</a>.</p>
 <p>In the following we learn how to access a SMOS dataset with the OpenNDAP protocol. This allows the analysis of some parts of the data  while the complete dataset can stay on the remote server. Data hosted by <a href="http://icdc.zmaw.de/l3c_smos_sit.html">ICDC</a>.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We would need Python OpenNDAP client <a href="http://www.pydap.org/">pydap</a>.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pydap.client</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Opening the dataset is straight forward:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="o">=</span><span class="n">pydap</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">open_url</span><span class="p">(</span><span class="s1">&#39;http://icdc.zmaw.de/thredds/dodsC/smos_icethickness_2014&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="o">=</span><span class="n">pydap</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">open_url</span><span class="p">(</span><span class="s1">'http://icdc.zmaw.de/thredds/dodsC/smos_icethickness_2014'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let's have a look at the contents of the dataset</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="c1"># Lets have a look at the contents</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[15]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[15]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;y&#39;,
- &#39;x&#39;,
- &#39;longitude&#39;,
- &#39;latitude&#39;,
- &#39;time&#39;,
- &#39;sea_ice_thickness&#39;,
- &#39;saturation_ratio&#39;,
- &#39;nPair&#39;,
- &#39;land&#39;,
- &#39;ice_thickness_uncertainty&#39;,
- &#39;Tsurf&#39;,
- &#39;TB_uncertainty&#39;,
- &#39;TB&#39;,
- &#39;RFI_ratio&#39;]</pre>
-</div>
-
-</div>
-
+<pre>['y',
+ 'x',
+ 'longitude',
+ 'latitude',
+ 'time',
+ 'sea_ice_thickness',
+ 'saturation_ratio',
+ 'nPair',
+ 'land',
+ 'ice_thickness_uncertainty',
+ 'Tsurf',
+ 'TB_uncertainty',
+ 'TB',
+ 'RFI_ratio']</pre>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can access variables inside dataset by usual dictionary syntax:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">][:]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s1">'time'</span><span class="p">][:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[44]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[44]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([ 35076.,  35100.,  35124.,  35148.,  35172.,  35196.,  35220.,
         35244.,  35268.,  35292.,  35316.,  35340.,  35364.,  35388.,
@@ -1184,42 +1151,32 @@ h6:hover .anchor-link {
         36252.,  36276.,  36300.,  36324.,  36348.,  36372.,  36396.,
         36420.,  36444.,  36468.,  36492.,  36516.,  36540.])</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>or as attributes:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">time</span><span class="p">[:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[45]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[45]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([ 35076.,  35100.,  35124.,  35148.,  35172.,  35196.,  35220.,
         35244.,  35268.,  35292.,  35316.,  35340.,  35364.,  35388.,
@@ -1231,173 +1188,134 @@ h6:hover .anchor-link {
         36252.,  36276.,  36300.,  36324.,  36348.,  36372.,  36396.,
         36420.,  36444.,  36468.,  36492.,  36516.,  36540.])</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Doesn't really look like a human readable time. Let's have a look at its units:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In [46]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">dataset</span><span class="o">.</span><span class="n">time</span><span class="o">.</span><span class="n">attributes</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[46]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[46]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>{&#39;standard_name&#39;: &#39;time&#39;, &#39;units&#39;: &#39;hours since 2010-01-01 00:00:00&#39;}</pre>
-</div>
-
-</div>
-
+<pre>{'standard_name': 'time', 'units': 'hours since 2010-01-01 00:00:00'}</pre>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we define function to convert from 'hours since' to something more understandable:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="prompt input_prompt">In [47]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
 <span class="k">def</span> <span class="nf">ymd</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">offset_day</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns year,month,day string for an offset day&quot;&quot;&quot;</span>
+    <span class="sd">"""Returns year,month,day string for an offset day"""</span>
     <span class="n">time_ymd</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">mktime</span><span class="p">((</span><span class="n">y</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="n">ltime</span><span class="o">=</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">time_ymd</span><span class="o">+</span><span class="n">offset_day</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">24</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span> <span class="s1">&#39;%(#)02d&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;#&#39;</span><span class="p">:(</span><span class="nb">int</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">1</span><span class="p">]))}),</span><span class="nb">str</span><span class="p">(</span> <span class="s1">&#39;%(#)02d&#39;</span> <span class="o">%</span> <span class="p">{</span><span class="s1">&#39;#&#39;</span><span class="p">:(</span><span class="nb">int</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">2</span><span class="p">]))})]</span>
+    <span class="k">return</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">str</span><span class="p">(</span> <span class="s1">'%(#)02d'</span> <span class="o">%</span> <span class="p">{</span><span class="s1">'#'</span><span class="p">:(</span><span class="nb">int</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">1</span><span class="p">]))}),</span><span class="nb">str</span><span class="p">(</span> <span class="s1">'%(#)02d'</span> <span class="o">%</span> <span class="p">{</span><span class="s1">'#'</span><span class="p">:(</span><span class="nb">int</span><span class="p">(</span><span class="n">ltime</span><span class="p">[</span><span class="mi">2</span><span class="p">]))})]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Get the latest date of the dataset and convert it (just to understand which day we are going to plot).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In [48]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">ymd</span><span class="p">(</span><span class="mi">2010</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">dataset</span><span class="o">.</span><span class="n">time</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">24</span><span class="p">)</span> <span class="c1"># Determine latest date</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[48]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[48]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;2014&#39;, &#39;03&#39;, &#39;03&#39;]</pre>
-</div>
-
-</div>
-
+<pre>['2014', '03', '03']</pre>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we finlay get the lat/lon data, and retrieve the latest field of SMOS sea ice thickness:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In [52]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lats</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;latitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="p">[:,:]</span>
-<span class="n">lons</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="p">[:,:]</span>
-<span class="n">sit</span><span class="o">=</span><span class="n">array</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">&#39;sea_ice_thickness&#39;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:])</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lats</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="s1">'latitude'</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="p">[:,:]</span>
+<span class="n">lons</span><span class="o">=</span><span class="n">dataset</span><span class="p">[</span><span class="s1">'longitude'</span><span class="p">]</span><span class="o">.</span><span class="n">array</span><span class="p">[:,:]</span>
+<span class="n">sit</span><span class="o">=</span><span class="n">array</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s1">'sea_ice_thickness'</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,:,:])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In [55]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">imshow</span><span class="p">(</span><span class="n">sit</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:])</span>
 <span class="n">colorbar</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[55]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.colorbar.Colorbar instance at 0x7fdd55f29050&gt;</pre>
+<pre><matplotlib.colorbar.colorbar instance at 0x7fdd55f29050></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAbEAAAHkCAYAAACwkxH1AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvW2MVOd9//2dELCHxh67tQVtWc0Z1qSbyPYLO7ewepvO
@@ -1900,69 +1818,54 @@ uJCFCxdSXV3Ntm3buHz5crf7R8rKygDIzMy0dP9IY2Mjzz33nH/ox+fVV19l2rRpxuTidrtZv349
 dXV1tLe388ADD/D888/7f25MyaMjh8PBhQsXAvaJmZCD2+1m7dq1NDQ04PV6GTVqFIsWLeLJJ580
 Kg+49Z/Vd999l8rKSgBSU1NZsWIF0dHRRuURjnQAsIiIGEvHTomIiLFUxERExFgqYiIiYiwVMRER
 MZaKmIiIGEtFTEREjKUiJiIixlIRExERY6mIiYiIsf4fv6b+6oouwc8AAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Data need a bit of work. We mask all -999 values and everything that is larger than 1 meter.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">sit</span><span class="p">[</span><span class="n">sit</span><span class="o">==-</span><span class="mf">999.</span><span class="p">]</span><span class="o">=</span><span class="n">nan</span>
-<span class="n">sit</span><span class="p">[</span><span class="n">sit</span><span class="o">&gt;</span><span class="mf">1.</span><span class="p">]</span><span class="o">=</span><span class="mf">1.0</span>
+<span class="n">sit</span><span class="p">[</span><span class="n">sit</span><span class="o">></span><span class="mf">1.</span><span class="p">]</span><span class="o">=</span><span class="mf">1.0</span>
 
 <span class="n">sitm</span> <span class="o">=</span> <span class="n">ma</span><span class="o">.</span><span class="n">masked_where</span><span class="p">(</span><span class="n">isnan</span><span class="p">(</span><span class="n">sit</span><span class="p">),</span><span class="n">sit</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="prompt input_prompt">In [59]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">imshow</span><span class="p">(</span><span class="n">sitm</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[59]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[59]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.image.AxesImage at 0x786ee50&gt;</pre>
+<pre><matplotlib.image.axesimage at 0x786ee50></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAV0AAAHkCAYAAACdTfwKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXl8FPX9/5+zm02yCTlIOBIhEC5BDkmU+9qZiIgoeKHW
@@ -3145,30 +3048,25 @@ MOAnP/kJ8+fPj5laPB4PGzZsoLq6Gp/Pxx133MFjjz0W/NzESh3dFRcXc/bs2R7zdGOhBo/Hw7p1
 66irq8Pv95Oens7KlSuZO3duTNUBRufqlVdeQdM0AHJzc3n66aexWq1hr0M2vBFCCBPJMmAhhDCR
 hK4QQphIQlcIIUwkoSuEECaS0BVCCBNJ6AohhIkkdIUQwkQSukIIYSIJXSGEMNH/AzF9dGUbVxit
 AAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Use Basemap to make it much prettier :)</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In [60]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">mpl_toolkits.basemap</span> <span class="k">import</span> <span class="n">Basemap</span>
 
 <span class="n">lat_ts</span><span class="o">=</span><span class="mf">90.0</span>
@@ -3177,31 +3075,26 @@ AAAAAElFTkSuQmCC
 <span class="n">sgn</span><span class="o">=</span><span class="mi">1</span>
 <span class="n">width</span><span class="o">=</span><span class="mf">7000000.</span>
 <span class="n">height</span><span class="o">=</span><span class="mf">7000000.0</span>
-<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">&#39;h&#39;</span><span class="p">,</span>\
-            <span class="n">projection</span><span class="o">=</span><span class="s1">&#39;stere&#39;</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span><span class="n">lat_0</span><span class="o">=</span><span class="n">lat_0</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="n">lon_0</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">Basemap</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="n">width</span><span class="p">,</span><span class="n">height</span><span class="o">=</span><span class="n">height</span><span class="p">,</span><span class="n">resolution</span><span class="o">=</span><span class="s1">'h'</span><span class="p">,</span>\
+            <span class="n">projection</span><span class="o">=</span><span class="s1">'stere'</span><span class="p">,</span><span class="n">lat_ts</span><span class="o">=</span><span class="n">lat_ts</span><span class="p">,</span><span class="n">lat_0</span><span class="o">=</span><span class="n">lat_0</span><span class="p">,</span><span class="n">lon_0</span><span class="o">=</span><span class="n">lon_0</span><span class="p">)</span>
 <span class="n">m</span><span class="o">.</span><span class="n">bluemarble</span><span class="p">()</span> 
 
 <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="o">=</span><span class="n">m</span><span class="p">(</span><span class="n">lons</span><span class="p">,</span><span class="n">lats</span><span class="p">)</span>
 
-<span class="n">CS</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sitm</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:],</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gist_earth</span><span class="p">)</span><span class="c1">#,ps,cmap=cm.jet,extend=&#39;max&#39;)</span>
+<span class="n">CS</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">pcolormesh</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">sitm</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:],</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="o">.</span><span class="n">gist_earth</span><span class="p">)</span><span class="c1">#,ps,cmap=cm.jet,extend='max')</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawparallels</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">80.</span><span class="p">,</span><span class="mf">81.</span><span class="p">,</span><span class="mf">5.</span><span class="p">))</span><span class="c1">#,labels=[1,0,0,0])</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawmeridians</span><span class="p">(</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">180.</span><span class="p">,</span><span class="mf">181.</span><span class="p">,</span><span class="mf">15.</span><span class="p">))</span><span class="c1">#,labels=[0,0,1,1])</span>
 <span class="n">m</span><span class="o">.</span><span class="n">drawcoastlines</span><span class="p">()</span>
 <span class="n">m</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 <span class="n">show</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgEAAAHZCAYAAAAfY+i+AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXmQZNlV5vm7y3vPd499j8i1KrP2fVGpVJKqJFESQgJt
@@ -9836,15 +9729,13 @@ JQgCzj//fL761a8SxzE7d+7kgQce4NJLLz1m7KWXXsqdd97J+Pg4tVqNv//7v+c973nlAtJXrAlo
 aLBp0yauv/56HOflV/5bQUCLFi1atGjxFqW1HNCiRYsWLVq8RWkFAS1atGjRosVblFYQ0KJFixYt
 WrxFaQUBLVq0aNGixVuUVhDQokWLFi1avEVpBQEtWrRo0aLFW5RWENCiRYsWLVq8RWkFAS1atGjR
 osVblP8P2Yr7a79P1EQAAAAASUVORK5CYII=
-">
+" />
+</div>
+</div>
+</div>
+</div>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>EarthPy - Arcticio</title><link>http://earthpy.org/</link><description></description><lastBuildDate>Tue, 14 Jan 2014 00:00:00 +0100</lastBuildDate><item><title>Northern Cryosphere Metrics rendered with Colors</title><link>http://earthpy.org/northern_cryosphere_metrics_rendered_with_colors.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;a href="http://nbviewer.ipython.org/urls/dl.dropboxusercontent.com/u/354885/notebooks/Pub-02-Cryo-Colors.ipynb"&gt;Notebook file&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;a href="https://twitter.com/ArcticIo"&gt;Author's twitter&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Arctic sea ice and snow cover and are two of the most prominent features of the cryosphere of the northern hemisphere and can be seen with a naked eye from the Moon. Measurements of sea ice area started around 1979 and snow cover a bit earlier. Both show a strong seasonal signal and area also a decline over the three decades. Even stronger is the decline calculated by a sea ice model run by the &lt;a href="http://psc.apl.washington.edu/wordpress/research/projects/arctic-sea-ice-volume-anomaly/"&gt;Polar Science Center&lt;/a&gt;, Washington. PIOMAS outputs daily sea ice volume for the same time allowing a good comparison of the three data sets. Instead of the usual line charts this notebook translates the daily data into a color range. Changes within a dataset are far better visible, while maintaining comparability.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Arcticio</dc:creator><pubDate>Tue, 14 Jan 2014 00:00:00 +0100</pubDate><guid isPermaLink="false">tag:earthpy.org,2014-01-14:/northern_cryosphere_metrics_rendered_with_colors.html</guid><category>matplotlib</category><category>Arctic</category></item><item><title>Near realtime data from Arctic ice mass balance buoys</title><link>http://earthpy.org/near_realtime_data_from_arctic_ice_mass_balance_buoys.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;

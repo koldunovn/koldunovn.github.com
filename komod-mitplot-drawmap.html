@@ -197,6 +197,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -217,11 +218,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -959,8 +955,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -971,9 +969,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1012,262 +1012,214 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong></p>
-
 <pre><code>Quickly draw maps with PyNGL module
 
 </code></pre>
 <p><strong>Solution:</strong></p>
-
 <pre><code>komod module
 
 </code></pre>
 <p><a href="http://nbviewer.ipython.org/urls/raw.github.com/koldunovn/earthpy.org/master/content/earthpy_mitplot.ipynb"><strong>Notebook file</strong></a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The PyNGL module produce very nice looking maps, and it's capabilities in fine tuning the resulting image in many cases are much better compared to matplotlib Basemap module. However this flexibility come at a price: in order to draw a map of an acceptable appearance one has to write quite a long script, and specify many parameters. Of course once you find your "best ever" set of parameters, you basically copy/paste them from one script to another with only slight modifications. But at some point you get annoyed by this long sheets of code, that by the way do not look very nice in IPython notebooks, and you write a wrapper function.</p>
 <p>This is exactly what happens to me, and here I present several functions, that allow you relatively easily to create maps with PyNGL. This functions are part of the <a href="https://github.com/koldunovn/komod"><strong>komod module</strong></a>, that I wrote for manipulation with MITgsm data. However plotting functions are not MITgcm specific, and can be used for any 2D (and also, as you will see, 3D and 4D) data that have lat/lon coordinates.</p>
 <p>In order to make <em>komod</em> work you have to first install numpy, scipy, matplotlib and PyNGL. In order to make this tutorial work, you have to have ether gv (viewer of PostScript and PDF files) or ImageMagick (*nix image processing) installed. If you done with this, let's get started :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Import modules:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">komod</span>
 <span class="kn">import</span> <span class="nn">Nio</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As an example we are going to use netCDF file of <a href="http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc">mean temperature from the World Ocean Atlas 2009</a> (5 deg. resolution). You can get it with wget:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>wget http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>--2013-03-31 15:12:32--  http://data.nodc.noaa.gov/thredds/fileServer/woa/WOA09/NetCDFdata/temperature_annual_5deg.nc
 Resolving data.nodc.noaa.gov (data.nodc.noaa.gov)... 140.90.235.84
 Connecting to data.nodc.noaa.gov (data.nodc.noaa.gov)|140.90.235.84|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 1377776 (1.3M) [application/x-netcdf]
-Saving to: `temperature_annual_5deg.nc.1&#39;
+Saving to: `temperature_annual_5deg.nc.1'
 
-100%[======================================&gt;] 1,377,776    633K/s   in 2.1s    
+100%[======================================>] 1,377,776    633K/s   in 2.1s    
 
-2013-03-31 15:12:35 (633 KB/s) - `temperature_annual_5deg.nc.1&#39; saved [1377776/1377776]
+2013-03-31 15:12:35 (633 KB/s) - `temperature_annual_5deg.nc.1' saved [1377776/1377776]
 
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We open the file with <em>Nio</em> (part of PyNGL), while you can do it with any other module that opens netCDF files (like netCDF4 or scipy.io.netcdf).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In [2]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ff</span> <span class="o">=</span><span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">&#39;temperature_annual_5deg.nc&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">ff</span> <span class="o">=</span><span class="n">Nio</span><span class="o">.</span><span class="n">open_file</span><span class="p">(</span><span class="s1">'temperature_annual_5deg.nc'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Get data from the variables (t_mn - is the mean temperature, that we are going to plot):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;t_mn&#39;</span><span class="p">][:]</span>
-<span class="n">lat</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:]</span>
-<span class="n">lon</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
-<span class="n">lev</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;depth&#39;</span><span class="p">][:]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp</span> <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'t_mn'</span><span class="p">][:]</span>
+<span class="n">lat</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">][:]</span>
+<span class="n">lon</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">][:]</span>
+<span class="n">lev</span>  <span class="o">=</span> <span class="n">ff</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'depth'</span><span class="p">][:]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The <em>temp</em> variable has four dimensions (time, depth, lon, lat):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In [12]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">temp</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[12]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[12]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(1, 33, 36, 72)</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>so we choose first (and the only in this case) field of time and first field of depth (surface).</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And plot:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This command creates .ps file (<em>output.ps</em> by default) with the map in your working directory. If you have gv installed, then window with the map should pop up. If not, let's convert ps file to png:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>convert -scale 50% -rotate -90 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>convert -scale <span class="m">50</span>% -rotate -90 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[5]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[5]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAAEyEAYAAAC5aTsMAAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -3603,49 +3555,39 @@ oiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoiiKoigA/w8ofSgwMqLHfAAAACV0RVh0
 ZGF0ZTpjcmVhdGUAMjAxMy0wMy0zMVQxNjozMjozNyswMjowMFx5x0IAAAAldEVYdGRhdGU6bW9k
 aWZ5ADIwMTMtMDMtMzFUMTY6MzI6MzcrMDI6MDAtJH/+AAAAE3RFWHRwczpMZXZlbABBZG9iZS0y
 LjAKOZN0DQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Default map already looks fine, except for the name of the variable and a bit strange intervals for the isotherms. It can be easily fixed:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">)</span>
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 50% -rotate -90 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">50</span>% -rotate -90 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[6]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[6]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAAEyEAYAAAC5aTsMAAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -6516,49 +6458,39 @@ EEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBC
 CCGEEEIIIYQQkmP/BwAws2+ooDE8AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDEzLTAzLTMxVDE2OjMy
 OjQ2KzAyOjAw8MvF7wAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxMy0wMy0zMVQxNjozMjo0NiswMjow
 MIGWfVMAAAATdEVYdHBzOkxldmVsAEFkb2JlLTIuMAo5k3QNAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you prefer raster version, where grid boxes are clearly visible:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[44]:</div>
+<div class="prompt input_prompt">In [44]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span> <span class="n">raster_fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">,</span> <span class="n">raster_fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 50% -rotate -90 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">50</span>% -rotate -90 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[44]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[44]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAAEyEAYAAAC5aTsMAAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -7815,50 +7747,40 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAy+29xYODhfMp0TgAAACV0RVh0ZGF0
 ZTpjcmVhdGUAMjAxMy0wMy0zMVQxNTo1MTo0MiswMjowMLrM/HIAAAAldEVYdGRhdGU6bW9kaWZ5
 ADIwMTMtMDMtMzFUMTU6NTE6NDIrMDI6MDDLkUTOAAAAE3RFWHRwczpMZXZlbABBZG9iZS0yLjAK
 OZN0DQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you want to change color scheme it's also possible. You have to choose one from <a href="http://www.pyngl.ucar.edu/Graphics/color_table_gallery.shtml">PyNGL color maps</a>, and in some cases also adjust start and end colors:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In [49]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span> <span class="n">raster_fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
-             <span class="n">colormap_name</span><span class="o">=</span><span class="s1">&#39;posneg_1&#39;</span><span class="p">,</span> <span class="n">start_color</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">end_color</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">,</span> <span class="n">raster_fill</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+             <span class="n">colormap_name</span><span class="o">=</span><span class="s1">'posneg_1'</span><span class="p">,</span> <span class="n">start_color</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">end_color</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 50% -rotate -90 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">50</span>% -rotate -90 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[49]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[49]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYwAAAEyEAYAAAC5aTsMAAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -9068,50 +8990,40 @@ CCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQggh
 hBBCCCGEEEIIIYQQsf0PUhqrNruxwioAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTMtMDMtMzFUMTU6
 NTk6MTArMDI6MDB2ZKPLAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDEzLTAzLTMxVDE1OjU5OjEwKzAy
 OjAwBzkbdwAAABN0RVh0cHM6TGV2ZWwAQWRvYmUtMi4wCjmTdA0AAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>If you want to plot some smaller region there are two ways to do it - hard and easy. The easy one is to set <em>region='Global'</em> and specify min/max lat and lon:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="prompt input_prompt">In [60]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span> 
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">,</span> 
              <span class="n">minLon</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">maxLon</span><span class="o">=</span><span class="mi">290</span> <span class="p">,</span> <span class="n">minLat</span><span class="o">=-</span><span class="mi">80</span> <span class="p">,</span> <span class="n">maxLat</span><span class="o">=</span><span class="mi">75</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 60% -rotate -0 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">60</span>% -rotate -0 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[60]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[60]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAAHbEAYAAABU98c0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -13287,59 +13199,47 @@ aZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqmaZqm
 aZqmaZqm/U/6P070x9UJI3f9AAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDEzLTAzLTMxVDE2OjA3OjUw
 KzAyOjAwIHpdDgAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxMy0wMy0zMVQxNjowNzo1MCswMjowMFEn
 5bIAAAATdEVYdHBzOkxldmVsAEFkb2JlLTIuMAo5k3QNAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>However polar regions will look ugly and there is still problem with plotting over 0 meridian. For longitudes only 0-360 format is supported, so something like minLon=-20, maxLon=20 will not work :(</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Hard way is to use predefined regions:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;NAtlanticOcean&#39;</span><span class="p">)</span>
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'NAtlanticOcean'</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 60% -rotate -0 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">60</span>% -rotate -0 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[4]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[4]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAAHbEAYAAABU98c0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -17244,49 +17144,39 @@ iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiI
 iIiIiIiIiIiIiIiIiIiIiG5X/wdjAEYHi2zXlwAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxMy0wMy0z
 MVQxNjoyODowMiswMjowMFZioA8AAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTMtMDMtMzFUMTY6Mjg6
 MDIrMDI6MDAnPxizAAAAE3RFWHRwczpMZXZlbABBZG9iZS0yLjAKOZN0DQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>In order to get rid of the ugly break at the 0 longitude, we have to add cyclic points:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,:,:],</span> 
              <span class="n">datamin</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">datamax</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span> <span class="n">datastep</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
-             <span class="n">vtitle</span><span class="o">=</span><span class="s1">&#39;T, deg. C&#39;</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;NAtlanticOcean&#39;</span><span class="p">,</span> <span class="n">add_cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+             <span class="n">vtitle</span><span class="o">=</span><span class="s1">'T, deg. C'</span><span class="p">,</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'NAtlanticOcean'</span><span class="p">,</span> <span class="n">add_cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<span class="o">!</span>convert -scale 60% -rotate -0 output.ps output.png
-<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;output.png&#39;</span><span class="p">)</span>
+<span class="o">!</span>convert -scale <span class="m">60</span>% -rotate -0 output.ps output.png
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'output.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[7]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[7]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAAHbEAYAAABU98c0AAAABGdBTUEAALGPC/xhBQAAAAFzUkdC
 AK7OHOkAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAZiS0dE
@@ -21195,77 +21085,61 @@ iIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiIiK5V/wew83OTzNRuaQAAACV0
 RVh0ZGF0ZTpjcmVhdGUAMjAxMy0wMy0zMVQxNjozMzowNSswMjowMKqrurYAAAAldEVYdGRhdGU6
 bW9kaWZ5ADIwMTMtMDMtMzFUMTY6MzM6MDUrMDI6MDDb9gIKAAAAE3RFWHRwczpMZXZlbABBZG9i
 ZS0yLjAKOZN0DQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>While it look not that hard (you just define <em>region</em> variable), actually creating this regions is a bit of the pain. You have to go in to the komod/mtplot.py file and define it by specifying several map related parameters in <em>reg</em> function. In return your get a bit more advanced control over the projection and some other characteristics of the region. In the future I hope to make just separate configuration file with this parameters.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One more thing that I have to mention, is that you can provide not only one, but several fields to arctpl, and all of them will be plotted:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In [15]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As a result you will get .ps file with several pages:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;earthpy_mitplot1.png&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'earthpy_mitplot1.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGdCAIAAABByZoRAAAACXBIWXMAAAsTAAALEwEAmpwYAAAA
 B3RJTUUH3QMfEywS+UafhwAAIABJREFUeNrsnXecXkd198/M3PL0tr33KmlX3SpWl3uXJVeMDTbG
@@ -23763,58 +23637,46 @@ rb8jSZJCoZDH40G3AQAAAAbA5/N1Ol2bFCEOGeVMQGNjYy5lgqZpmqa7du3K5/Nra2tb8MZyqNVq
 jUbTmigblmWlUqmdnR2fz4eOBAAAAAxDp9O1VREihDQaTQvfCgQCHMzSvlVnWdbKyqrZBgAAAABA
 W+C1/lwYgiBa3pnjwjjfdgPvD+M/WZb9w7sDAAAAwNvqHR6Goqj20lhvddnb1hjyJQAAAID2xdhY
 /D/p91NU8K5F5QAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can indicate depth of the fields by setting <em>levon=True</em> and by providing values from your depth variable (<em>lev</em> in our case):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpl</span><span class="p">(</span><span class="n">lon</span><span class="p">,</span> <span class="n">lat</span><span class="p">,</span> <span class="n">temp</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">,:,:],</span> <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">,</span>
              <span class="n">levon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">llevel</span><span class="o">=</span><span class="n">lev</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;earthpy_mitplot2.png&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'earthpy_mitplot2.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGeCAIAAADHXei/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA
 B3RJTUUH3QMfEzEnUJk3uAAAIABJREFUeNrsnXd8VUX6/2fmtNtveu8hCSEhCQkl9N6kCiKogOuq
@@ -26330,59 +26192,47 @@ i9W9e/devXpJJJL2lCaXy2UyWXsqoFQq3dzcdHV1VSoVRMoAAAAAHUQqlf6fIhSLxSxGe1ULDhl9
 169sNpvNZtfU1Gisltu4r76+PkJIXQ0DAAAAQMdhWVhYCGvetFNjte2Zwyrtfb137VSEmhUOAAAA
 AG0rIBaXy9Wu0uoM0yVdJthFAQAAAC2vCHV1dUmVUtksA1kAAAAAXZD/B2Z8/BLgwnx7AAAAAElF
 TkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>There is another function in komod, that provide similar capabilities, but work directly with netCDF file - <em>arctpltnc</em>. You have to specify file name, name of the data variable and names of the coordinate variables. Then cross your fingers and run it. If everything is fine and your netCDF file is more or less standard, this function should plot every field that it will find in there (might take veeery long time).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpltnc</span><span class="p">(</span><span class="s1">&#39;temperature_annual_5deg.nc&#39;</span><span class="p">,</span> <span class="s1">&#39;t_mn&#39;</span><span class="p">,</span> 
-                <span class="n">lon</span><span class="o">=</span><span class="s1">&#39;lon&#39;</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="s1">&#39;lat&#39;</span><span class="p">,</span> <span class="n">llevel</span><span class="o">=</span><span class="s2">&quot;depth&quot;</span><span class="p">,</span> 
-                <span class="n">region</span> <span class="o">=</span> <span class="s1">&#39;Global&#39;</span><span class="p">,</span> <span class="n">add_cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">levon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">komod</span><span class="o">.</span><span class="n">arctpltnc</span><span class="p">(</span><span class="s1">'temperature_annual_5deg.nc'</span><span class="p">,</span> <span class="s1">'t_mn'</span><span class="p">,</span> 
+                <span class="n">lon</span><span class="o">=</span><span class="s1">'lon'</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="s1">'lat'</span><span class="p">,</span> <span class="n">llevel</span><span class="o">=</span><span class="s2">"depth"</span><span class="p">,</span> 
+                <span class="n">region</span> <span class="o">=</span> <span class="s1">'Global'</span><span class="p">,</span> <span class="n">add_cyclic</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">levon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">&#39;earthpy_mitplot3.png&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s1">'earthpy_mitplot3.png'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[23]:</div>
 <div class="output_png output_subarea output_execute_result">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAlgAAAGeCAIAAADHXei/AAAACXBIWXMAAAsTAAALEwEAmpwYAAAA
 B3RJTUUH3QMfFBQcDC4Y/gAAIABJREFUeNrsnXecVcX5/2fmlNt37957t/fed+kdFhArgqCALcbY
@@ -29081,35 +28931,29 @@ lHTt2jWZXK6MixsaGkpISNDr9SkpKQKBQK/Xr1mzRi6Xd3Z25uTkxMfHDw4Ozs3NZWRkCIXCBQtg
 HRlxms3S7GzH7OzMtWuxGs10d7eiqIhyuSy3bwvEYqfNRlFU9Nq1trExq16vKCpyzMzM6/WsXC5O
 THTMzFiHRwRymTg11XLzpstul61bxzmdaBwAAI82oVAYFRUllckUCoVYLBYIBP8HBggViqqx/8wA
 AAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It will put time stamp (Climatology in out case) and level as figure title, and content of the <em>.units</em> attribute from the data variable, as units. You can tune figures the same way as you do for <em>arctplt</em>.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Next time I will show you how to use komod to plot the grid of your data and make a transect.</p>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

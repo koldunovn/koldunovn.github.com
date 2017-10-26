@@ -1,17 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>EarthPy - Paul Inkenbrandt</title><link>http://earthpy.org/</link><description></description><lastBuildDate>Mon, 31 Aug 2015 00:00:00 +0200</lastBuildDate><item><title>Flow duration curves from current USGS NWIS data</title><link>http://earthpy.org/flow.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;b&gt;&lt;font size="5"&gt;Using Flow Duration Curves to Determine Basin Characteristics and Estimate Flow&lt;/font&gt;&lt;/b&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
@@ -26,13 +23,11 @@
 &lt;li&gt;iterative charts (one monthly summary boxplot per station)&lt;/li&gt;
 &lt;li&gt;Gantt charts of USGS stations&lt;/li&gt;
 &lt;/ul&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
-&lt;h2 id="Background"&gt;Background&lt;a class="anchor-link" href="#Background"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Import necessary packages. &lt;a href="http://ulmo.readthedocs.org/en/latest/"&gt;ulmo&lt;/a&gt; is not a standard package and will have to be loaded into your local python repository for some of these functions to work. Use the following command in your cmd prompt to install &lt;code&gt;ulmo&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Paul Inkenbrandt</dc:creator><pubDate>Mon, 31 Aug 2015 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:earthpy.org,2015-08-31:/flow.html</guid><category>matplotlib</category><category>pandas</category></item></channel></rss>
+&lt;h2 id="Background"&gt;Background&lt;a class="anchor-link" href="#Background"&gt;¶&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Import necessary packages. &lt;a href="http://ulmo.readthedocs.org/en/latest/"&gt;ulmo&lt;/a&gt; is not a standard package and will have to be loaded into your local python repository for some of these functions to work. Use the following command in your cmd prompt to install &lt;code&gt;ulmo&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Paul Inkenbrandt</dc:creator><pubDate>Mon, 31 Aug 2015 00:00:00 +0200</pubDate><guid isPermaLink="false">tag:earthpy.org,2015-08-31:/flow.html</guid><category>matplotlib</category><category>pandas</category></item></channel></rss>

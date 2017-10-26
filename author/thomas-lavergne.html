@@ -192,6 +192,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -212,11 +213,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -954,8 +950,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -966,9 +964,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1007,80 +1007,67 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task:</strong> Interpolate data from regular to curvilinear grid</p>
 <p><strong>Solution:</strong> <a href="https://code.google.com/p/pyresample/">pyresample</a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><a href="http://nbviewer.ipython.org/github/koldunovn/earthpy.org/blob/master/content/notebooks/interpolation_between_grids_with_pyresample.ipynb">Notebook file</a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Following two excellent contributions on interpolation between grids by <a href="http://earthpy.org/interpolation_between_grids_with_basemap.html">Nikolay</a> Koldunov and <a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html">Oleksandr</a> Huziy I would like to introduce a solution using the <a href="https://code.google.com/p/pyresample">pyresample</a> package. I feel it is timely since pyresample does encapsulate the strategy presented by Oleksandr (which I totally support) in fewer function calls. There might also be a speed-up factor to consider for big datasets, since pyresample comes with its own implementation of KD-Trees which was tested faster than the scipy.spatial.cKDTree.</p>
 <p>The same data as in Nikolay's and Oleksandr's post will be used for easing comparison.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Some necessary imports:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In [1]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Populating the interactive namespace from numpy and matplotlib
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In [3]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#for netcdf</span>
 <span class="kn">from</span> <span class="nn">netCDF4</span> <span class="k">import</span> <span class="n">Dataset</span>
 
@@ -1097,310 +1084,261 @@ h6:hover .anchor-link {
 <span class="c1">#for downloading files</span>
 <span class="kn">import</span> <span class="nn">urllib2</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>I repeat Oleksandr's routine for downloading data, and download of the NCEP dataset, as well as the target curvilinear grid:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In [4]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">download_from_link</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
     <span class="c1">#download if it does not exist yet</span>
     <span class="kn">import</span> <span class="nn">os</span>
     <span class="n">f_name</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">f_name</span><span class="p">):</span>
         <span class="n">remote_con</span> <span class="o">=</span> <span class="n">urllib2</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f_name</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">f_name</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">remote_con</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Load NCEP reanalysis data.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_from_link</span><span class="p">(</span><span class="s2">&quot;ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.derived/surface/air.mon.mean.nc&quot;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_from_link</span><span class="p">(</span><span class="s2">"ftp://ftp.cdc.noaa.gov/Datasets/ncep.reanalysis.derived/surface/air.mon.mean.nc"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We also need coordinates of the curvilinear grid:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In [6]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_from_link</span><span class="p">(</span><span class="s2">&quot;https://dl.dropboxusercontent.com/u/107639/curv_grid.nc&quot;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">download_from_link</span><span class="p">(</span><span class="s2">"https://www.dropbox.com/s/9xzgyjs08zyuwzw/curv_grid.nc"</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now I'll skip exploring the data (take a look at Oleksandr's post) and concentrate on the reprojection of the NCEP values and the model's curvilinear grid.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># load lat-lon of the target grid</span>
-<span class="n">fc</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;curv_grid.nc&#39;</span><span class="p">)</span>
-<span class="n">lon_curv</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;xc&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
-<span class="n">lat_curv</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;yc&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
+<span class="n">fc</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">'curv_grid.nc'</span><span class="p">)</span>
+<span class="n">lon_curv</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'xc'</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
+<span class="n">lat_curv</span> <span class="o">=</span> <span class="n">fc</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'yc'</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
 <span class="n">fc</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="c1"># load lat-lon-value of the origin data</span>
-<span class="n">fr</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">&#39;air.mon.mean.nc&#39;</span><span class="p">)</span>
-<span class="n">air</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;air&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
-<span class="n">lat</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lat&#39;</span><span class="p">][:]</span>
-<span class="n">lon</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">&#39;lon&#39;</span><span class="p">][:]</span>
+<span class="n">fr</span> <span class="o">=</span> <span class="n">Dataset</span><span class="p">(</span><span class="s1">'air.mon.mean.nc'</span><span class="p">)</span>
+<span class="n">air</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'air'</span><span class="p">][</span><span class="mi">0</span><span class="p">,:,:]</span>
+<span class="n">lat</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lat'</span><span class="p">][:]</span>
+<span class="n">lon</span> <span class="o">=</span> <span class="n">fr</span><span class="o">.</span><span class="n">variables</span><span class="p">[</span><span class="s1">'lon'</span><span class="p">][:]</span>
 <span class="n">fr</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
 <span class="c1"># get 2D versions of the lat and lon variables (note the -180 here!)</span>
 <span class="n">lon2d</span><span class="p">,</span> <span class="n">lat2d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">lon</span> <span class="o">-</span> <span class="mi">180</span><span class="p">,</span> <span class="n">lat</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>When all the necessary inputs are read in memory, that's where we start using pyresample's magic.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Create a pyresample object holding the origin (NCEP) grid:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">orig_def</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">SwathDefinition</span><span class="p">(</span><span class="n">lons</span><span class="o">=</span><span class="n">lon2d</span><span class="p">,</span> <span class="n">lats</span><span class="o">=</span><span class="n">lat2d</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Create another pyresample object for the target (curvilinear) grid:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">targ_def</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">SwathDefinition</span><span class="p">(</span><span class="n">lons</span><span class="o">=</span><span class="n">lon_curv</span><span class="p">,</span> <span class="n">lats</span><span class="o">=</span><span class="n">lat_curv</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Resample (aka re-project, re-grid) the NCEP data to target grid. First with nearest neighbour resampling...</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">air_nearest</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">kd_tree</span><span class="o">.</span><span class="n">resample_nearest</span><span class="p">(</span><span class="n">orig_def</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> \
         <span class="n">targ_def</span><span class="p">,</span> <span class="n">radius_of_influence</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>... then with the custom weight function as inverse of the distance (same as Oleksandr):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In [11]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">r</span><span class="p">:</span> <span class="mi">1</span><span class="o">/</span><span class="n">r</span><span class="o">**</span><span class="mi">2</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In [13]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">air_idw</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">kd_tree</span><span class="o">.</span><span class="n">resample_custom</span><span class="p">(</span><span class="n">orig_def</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> \
                            <span class="n">targ_def</span><span class="p">,</span> <span class="n">radius_of_influence</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>\
                            <span class="n">weight_funcs</span><span class="o">=</span><span class="n">wf</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>(the warning indicates we might loose information by limiting to 10 neighbours...)</p>
 <p>Pyresample also natively support gaussian-shaped weighting:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In [14]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">air_gauss</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">kd_tree</span><span class="o">.</span><span class="n">resample_gauss</span><span class="p">(</span><span class="n">orig_def</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> \
                            <span class="n">targ_def</span><span class="p">,</span> <span class="n">radius_of_influence</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>\
                            <span class="n">sigmas</span><span class="o">=</span><span class="mi">250000</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let us plot the results from these three approaches. We use imshow() that does not introduce additional interpolation.</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">15</span><span class="p">))</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_nearest</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Nearest neighbor&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_nearest</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Nearest neighbor"</span><span class="p">)</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_idw</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;IDW of square distance </span><span class="se">\n</span><span class="s2"> using 10 neighbors&quot;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_idw</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"IDW of square distance </span><span class="se">\n</span><span class="s2"> using 10 neighbors"</span><span class="p">);</span>
 
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_gauss</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gauss-shape of distance (sigma=25km)</span><span class="se">\n</span><span class="s2"> using 10 neighbors&quot;</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_gauss</span><span class="p">,</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gauss-shape of distance (sigma=25km)</span><span class="se">\n</span><span class="s2"> using 10 neighbors"</span><span class="p">);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAATsAAANqCAYAAADykey8AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXt8VdWZ//85JCExJCZck4YARwWMXBQrFb5WB/B+RVQK
@@ -3963,124 +3901,103 @@ r7xS6ezu5OssiltsoCiKovjmN79ZPPjgg8V9991XfO5zn7vVp7+p9Ed/9EfFPffcU0xOThanTp0q
 VTz66KPFY489Vjz22GPFv/zLv9xx1/qTn/ykePzxx4tHH320eN/73lf87d/+bVEUxR13nZpeeeWV
 yhp7J19nURTFgcTGHtIhHdIh3Wo6jKA4pEM6pN8IOgS7QzqkQ/qNoEOwO6RDOqTfCDoEu0M6pEP6
 jaBDsDukQzqk3wg6BLtDOqRD+o2g/x/dMftBUF9TKAAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's say we do not want to resample to the curvilinear coordinates, but to a predefined Lambert Azimuthal Equal Area covering Southern Hemisphere (something based on NSIDC's <a href="nsidc.org/data/ease">EASE</a> grids).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">area_id</span> <span class="o">=</span> <span class="s1">&#39;ease_nh&#39;</span>
-<span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Arctic EASE grid&#39;</span>
-<span class="n">proj_id</span> <span class="o">=</span> <span class="s1">&#39;ease_nh&#39;</span>
+<div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">area_id</span> <span class="o">=</span> <span class="s1">'ease_nh'</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s1">'Arctic EASE grid'</span>
+<span class="n">proj_id</span> <span class="o">=</span> <span class="s1">'ease_nh'</span>
 <span class="n">x_size</span> <span class="o">=</span> <span class="mi">425</span>
 <span class="n">y_size</span> <span class="o">=</span> <span class="mi">425</span>
 <span class="n">area_extent</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">5326849.0625</span><span class="p">,</span><span class="o">-</span><span class="mf">5326849.0625</span><span class="p">,</span><span class="mf">5326849.0625</span><span class="p">,</span><span class="mf">5326849.0625</span><span class="p">)</span>
-<span class="n">proj_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span> <span class="s1">&#39;6371228.0&#39;</span><span class="p">,</span> <span class="s1">&#39;units&#39;</span><span class="p">:</span> <span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="s1">&#39;lon_0&#39;</span><span class="p">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span><span class="s1">&#39;proj&#39;</span><span class="p">:</span> <span class="s1">&#39;laea&#39;</span><span class="p">,</span> <span class="s1">&#39;lat_0&#39;</span><span class="p">:</span> <span class="s1">&#39;+90&#39;</span><span class="p">}</span>
+<span class="n">proj_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'a'</span><span class="p">:</span> <span class="s1">'6371228.0'</span><span class="p">,</span> <span class="s1">'units'</span><span class="p">:</span> <span class="s1">'m'</span><span class="p">,</span> <span class="s1">'lon_0'</span><span class="p">:</span> <span class="s1">'0'</span><span class="p">,</span><span class="s1">'proj'</span><span class="p">:</span> <span class="s1">'laea'</span><span class="p">,</span> <span class="s1">'lat_0'</span><span class="p">:</span> <span class="s1">'+90'</span><span class="p">}</span>
 <span class="n">targ_def</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">AreaDefinition</span><span class="p">(</span><span class="n">area_id</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">proj_id</span><span class="p">,</span> <span class="n">proj_dict</span><span class="p">,</span> <span class="n">x_size</span><span class="p">,</span> <span class="n">y_size</span><span class="p">,</span> <span class="n">area_extent</span><span class="p">)</span>
 <span class="nb">print</span> <span class="n">targ_def</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Area ID: ease_nh
 Name: Arctic EASE grid
 Projection ID: ease_nh
-Projection: {&#39;a&#39;: &#39;6371228.0&#39;, &#39;lat_0&#39;: &#39;+90&#39;, &#39;lon_0&#39;: &#39;0&#39;, &#39;proj&#39;: &#39;laea&#39;, &#39;units&#39;: &#39;m&#39;}
+Projection: {'a': '6371228.0', 'lat_0': '+90', 'lon_0': '0', 'proj': 'laea', 'units': 'm'}
 Number of columns: 425
 Number of rows: 425
 Area extent: (-5326849.0625, -5326849.0625, 5326849.0625, 5326849.0625)
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Same function call as above:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="prompt input_prompt">In [19]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">air_gauss</span> <span class="o">=</span> <span class="n">pyresample</span><span class="o">.</span><span class="n">kd_tree</span><span class="o">.</span><span class="n">resample_gauss</span><span class="p">(</span><span class="n">orig_def</span><span class="p">,</span> <span class="n">air</span><span class="p">,</span> \
                            <span class="n">targ_def</span><span class="p">,</span> <span class="n">radius_of_influence</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span> <span class="n">neighbours</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>\
                            <span class="n">sigmas</span><span class="o">=</span><span class="mi">250000</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And visualization:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_gauss</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;NCEP air temp&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Gauss-shape of distance (sigma=25km)</span><span class="se">\n</span><span class="s2"> using 10 neighbors&quot;</span><span class="p">);</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">air_gauss</span><span class="o">.</span><span class="n">transpose</span><span class="p">(),</span><span class="n">interpolation</span><span class="o">=</span><span class="s1">'nearest'</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">)</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">'NCEP air temp'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">"Gauss-shape of distance (sigma=25km)</span><span class="se">\n</span><span class="s2"> using 10 neighbors"</span><span class="p">);</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAUUAAAEYCAYAAADLZOR0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsfXmcHFW1/7enarp7eqZnOskkk5AEAgQIkaA8AgRlSfQJ
@@ -5002,25 +4919,21 @@ qUl1dXWpr7/+Wt2/f1/t3btX9fT0qH379qkHDx7413/00Uequ7tb9fX1qdOnT6/gk4fj4sWLKhaL
 qcHBQTU0NKSGhobU999/37Dj+vXXX9Xw8LAaHBxUO3fuVB9//LFSSjXseCSmpqb86PNaGdNqRTTN
 L0KECBEYohktESJEiMAQkWKECBEiMESkGCFChAgMESlGiBAhAkNEihEiRIjAEJFihAgRIjD8D0xc
 MrqeCDv4AAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Check the <a href="https://code.google.com/p/pyresample/">pyressample</a> for more cool re-projection stuff, including resampling of satellite data!</p>
+</div>
+</div>
+</div>
 
-</div>
-</div>
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

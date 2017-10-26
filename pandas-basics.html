@@ -197,6 +197,7 @@ div.cell.selected.jupyter-soft-selected {
   }
 }
 div.inner_cell {
+  min-width: 0;
   /* Old browsers */
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -217,11 +218,6 @@ div.inner_cell {
   box-flex: 1;
   /* Modern browsers */
   flex: 1;
-}
-@-moz-document url-prefix() {
-  div.inner_cell {
-    overflow-x: hidden;
-  }
 }
 /* input_area and input_prompt must match in top border and margin for alignment */
 div.input_area {
@@ -959,8 +955,10 @@ h6:hover .anchor-link {
 .highlight .mh { color: #666666 } /* Literal.Number.Hex */
 .highlight .mi { color: #666666 } /* Literal.Number.Integer */
 .highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sa { color: #BA2121 } /* Literal.String.Affix */
 .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
 .highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
 .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
 .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
 .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
@@ -971,9 +969,11 @@ h6:hover .anchor-link {
 .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
 .highlight .ss { color: #19177C } /* Literal.String.Symbol */
 .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0000FF } /* Name.Function.Magic */
 .highlight .vc { color: #19177C } /* Name.Variable.Class */
 .highlight .vg { color: #19177C } /* Name.Variable.Global */
 .highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .vm { color: #19177C } /* Name.Variable.Magic */
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */</style>
 <style type="text/css">
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
@@ -1012,462 +1012,368 @@ h6:hover .anchor-link {
 
 .ansi-bold { font-weight: bold; }
 </style>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Task</strong>:</p>
-
 <pre><code>analysis of several time series data (AO, NAO)
 
 </code></pre>
 <p><strong>Modules</strong>:</p>
-
 <pre><code>pandas
 
 </code></pre>
 <p><a href="http://nbviewer.ipython.org/urls/github.com/koldunovn/earthpy.org/raw/master/content/earthpy_pandas_basics.ipynb"><strong>Notebook file</strong></a></p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here I am going to show just some basic <a href="http://pandas.pydata.org/">pandas</a> stuff for time series analysis, as I think for the Earth Scientists it's the most interesting topic. If you find this small tutorial useful, I encourage you to watch <a href="http://pyvideo.org/video/1198/time-series-data-analysis-with-pandas">this video</a>, where Wes McKinney give extensive introduction to the time series data analysis with pandas.</p>
 <p>On the official website you can find explanation of what problems pandas solve in general, but I can tell you what problem pandas solve for me. It makes analysis and visualisation of 1D data, especially time series, MUCH faster. Before pandas working with time series in python was a pain for me, now it's fun. Ease of use stimulate in-depth exploration of the data: why wouldn't you make some additional analysis if it's just one line of code? Hope you will also find this great tool helpful and useful. So, let's begin.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As an example we are going to use time series of <a href="http://en.wikipedia.org/wiki/Arctic_oscillation">Arctic Oscillation (AO)</a> and <a href="http://en.wikipedia.org/wiki/North_Atlantic_oscillation">North Atlantic Oscillation (NAO)</a> data sets.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Module-import">Module import<a class="anchor-link" href="#Module-import">&#182;</a></h2>
+<h2 id="Module-import">Module import<a class="anchor-link" href="#Module-import">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>First we have to import necessary modules:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In [5]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">pandas</span> <span class="kn">import</span> <span class="n">Series</span><span class="p">,</span> <span class="n">DataFrame</span><span class="p">,</span> <span class="n">Panel</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">max_rows</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span> <span class="c1"># this limit maximum numbers of rows</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And "switch on" inline graphic for the notebook:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In [7]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">pylab</span> inline
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>
 Welcome to pylab, a matplotlib-based Python environment [backend: module://IPython.kernel.zmq.pylab.backend_inline].
-For more information, type &#39;help(pylab)&#39;.
+For more information, type 'help(pylab)'.
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Pandas developing very fast, and while we are going to use only basic functionality, some details may still change in the newer versions. This example will only work in version &gt; 0.8. Check yours:</p>
-
+<p>Pandas developing very fast, and while we are going to use only basic functionality, some details may still change in the newer versions. This example will only work in version > 0.8. Check yours:</p>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In [8]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">__version__</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[8]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[8]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&#39;0.10.1&#39;</pre>
-</div>
-
-</div>
-
+<pre>'0.10.1'</pre>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Loading-data">Loading data<a class="anchor-link" href="#Loading-data">&#182;</a></h2>
+<h2 id="Loading-data">Loading data<a class="anchor-link" href="#Loading-data">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now, when we are done with preparations, let's get some data. If you work on Windows download monthly AO data <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii">from here</a>. If you on *nix machine, you can do it directly from ipython notebook using system call to wget command:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In [9]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>wget http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>--2013-03-29 13:52:47--  http://www.cpc.ncep.noaa.gov/products/precip/CWlink/daily_ao_index/monthly.ao.index.b50.current.ascii
 Resolving www.cpc.ncep.noaa.gov (www.cpc.ncep.noaa.gov)... 140.90.33.21, 140.90.200.11, 140.90.200.21, ...
 Connecting to www.cpc.ncep.noaa.gov (www.cpc.ncep.noaa.gov)|140.90.33.21|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 18950 (19K) [text/plain]
-Saving to: `monthly.ao.index.b50.current.ascii.2&#39;
+Saving to: `monthly.ao.index.b50.current.ascii.2'
 
-100%[======================================&gt;] 18,950      --.-K/s   in 0.1s    
+100%[======================================>] 18,950      --.-K/s   in 0.1s    
 
-2013-03-29 13:52:48 (167 KB/s) - `monthly.ao.index.b50.current.ascii.2&#39; saved [18950/18950]
+2013-03-29 13:52:48 (167 KB/s) - `monthly.ao.index.b50.current.ascii.2' saved [18950/18950]
 
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Pandas has very good IO capabilities, but we not going to use them in this tutorial in order to keep things simple. For now we open the file simply with numpy loadtxt:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In [10]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;monthly.ao.index.b50.current.ascii&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">ao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">'monthly.ao.index.b50.current.ascii'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Every line in the file consist of three elements: year, month, value:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In [16]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">ao</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[16]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[16]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>array([[  1.95000000e+03,   1.00000000e+00,  -6.03100000e-02],
        [  1.95000000e+03,   2.00000000e+00,   6.26810000e-01]])</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And here is the shape of our array:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In [17]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">ao</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[17]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[17]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(758, 3)</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Time-Series">Time Series<a class="anchor-link" href="#Time-Series">&#182;</a></h2>
+<h2 id="Time-Series">Time Series<a class="anchor-link" href="#Time-Series">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We would like to convert this data in to time series, that can be manipulated naturally and easily. First step, that we have to do is to create the range of dates for our time series. From the file it is clear, that record starts at January 1950 and ends at February 2013 (at the time I am writing this, of course). Frequency of the data is one month (freq='M').</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In [18]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1950-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2013-03&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">dates</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'1950-01'</span><span class="p">,</span> <span class="s1">'2013-03'</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'M'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As you see syntax is quite simple, and this is one of the reasons why I love Pandas so much :) Another thing to mention, is that we put March 2003 instead of February because the interval is open on the right side. You can check if the range of dates is properly generated:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="prompt input_prompt">In [20]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">dates</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[20]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[20]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;class &#39;pandas.tseries.index.DatetimeIndex&#39;&gt;
+<pre><class &#x27;pandas.tseries.index.datetimeindex&#x27;>
 [1950-01-31 00:00:00, ..., 2013-02-28 00:00:00]
 Length: 758, Freq: M, Timezone: None</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In [21]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">dates</span><span class="o">.</span><span class="n">shape</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[21]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[21]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>(758,)</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we are ready to create our first time series. Dates from the <em>dates</em> variable will be our index, and AO values will be our, hm... values:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In [22]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">ao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="prompt input_prompt">In [23]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[23]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[23]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1950-01-31   -0.060310
 1950-02-28    0.626810
@@ -1483,51 +1389,38 @@ Length: 758, Freq: M, Timezone: None</pre>
 2013-02-28   -1.00740
 Freq: M, Length: 758</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we can plot complete time series:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In [26]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[26]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[26]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xa1f05cc&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xa1f05cc></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW4AAAD9CAYAAACcJ53WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXmYVcW5Pbx6pGmgaUBmUBBRZGwGxdnjgHEORhPFREGT
@@ -1992,53 +1885,40 @@ MAQsMgwD+r6HEAJCCDRN47+d5xlaa1hrkec5lmXxs6qqoJSCUgrTNP1FFO8nmQBgHEdorWGM8YcP
 CDvTvu8oiuJrn1AzPc+Duq5hjIFSCl3X+Vmomc7zhJQSaZrCOYfruvzsP2U6jgNRFCHLMlhrYa3F
 uq647xtlWSJJEjjn/CUOANq2RRzHkFJi2za//lauV9+cJCKi38efk0REgWFxExEFhsVNRBQYFjcR
 UWBY3EREgWFxExEF5gOjNEKIu5A46AAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>or its part:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In [28]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">&#39;1980&#39;</span><span class="p">:</span><span class="s1">&#39;1990&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">'1980'</span><span class="p">:</span><span class="s1">'1990'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[28]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[28]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xa58c64c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xa58c64c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW0AAAD9CAYAAAB3ECbVAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXl4FeXZ/79JyMqSBAgQNgFlCSSQCEhdOYIIirtWwdcK
@@ -2400,53 +2280,40 @@ yPLy8tgDDzzAOjs7XTnenKKiIt3VI3bEbmxsZJMnT2YTJ05kEyZMYPfdd1/YfbZzv48cOcIuuugi
 NnHiRHbJJZew4uJiV+IyxtioUaPYgQMHwu6r3bHffvttlpubyyZOnMiuuuoqVlNT41rs+fPns/Hj
 x7Px48ezlStX2hq3qKiIjR07luXk5LBZs2axo0ePdi0zqmN24OgckQKBQCCwl6iduUYgEAiiESHa
 AoFA0I0Qoi0QCATdCCHaAoFA0I0Qoi0QCATdCCHaAoFA0I34/0FAP6PMGuc8AAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>or even smaller part:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In [29]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">&#39;1980-05&#39;</span><span class="p">:</span><span class="s1">&#39;1981-03&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">'1980-05'</span><span class="p">:</span><span class="s1">'1981-03'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[29]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[29]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xa95c48c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xa95c48c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYAAAAEJCAYAAACdePCvAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzt3XtcFPX6wPHPCpqXTDSVDFAsUYEAIdLKVEpR80JpKXrq
@@ -2691,123 +2558,93 @@ BCCEMB170bOSkhImTJjAQw89BEDr1q0dtbJOnz5NZmamLDPrAkkAQghDDRw4kFtvvZUdO3YQEhLC
 rFmzmDt3Lq1atSI8PJzg4GCGDBkCwIgRIygsLCQqKoq2bdsybNgwbrjhBkDVxgkJCeHs2bOEhITw
 wgsvGPh/ZQ0yE1gIIXyUPAEIIYSPkgQghBA+ShKAEEL4KEkAQgjhoyQBCCGEj5IEIIQQPur/ARL8
 NQ9FNxM7AAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Reference to the time periods is done in a very natural way. You, of course, can also get individual values. By number:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="prompt input_prompt">In [48]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="mi">120</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[48]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[48]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>-2.4842</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>or by index (date in our case):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="prompt input_prompt">In [45]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">&#39;1960-01&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">'1960-01'</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[45]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[45]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1960-01-31   -2.4842
 Freq: M</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And what if we choose only one year?</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="prompt input_prompt">In [46]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">&#39;1960&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="s1">'1960'</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[46]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[46]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1960-01-31   -2.484200
 1960-02-29   -2.212400
@@ -2823,52 +2660,40 @@ Freq: M</pre>
 1960-12-31   -0.342950
 Freq: M</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Isn't that great? :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One bonus example :)</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[68]:</div>
+<div class="prompt input_prompt">In [68]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="n">AO</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO</span><span class="p">[</span><span class="n">AO</span> <span class="o">></span> <span class="mi">0</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[68]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[68]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1950-02-28    0.626810
 1950-04-30    0.555100
@@ -2884,196 +2709,157 @@ Freq: M</pre>
 2012-09-30    0.772250
 Length: 347</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Frame">Data Frame<a class="anchor-link" href="#Data-Frame">&#182;</a></h2>
+<h2 id="Data-Frame">Data Frame<a class="anchor-link" href="#Data-Frame">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now let's make live a bit more interesting and download more data. This will be NOA time series (Windowd users can get it <a href="http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii">here</a>).</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="prompt input_prompt">In [49]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">!</span>wget http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>--2013-03-29 15:43:28--  http://www.cpc.ncep.noaa.gov/products/precip/CWlink/pna/norm.nao.monthly.b5001.current.ascii
 Resolving www.cpc.ncep.noaa.gov (www.cpc.ncep.noaa.gov)... 129.15.96.11, 129.15.96.21, 140.90.33.11, ...
 Connecting to www.cpc.ncep.noaa.gov (www.cpc.ncep.noaa.gov)|129.15.96.11|:80... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 18192 (18K) [text/plain]
-Saving to: `norm.nao.monthly.b5001.current.ascii.2&#39;
+Saving to: `norm.nao.monthly.b5001.current.ascii.2'
 
-100%[======================================&gt;] 18,192       109K/s   in 0.2s    
+100%[======================================>] 18,192       109K/s   in 0.2s    
 
-2013-03-29 15:43:29 (109 KB/s) - `norm.nao.monthly.b5001.current.ascii.2&#39; saved [18192/18192]
+2013-03-29 15:43:29 (109 KB/s) - `norm.nao.monthly.b5001.current.ascii.2' saved [18192/18192]
 
 </pre>
 </div>
 </div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Create Series the same way as we did for AO:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[50]:</div>
+<div class="prompt input_prompt">In [50]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">nao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">&#39;norm.nao.monthly.b5001.current.ascii&#39;</span><span class="p">)</span>
-<span class="n">dates_nao</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">&#39;1950-01&#39;</span><span class="p">,</span> <span class="s1">&#39;2013-03&#39;</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">&#39;M&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">nao</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="s1">'norm.nao.monthly.b5001.current.ascii'</span><span class="p">)</span>
+<span class="n">dates_nao</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s1">'1950-01'</span><span class="p">,</span> <span class="s1">'2013-03'</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s1">'M'</span><span class="p">)</span>
 <span class="n">NAO</span> <span class="o">=</span> <span class="n">Series</span><span class="p">(</span><span class="n">nao</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">dates_nao</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Time period is the same:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="prompt input_prompt">In [52]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">NAO</span><span class="o">.</span><span class="n">index</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[52]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[52]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;class &#39;pandas.tseries.index.DatetimeIndex&#39;&gt;
+<pre><class &#x27;pandas.tseries.index.datetimeindex&#x27;>
 [1950-01-31 00:00:00, ..., 2013-02-28 00:00:00]
 Length: 758, Freq: M, Timezone: None</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now we create Data Frame, that will contain both AO and NAO data. It sort of an Excel table where the first row contain headers for the columns and firs column is an index:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="prompt input_prompt">In [53]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;AO&#39;</span> <span class="p">:</span> <span class="n">AO</span><span class="p">,</span> <span class="s1">&#39;NAO&#39;</span> <span class="p">:</span> <span class="n">NAO</span><span class="p">})</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="p">({</span><span class="s1">'AO'</span> <span class="p">:</span> <span class="n">AO</span><span class="p">,</span> <span class="s1">'NAO'</span> <span class="p">:</span> <span class="n">NAO</span><span class="p">})</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>One can plot the data straight away:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="prompt input_prompt">In [55]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[55]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[55]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xaa0e6ec&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xaa0e6ec></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW4AAAD9CAYAAACcJ53WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsvXm8HUWZPv5Ud5/lLtkhBBI2JQhhDeowg6gR3FcYGREV
@@ -3749,119 +3535,100 @@ nnvYvsuXLyc1NTVk2LBhZMSIEeSNN95gv82YMYNUV1eT6upq8sorr3RFUxhiaRMhhLzwwgukpqaG
 iNTX15Nvv/2W/ZZIbfrv//5vIkkSGTp0KBk2bBgZNmwYefPNN8nhw4fJpEmTSP/+/Ul9fT0TcYQQ
 Mn/+fFJRUUEGDBhA1qxZw7Z3VLs6dAUcAQEBAYH2hxicFBAQEEgyCOIWEBAQSDII4hYQEBBIMgji
 FhAQEEgyCOIWEBAQSDII4hYQEBBIMvx/UwT7Q6lcVIwAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Or have a look at the first several rows:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="prompt input_prompt">In [57]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[57]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[57]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1950-01-31</th>
-      <td>-0.060310</td>
-      <td> 0.92</td>
-    </tr>
-    <tr>
-      <th>1950-02-28</th>
-      <td> 0.626810</td>
-      <td> 0.40</td>
-    </tr>
-    <tr>
-      <th>1950-03-31</th>
-      <td>-0.008127</td>
-      <td>-0.36</td>
-    </tr>
-    <tr>
-      <th>1950-04-30</th>
-      <td> 0.555100</td>
-      <td> 0.73</td>
-    </tr>
-    <tr>
-      <th>1950-05-31</th>
-      <td> 0.071577</td>
-      <td>-0.59</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1950-01-31</th>
+<td>-0.060310</td>
+<td> 0.92</td>
+</tr>
+<tr>
+<th>1950-02-28</th>
+<td> 0.626810</td>
+<td> 0.40</td>
+</tr>
+<tr>
+<th>1950-03-31</th>
+<td>-0.008127</td>
+<td>-0.36</td>
+</tr>
+<tr>
+<th>1950-04-30</th>
+<td> 0.555100</td>
+<td> 0.73</td>
+</tr>
+<tr>
+<th>1950-05-31</th>
+<td> 0.071577</td>
+<td>-0.59</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can reference each column by its name:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="prompt input_prompt">In [58]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;NAO&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">'NAO'</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[58]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[58]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1950-01-31    0.92
 1950-02-28    0.40
@@ -3877,42 +3644,32 @@ FhAQEEgyCOIWEBAQSDII4hYQEBBIMvx/UwT7Q6lcVIwAAAAASUVORK5CYII=
 2013-02-28   -0.45306
 Freq: M, Name: NAO, Length: 758</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>or as method of the Data Frame variable (if name of the variable is a valid python name):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[77]:</div>
+<div class="prompt input_prompt">In [77]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[77]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[77]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1950-01-31    0.92
 1950-02-28    0.40
@@ -3928,278 +3685,238 @@ Freq: M, Name: NAO, Length: 758</pre>
 2013-02-28   -0.45306
 Freq: M, Name: NAO, Length: 758</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can simply add column to the Data Frame:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[82]:</div>
+<div class="prompt input_prompt">In [82]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;Diff&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;AO&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;NAO&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">'Diff'</span><span class="p">]</span> <span class="o">=</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">'AO'</span><span class="p">]</span> <span class="o">-</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">'NAO'</span><span class="p">]</span>
 <span class="n">aonao</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[82]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[82]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-      <th>Diff</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1950-01-31</th>
-      <td>-0.060310</td>
-      <td> 0.92</td>
-      <td>-0.980310</td>
-    </tr>
-    <tr>
-      <th>1950-02-28</th>
-      <td> 0.626810</td>
-      <td> 0.40</td>
-      <td> 0.226810</td>
-    </tr>
-    <tr>
-      <th>1950-03-31</th>
-      <td>-0.008127</td>
-      <td>-0.36</td>
-      <td> 0.351872</td>
-    </tr>
-    <tr>
-      <th>1950-04-30</th>
-      <td> 0.555100</td>
-      <td> 0.73</td>
-      <td>-0.174900</td>
-    </tr>
-    <tr>
-      <th>1950-05-31</th>
-      <td> 0.071577</td>
-      <td>-0.59</td>
-      <td> 0.661577</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+<th>Diff</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1950-01-31</th>
+<td>-0.060310</td>
+<td> 0.92</td>
+<td>-0.980310</td>
+</tr>
+<tr>
+<th>1950-02-28</th>
+<td> 0.626810</td>
+<td> 0.40</td>
+<td> 0.226810</td>
+</tr>
+<tr>
+<th>1950-03-31</th>
+<td>-0.008127</td>
+<td>-0.36</td>
+<td> 0.351872</td>
+</tr>
+<tr>
+<th>1950-04-30</th>
+<td> 0.555100</td>
+<td> 0.73</td>
+<td>-0.174900</td>
+</tr>
+<tr>
+<th>1950-05-31</th>
+<td> 0.071577</td>
+<td>-0.59</td>
+<td> 0.661577</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>And delete it:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[83]:</div>
+<div class="prompt input_prompt">In [83]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="k">del</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;Diff&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="k">del</span> <span class="n">aonao</span><span class="p">[</span><span class="s1">'Diff'</span><span class="p">]</span>
 <span class="n">aonao</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[83]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[83]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>2012-10-31</th>
-      <td>-1.51400</td>
-      <td>-2.06200</td>
-    </tr>
-    <tr>
-      <th>2012-11-30</th>
-      <td>-0.11057</td>
-      <td>-0.57820</td>
-    </tr>
-    <tr>
-      <th>2012-12-31</th>
-      <td>-1.74860</td>
-      <td> 0.17064</td>
-    </tr>
-    <tr>
-      <th>2013-01-31</th>
-      <td>-0.60952</td>
-      <td> 0.34530</td>
-    </tr>
-    <tr>
-      <th>2013-02-28</th>
-      <td>-1.00740</td>
-      <td>-0.45306</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>2012-10-31</th>
+<td>-1.51400</td>
+<td>-2.06200</td>
+</tr>
+<tr>
+<th>2012-11-30</th>
+<td>-0.11057</td>
+<td>-0.57820</td>
+</tr>
+<tr>
+<th>2012-12-31</th>
+<td>-1.74860</td>
+<td> 0.17064</td>
+</tr>
+<tr>
+<th>2013-01-31</th>
+<td>-0.60952</td>
+<td> 0.34530</td>
+</tr>
+<tr>
+<th>2013-02-28</th>
+<td>-1.00740</td>
+<td>-0.45306</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Slicing will also work:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[86]:</div>
+<div class="prompt input_prompt">In [86]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">&#39;1981-01&#39;</span><span class="p">:</span><span class="s1">&#39;1981-03&#39;</span><span class="p">]</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="p">[</span><span class="s1">'1981-01'</span><span class="p">:</span><span class="s1">'1981-03'</span><span class="p">]</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[86]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[86]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1981-01-31</th>
-      <td>-0.11634</td>
-      <td> 0.37</td>
-    </tr>
-    <tr>
-      <th>1981-02-28</th>
-      <td>-0.33158</td>
-      <td> 0.92</td>
-    </tr>
-    <tr>
-      <th>1981-03-31</th>
-      <td>-1.64470</td>
-      <td>-1.19</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>1981-01-31</th>
+<td>-0.11634</td>
+<td> 0.37</td>
+</tr>
+<tr>
+<th>1981-02-28</th>
+<td>-0.33158</td>
+<td> 0.92</td>
+</tr>
+<tr>
+<th>1981-03-31</th>
+<td>-1.64470</td>
+<td>-1.19</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>even in some crazy combinations:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[107]:</div>
+<div class="prompt input_prompt">In [107]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="kn">import</span> <span class="nn">datetime</span>
-<span class="n">aonao</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> 
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
-        <span class="o">&amp;</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1989</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
-        <span class="s1">&#39;NAO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;barh&#39;</span><span class="p">)</span>
+<span class="n">aonao</span><span class="o">.</span><span class="n">ix</span><span class="p">[(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span> <span class="o">></span> <span class="mi">0</span><span class="p">)</span> <span class="o">&</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span> <span class="o"><</span> <span class="mi">0</span><span class="p">)</span> 
+        <span class="o">&</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o">></span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1980</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 
+        <span class="o">&</span> <span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">index</span> <span class="o"><</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">1989</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)),</span>
+        <span class="s1">'NAO'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'barh'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[107]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[107]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xcdc582c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xcdc582c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdEAAAD5CAYAAAB4Sw90AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzs3XtQVGeePvBHjczObCSNt5ahM4XS3SA0De1twhp+S4SG
@@ -4519,163 +4236,124 @@ SDs7OyQIAjU3N5PVaqXx8XEiIrq/vyev11uy/vj4uCFXFmrpPDk5oaamJhocHCSXy0Uul4v29/dN
 ILfbTU6nkyYnJw2/OldrZ16jZkhLZyNnqNxMRKNRikajhTVzc3PkcDjI6XRqvsDQ6M5gMEgdHR2F
 50+SpKrH4xvQM8YYYzXi07mMMcZYjXgTZYwxxmrEmyhjjDFWI95EGWOMsRrxJsoYY4zViDdRxhhj
 rEZf7G+HG926WBkAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Here we use special <a href="http://pandas.pydata.org/pandas-docs/stable/indexing.html#advanced-indexing-with-labels">advanced indexing attribute .ix</a>. We choose all NAO values in the 1980s for months where AO is positive and NAO is negative, and then plot them. Magic :)</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Statistics">Statistics<a class="anchor-link" href="#Statistics">&#182;</a></h2>
+<h2 id="Statistics">Statistics<a class="anchor-link" href="#Statistics">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Back to simple stuff. We can obtain statistical information over elements of the Data Frame. Default is column wise:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[122]:</div>
+<div class="prompt input_prompt">In [122]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[122]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[122]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>AO    -0.133043
 NAO   -0.032465</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[123]:</div>
+<div class="prompt input_prompt">In [123]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[123]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[123]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>AO     3.4953
 NAO    3.0400</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[124]:</div>
+<div class="prompt input_prompt">In [124]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[124]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[124]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>AO    -4.2657
 NAO   -3.1800</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can also do it row-wise:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[113]:</div>
+<div class="prompt input_prompt">In [113]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[113]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[113]:</div>
 <div class="output_text output_subarea output_execute_result">
 <pre>1950-01-31    0.429845
 1950-02-28    0.513405
@@ -4691,151 +4369,128 @@ NAO   -3.1800</pre>
 2013-02-28   -0.730230
 Freq: M, Length: 758</pre>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Or get everything at once:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[125]:</div>
+<div class="prompt input_prompt">In [125]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[125]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[125]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>count</th>
-      <td> 758.000000</td>
-      <td> 758.000000</td>
-    </tr>
-    <tr>
-      <th>mean</th>
-      <td>  -0.133043</td>
-      <td>  -0.032465</td>
-    </tr>
-    <tr>
-      <th>std</th>
-      <td>   1.003774</td>
-      <td>   1.001887</td>
-    </tr>
-    <tr>
-      <th>min</th>
-      <td>  -4.265700</td>
-      <td>  -3.180000</td>
-    </tr>
-    <tr>
-      <th>25%</th>
-      <td>  -0.671770</td>
-      <td>  -0.767500</td>
-    </tr>
-    <tr>
-      <th>50%</th>
-      <td>  -0.058805</td>
-      <td>  -0.015000</td>
-    </tr>
-    <tr>
-      <th>75%</th>
-      <td>   0.463980</td>
-      <td>   0.660000</td>
-    </tr>
-    <tr>
-      <th>max</th>
-      <td>   3.495300</td>
-      <td>   3.040000</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>count</th>
+<td> 758.000000</td>
+<td> 758.000000</td>
+</tr>
+<tr>
+<th>mean</th>
+<td>  -0.133043</td>
+<td>  -0.032465</td>
+</tr>
+<tr>
+<th>std</th>
+<td>   1.003774</td>
+<td>   1.001887</td>
+</tr>
+<tr>
+<th>min</th>
+<td>  -4.265700</td>
+<td>  -3.180000</td>
+</tr>
+<tr>
+<th>25%</th>
+<td>  -0.671770</td>
+<td>  -0.767500</td>
+</tr>
+<tr>
+<th>50%</th>
+<td>  -0.058805</td>
+<td>  -0.015000</td>
+</tr>
+<tr>
+<th>75%</th>
+<td>   0.463980</td>
+<td>   0.660000</td>
+</tr>
+<tr>
+<th>max</th>
+<td>   3.495300</td>
+<td>   3.040000</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Resampling">Resampling<a class="anchor-link" href="#Resampling">&#182;</a></h2>
+<h2 id="Resampling">Resampling<a class="anchor-link" href="#Resampling">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Pandas provide easy way to resample data to different time frequency. Two main parameters for resampling is time period you resemple to and the method that you use. By default the method is mean. Following example calculates annual ('A') mean:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[349]:</div>
+<div class="prompt input_prompt">In [349]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">)</span>
-<span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;g--&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"A"</span><span class="p">)</span>
+<span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'g--'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[349]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[349]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xda37f2c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xda37f2c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAD9CAYAAABHnDf0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXd4VNXW/7+T3hvpBUJ6ISShd4J00AA2wAbyqhFFL/7U
@@ -5157,54 +4812,41 @@ q+XXzFVTQUEBi46OZrGxsWzq1KmsqKhIfs2UNJ04cYJJJBKWmJgoX167b98+VlNTwyZPnqxyKeR7
 773HwsPDWXR0NNu/f7/8vKno0kXTgAEDmJeXF3NxcWHBwcHs+vXrjDHhmkxiD1WCIAhCv9BOTARB
 EBYIOXeCIAgLhJw7QRCEBULOnSAIwgIh504QBGGBkHMnCIKwQP4/i51F50WP2wEAAAAASUVORK5C
 YII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>median:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[352]:</div>
+<div class="prompt input_prompt">In [352]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;median&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'median'</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[352]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[352]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xdf050cc&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xdf050cc></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAD9CAYAAABHnDf0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXt4VNW5/79DLoZ7QEgICccAIYRASFC8VcHxghRQbE97
@@ -5515,54 +5157,41 @@ z55lt99+O5swYQIrLi5mjz/+eOe2oMZUXl7Oxo4dy8aNG8emTZvGDh8+3LnNTzF98MEHLBKJsNLS
 0s7y2jVr1rDjx4+z66+/XrMU8uc//zkbPXo0Gzt2LFu7dm3n836Jy05MF110ERs8eDDr168fy8vL
 Y3v37mWMOY/JF8vsEQRBEO5CKzERBEGEEBJ3giCIEELiThAEEUJI3AmCIEIIiTtBEEQIIXEnCIII
 If8fFEwimG51ux8AAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can use your methods for resampling, for example np.max (in this case we change resampling frequency to 3 years):</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[357]:</div>
+<div class="prompt input_prompt">In [357]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;3A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"3A"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">)</span>
 <span class="n">AO_mm</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[357]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[357]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xe7418ac&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xe7418ac></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW8AAAD9CAYAAABz5fboAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXl4FFXW/79hE8OSsMhiwhiWsGQhCaABBIkDgizGXQFx
@@ -5826,55 +5455,42 @@ fejLL7+seU9JlenatSs9/PDDwZiiK1r8IhKpdfHx8ZSQkFCzukwkl19afcrMzKQBAwbUu45dfTp3
 0k9XrVpFR48epaFDh3pNFXz66aepa9eu1KNHD1q9enXN67L4FYxPV111FbVu3ZqaN29O0dHR9MMP
 PxBR6D6Z0sOSYRiG0RfupMMwDGNDOHgzDMPYEA7eDMMwNoSDN8MwjA3h4M0wDGNDOHgzDMPYkP8P
 GrCuKJ1zGvYAAAAASUVORK5CYII=
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You can specify several functions at once as a list:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[360]:</div>
+<div class="prompt input_prompt">In [360]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;mean&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">])</span>
-<span class="n">AO_mm</span><span class="p">[</span><span class="s1">&#39;1900&#39;</span><span class="p">:</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">AO_mm</span><span class="p">[</span><span class="s1">&#39;1900&#39;</span><span class="p">:</span><span class="s1">&#39;2020&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">AO_mm</span> <span class="o">=</span> <span class="n">AO</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="p">[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">])</span>
+<span class="n">AO_mm</span><span class="p">[</span><span class="s1">'1900'</span><span class="p">:</span><span class="s1">'2020'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">subplots</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">AO_mm</span><span class="p">[</span><span class="s1">'1900'</span><span class="p">:</span><span class="s1">'2020'</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[360]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[360]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xe99a9ec&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xe99a9ec></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAADyCAYAAAC2yoUhAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXdYVMf3/w+KEUE6S0e6AoKADUQRFIwVu6ISxRJDbFFj
@@ -6406,14 +6022,11 @@ Jk+eTAcOHCBtbW3atWsX9ezZU9qiNRuZ1EnS1uDdu3cYNmwYtLS0sGPHjlZtaaQFq5NswOokG1y7
 dg1ycnIYOnQo9u/fL21xWgVZ1EnkB7IFsXfvXnJ0dKQ//viDFBQU2qK9aXdYnWQDVifZoHfv3rRx
 40Zavny5zMxXNYUs6iTxZ/Y62ye9iFidZAVWJxYW8ZHKN1RZWFhYWNoWtsvAwsLC0glhjTsLCwtL
 J4Q17iwsLCydENa4s7CwsHRCWOPOwsLC0gn5f1W5vdq9adA1AAAAAElFTkSuQmCC
-">
+" />
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAW4AAAD9CAYAAACcJ53WAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXdYFNfXx7+AYEMERLAgImIDLBi7UVFjb7HErjGvxpbE
@@ -6919,72 +6532,56 @@ jOYJMmPC7tOJEydYUlKSzn2E2qfe3l729NNPs5iYGBYVFcW2b9+uOSbUPqlUKhYREcFmzJjB0tPT
 2Y0bNzTHbKlPJ0+eZCKRiCkUChYbG8tiY2NZbm4ua2trY2lpaWz69OksPT2ddXR0aK7JyclhoaGh
 LCIiguXl5WleF3q/goKCmJeXF3N1dWUymYxdvnyZMTb2fvEy5Z0QQoj10A44hBAiMBS4CSFEYChw
 E0KIwFDgJoQQgaHATQghAkOBmxBCBOb/AMXVmdqbgYdDAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Moving-(rolling)-statistics">Moving (rolling) statistics<a class="anchor-link" href="#Moving-(rolling)-statistics">&#182;</a></h2>
+<h2 id="Moving-(rolling)-statistics">Moving (rolling) statistics<a class="anchor-link" href="#Moving-(rolling)-statistics">¶</a></h2>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Pandas provide good collection of moving statistics.</p>
-
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rolling mean:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[371]:</div>
+<div class="prompt input_prompt">In [371]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_mean</span><span class="p">(</span><span class="n">aonao</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;-g&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_mean</span><span class="p">(</span><span class="n">aonao</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'-g'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[371]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[371]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0xfa78b8c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0xfa78b8c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXcAAAD9CAYAAABHnDf0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJzsnXeYG+W9/T8qoy7taqvbuhdsioNDC9WQUEwupoRQUiDA
@@ -7613,53 +7210,40 @@ yJw5c+LSs3J5TH//+9/JkiVLkj4nV8cUCATIDTfcQObMmUNmz55NHnvsMfW5XB1TfX09qa2tJbNm
 zSIrV64kJ0+eVJ8bS2N6++23iSAIZP78+Wp67V//+lfS2dlJLrroIsNUyIceeohMnTqV1NbWkldf
 fVV9fLjGNejCYRwOh8MZe/AJVQ6HwxmHcHHncDiccQgXdw6HwxmHcHHncDiccQgXdw6HwxmHcHHn
 cDicccj/B7sq04XRXSHQAAAAAElFTkSuQmCC
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Rolling correlation:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[377]:</div>
+<div class="prompt input_prompt">In [377]:</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_corr</span><span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span><span class="p">,</span> <span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">&#39;-g&#39;</span><span class="p">)</span>
+<div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">rolling_corr</span><span class="p">(</span><span class="n">aonao</span><span class="o">.</span><span class="n">AO</span><span class="p">,</span> <span class="n">aonao</span><span class="o">.</span><span class="n">NAO</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">120</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s1">'-g'</span><span class="p">)</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[377]:</div>
-
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[377]:</div>
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;matplotlib.axes.AxesSubplot at 0x1026808c&gt;</pre>
+<pre><matplotlib.axes.axessubplot at 0x1026808c></pre>
 </div>
-
 </div>
-
-<div class="output_area"><div class="prompt"></div>
-
-
+<div class="output_area">
+<div class="prompt"></div>
 <div class="output_png output_subarea ">
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXYAAAD9CAYAAACoXlzKAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAIABJREFUeJztnXl8VNX5/z9DMglJWAJhC0lokIQskE3irjgqsrSCRayA
@@ -7967,98 +7551,72 @@ xdTa2ipmzpwpFixY4PD4E088IV588UUhhBAvvPBCu87ThoYGcezYMXHFFVeI1tZWIYR+cbGwOzFt
 GTPEyJEjRWZmpli0aFHbc2aNqaioSKSlpYmMjAxx++23ixMnTrQ9Z6SYPvvsM2GxWEROTk7bENqP
 P/5YnDt3Ttx2220uhzs+99xzYtiwYSItLU1s3ry57XG94grqmqcMwzCM9nDnKcMwTIjBws4wDBNi
 sLAzDMOEGCzsDMMwIQYLO8MwTIjBws4wDBNi/H/sE9OBZnzwTQAAAABJRU5ErkJggg==
-">
-</div>
-
-</div>
-
+" />
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>By the way getting correlation coefficients for members of the Data Frame is as simple as:</p>
-
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[379]:</div>
+<div class="prompt input_prompt">In [379]:</div>
 <div class="inner_cell">
-    <div class="input_area">
+<div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">aonao</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
 </pre></div>
-
 </div>
 </div>
 </div>
-
 <div class="output_wrapper">
 <div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[379]:</div>
-
+<div class="output_area">
+<div class="prompt output_prompt">Out[379]:</div>
 <div class="output_html rendered_html output_subarea output_execute_result">
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>AO</th>
-      <th>NAO</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>AO</th>
-      <td> 1.000000</td>
-      <td> 0.610255</td>
-    </tr>
-    <tr>
-      <th>NAO</th>
-      <td> 0.610255</td>
-      <td> 1.000000</td>
-    </tr>
-  </tbody>
+<thead>
+<tr style="text-align: right;">
+<th></th>
+<th>AO</th>
+<th>NAO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<th>AO</th>
+<td> 1.000000</td>
+<td> 0.610255</td>
+</tr>
+<tr>
+<th>NAO</th>
+<td> 0.610255</td>
+<td> 1.000000</td>
+</tr>
+</tbody>
 </table>
 </div>
 </div>
-
-</div>
-
 </div>
 </div>
-
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="prompt input_prompt">
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>That's it. I hope you at least get a rough impression of what pandas can do for you. Comments are very welcome (below). If you have intresting examples of pandas usage in Earth Science, we would be happy to put them on <a href="http://earthpy.org">EarthPy</a>.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
-</pre></div>
-
 </div>
 </div>
 </div>
 
-</div>
 <script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
     var mathjaxscript = document.createElement('script');
     mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';

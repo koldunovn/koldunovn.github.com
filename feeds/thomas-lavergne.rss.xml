@@ -1,39 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0"><channel><title>EarthPy - Thomas Lavergne</title><link>http://earthpy.org/</link><description></description><lastBuildDate>Tue, 10 Dec 2013 00:00:00 +0100</lastBuildDate><item><title>Interpolation between grids with pyresample</title><link>http://earthpy.org/interpolation_between_grids_with_pyresample.html</link><description>
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;strong&gt;Task:&lt;/strong&gt; Interpolate data from regular to curvilinear grid&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Solution:&lt;/strong&gt; &lt;a href="https://code.google.com/p/pyresample/"&gt;pyresample&lt;/a&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;&lt;a href="http://nbviewer.ipython.org/github/koldunovn/earthpy.org/blob/master/content/notebooks/interpolation_between_grids_with_pyresample.ipynb"&gt;Notebook file&lt;/a&gt;&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
 &lt;p&gt;Following two excellent contributions on interpolation between grids by &lt;a href="http://earthpy.org/interpolation_between_grids_with_basemap.html"&gt;Nikolay&lt;/a&gt; Koldunov and &lt;a href="http://earthpy.org/interpolation_between_grids_with_ckdtree.html"&gt;Oleksandr&lt;/a&gt; Huziy I would like to introduce a solution using the &lt;a href="https://code.google.com/p/pyresample"&gt;pyresample&lt;/a&gt; package. I feel it is timely since pyresample does encapsulate the strategy presented by Oleksandr (which I totally support) in fewer function calls. There might also be a speed-up factor to consider for big datasets, since pyresample comes with its own implementation of KD-Trees which was tested faster than the scipy.spatial.cKDTree.&lt;/p&gt;
 &lt;p&gt;The same data as in Nikolay's and Oleksandr's post will be used for easing comparison.&lt;/p&gt;
-
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div class="cell border-box-sizing text_cell rendered"&gt;
-&lt;div class="prompt input_prompt"&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
 &lt;/div&gt;
 &lt;div class="inner_cell"&gt;
 &lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
